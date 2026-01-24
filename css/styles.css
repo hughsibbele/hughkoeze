@@ -117,6 +117,7 @@ section {
 
 header {
   background: var(--warm-white);
+  border-top: 3px solid var(--brick-light);
   border-bottom: 1px solid var(--mortar);
   padding: var(--space-4) 0;
 }
@@ -456,13 +457,22 @@ nav a:hover {
    ========================================= */
 
 footer {
-  background: var(--charcoal);
-  color: var(--mortar);
-  padding: var(--space-5) 0;
-  margin-top: var(--space-6);
+  background: var(--sandstone);
+  border-top: 1px solid var(--mortar);
+  border-bottom: 3px solid var(--brick-light);
+  padding: var(--space-3) 0;
+  margin-top: auto;
 }
 
-footer a { color: var(--verdigris-light); }
+footer p {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--brick);
+  letter-spacing: 0.05em;
+  margin-bottom: 0;
+}
+
+footer a { color: var(--verdigris); }
 
 /* =========================================
    UTILITIES
@@ -489,11 +499,17 @@ footer a { color: var(--verdigris-light); }
   padding: var(--space-6) var(--space-3);
 }
 
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
 .hero-content {
   display: flex;
   align-items: center;
   gap: var(--space-5);
-  max-width: 900px;
 }
 
 .hero-text {
@@ -502,7 +518,7 @@ footer a { color: var(--verdigris-light); }
 
 .hero-name {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -519,19 +535,31 @@ footer a { color: var(--verdigris-light); }
 
 .hero-tagline {
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  letter-spacing: 0.15em;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--charcoal-light);
-  margin-bottom: 0;
+  color: var(--brick);
+  margin-bottom: var(--space-1);
+}
+
+.hero-tagline-secondary {
+  font-size: 1rem;
+  color: var(--brick-light);
+  margin-bottom: var(--space-1);
+}
+
+.hero-nav {
+  display: flex;
+  gap: var(--space-2);
 }
 
 .hero-portrait {
-  width: 280px;
-  height: 350px;
+  flex-shrink: 0;
+  width: 340px;
+  height: 425px;
   object-fit: cover;
   border: 1px solid var(--mortar);
-  flex-shrink: 0;
+  display: block;
 }
 
 /* =========================================
@@ -548,6 +576,10 @@ footer a { color: var(--verdigris-light); }
     gap: var(--space-3);
   }
 
+  .hero-inner {
+    align-items: center;
+  }
+
   .hero-content {
     flex-direction: column;
     text-align: center;
@@ -558,15 +590,21 @@ footer a { color: var(--verdigris-light); }
   }
 
   .hero-portrait {
-    width: 220px;
-    height: 275px;
+    width: 260px;
+    height: 325px;
+  }
+
+  .hero-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-tagline,
+  .hero-tagline-secondary {
+    letter-spacing: 0.08em;
   }
 
   .hero-name {
     letter-spacing: 0.05em;
-  }
-
-  .hero-tagline {
-    letter-spacing: 0.1em;
   }
 }
