@@ -1,0 +1,226 @@
+{
+  "education": [
+    {
+      "id": "breadloaf-ma",
+      "institution": "Bread Loaf School of English, Middlebury College",
+      "degree": "Master of Arts in English",
+      "dates": "2015–2018",
+      "location": "Ripton, VT",
+      "description": "Graduate study in literature with focus on Russian literature, dramatic forms, and pedagogy. Summers-only program for practicing teachers.",
+      "capstones": [
+        {
+          "title": "The Seagull's Flight: Chekhov's Dramatic Revolution",
+          "type": "Paper",
+          "preview": null
+        },
+        {
+          "title": "Photographic Commentary on In Search of Lost Time",
+          "type": "Creative Project",
+          "preview": null
+        }
+      ],
+      "preview": null
+    },
+    {
+      "id": "unc-ba",
+      "institution": "University of North Carolina at Chapel Hill",
+      "degree": "Bachelor of Arts in English and Comparative Literature",
+      "dates": "2010–2014",
+      "location": "Chapel Hill, NC",
+      "honors": "Phi Beta Kappa, Honors in English",
+      "thesis": {
+        "title": "Carolina Honors Thesis",
+        "preview": null
+      },
+      "activities": [
+        "Carolina Outdoor Education Center, Student Instructor",
+        "Writing Center, Tutor"
+      ],
+      "preview": null
+    },
+    {
+      "id": "ala",
+      "institution": "African Leadership Academy",
+      "degree": "Post-Graduate Fellowship",
+      "dates": "2014–2015",
+      "location": "Johannesburg, South Africa",
+      "description": "Teaching fellowship at a pan-African secondary school developing the next generation of African leaders.",
+      "preview": null
+    },
+    {
+      "id": "stpauls",
+      "institution": "St. Paul's School",
+      "degree": "Secondary Education",
+      "dates": "2006–2010",
+      "location": "Concord, NH",
+      "preview": null
+    }
+  ],
+
+  "teaching": {
+    "current": {
+      "id": "ehs",
+      "institution": "Episcopal High School",
+      "title": "English Teacher",
+      "dates": "August 2018–Present",
+      "location": "Alexandria, VA",
+      "description": "Teaching literature and writing across grade levels at a fully-boarding independent school. Developed innovative curricula integrating place-based pedagogy, AI literacy, and close reading practices.",
+      "courses": [
+        {
+          "id": "english-9",
+          "name": "English 9",
+          "description": "Foundation course in close reading, analytical writing, and literary analysis.",
+          "preview": null
+        },
+        {
+          "id": "english-10",
+          "name": "English 10",
+          "description": "Continued development of literary analysis and argumentative writing skills.",
+          "preview": null
+        },
+        {
+          "id": "english-12",
+          "name": "English 12",
+          "description": "Senior capstone course preparing students for college-level reading and writing.",
+          "preview": null
+        },
+        {
+          "id": "chekhov",
+          "name": "Chekhov Seminar",
+          "grades": "11–12 Elective",
+          "description": "Deep dive into Chekhov's short stories and plays, exploring his revolutionary approach to drama and prose. Students engage directly with texts using AI companions for close reading.",
+          "preview": null
+        },
+        {
+          "id": "russian-lit",
+          "name": "Russian Literature",
+          "grades": "11–12 Elective",
+          "description": "Survey of Russian literary tradition from Pushkin through the twentieth century.",
+          "preview": null
+        },
+        {
+          "id": "middle-eastern-lit",
+          "name": "Contemporary Middle Eastern Literature",
+          "grades": "11–12 Elective",
+          "description": "Exploration of contemporary voices from across the Middle East and North Africa.",
+          "preview": null
+        },
+        {
+          "id": "gothic-lit",
+          "name": "Global Gothic Literature",
+          "grades": "11–12 Elective",
+          "description": "Investigation of gothic traditions across cultures, featuring custom AI reading companion 'GothBot' for interactive textual exploration.",
+          "preview": null
+        }
+      ]
+    },
+    "previous": [
+      {
+        "id": "cape-henry",
+        "institution": "Cape Henry Collegiate",
+        "title": "English Teacher",
+        "dates": "2015–2018",
+        "location": "Virginia Beach, VA",
+        "description": "Taught middle and upper school English while completing graduate studies.",
+        "preview": null
+      },
+      {
+        "id": "fulbright",
+        "institution": "Fulbright Program – Norway",
+        "title": "English Teaching Assistant",
+        "dates": "2014",
+        "location": "Norway",
+        "description": "Fulbright grant recipient teaching English at Norwegian secondary schools.",
+        "preview": null
+      }
+    ]
+  },
+
+  "leadership": [
+    {
+      "id": "ai-taskforce",
+      "title": "AI Task Force Lead",
+      "institution": "Episcopal High School",
+      "dates": "2024–Present",
+      "description": "Leading school-wide initiative to thoughtfully integrate AI tools into teaching and learning. Developing frameworks for AI literacy, creating faculty development programs, and piloting classroom applications including custom AI reading companions.",
+      "previews": [
+        {
+          "type": "Video",
+          "title": "AI Integration Presentation",
+          "file": null
+        },
+        {
+          "type": "Presentation",
+          "title": "Faculty Workshop Slides",
+          "file": null
+        }
+      ]
+    },
+    {
+      "id": "interim-chair",
+      "title": "Interim English Department Chair",
+      "institution": "Episcopal High School",
+      "dates": "2024–2025",
+      "description": "Provided departmental leadership during transitional year, coordinating curriculum development and faculty support.",
+      "preview": null
+    },
+    {
+      "id": "dean",
+      "title": "9th Grade Boys' Dean and Dorm Head",
+      "institution": "Episcopal High School",
+      "dates": "2021–2023",
+      "description": "Oversaw residential life and student support for ninth-grade boys, fostering community and navigating the transition to boarding school life.",
+      "preview": null
+    },
+    {
+      "id": "outdoor-leadership",
+      "title": "Outdoor Leadership Program Founder",
+      "institution": "Episcopal High School",
+      "dates": "2020–2022",
+      "description": "Created and directed student outdoor leadership program, training students in wilderness skills, group facilitation, and environmental stewardship.",
+      "previews": [
+        {
+          "type": "Photo",
+          "title": "Program Gallery",
+          "file": null
+        }
+      ]
+    }
+  ],
+
+  "coaching": [
+    {
+      "id": "ultimate",
+      "sport": "Ultimate Frisbee",
+      "role": "Head Coach",
+      "dates": "2019, 2023–Present",
+      "institution": "Episcopal High School",
+      "preview": null
+    },
+    {
+      "id": "basketball",
+      "sport": "JV Girls' Basketball",
+      "role": "Head Coach",
+      "dates": "2023–2025",
+      "institution": "Episcopal High School",
+      "preview": null
+    },
+    {
+      "id": "crew",
+      "sport": "Crew",
+      "role": "Coach",
+      "dates": "2018–2020",
+      "institution": "Episcopal High School",
+      "preview": null
+    }
+  ],
+
+  "skills": [
+    "Curriculum Development",
+    "AI Integration in Education",
+    "Place-Based Pedagogy",
+    "Wilderness Leadership",
+    "Close Reading Instruction",
+    "Writing Pedagogy"
+  ]
+}
