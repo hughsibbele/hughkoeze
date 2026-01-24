@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)file:///Users/hughkoeze/Downloads/design-system-v4.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Design System_files/css2" rel="stylesheet">
+  <style>
+    :root {
+      /* Primary Warm Tones - richer, less orange */
+      --brick: #7D5244;
+      --brick-light: #996B5B;
+      --sienna: #8B5142;
+      --umber: #5C3D2E;
+      --mortar: #CFC4B3;
+      --sandstone: #D5CBBA;
+      
+      /* Accents - bluer greens */
+      --verdigris: #3D7A7A;
+      --verdigris-light: #5A9494;
+      --verdigris-dark: #2D5E5E;
+      --sage: #9BB0A5;
+      --oak: #4A3728;
+      
+      /* Neutrals */
+      --stone-gray: #8E8A85;
+      --warm-white: #F6F4F0;
+      --cream: #FAFAF7;
+      --charcoal: #36332F;
+      --charcoal-light: #524E48;
+      
+      /* Typography */
+      --font-display: 'Josefin Sans', sans-serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      
+      /* Spacing (8px base grid) */
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 32px;
+      --space-5: 48px;
+      --space-6: 64px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--charcoal);
+      background-color: var(--cream);
+    }
+
+    /* =========================================
+       DECORATIVE ELEMENTS - DIVIDERS & SPACERS
+       Line-based, geometric, inspired by window 
+       mullions and door relief patterns
+       ========================================= */
+    
+    /* --- Divider 1: Simple line --- */
+    .divider-line {
+      height: 1px;
+      background: var(--mortar);
+    }
+    
+    .divider-line.thick {
+      height: 2px;
+    }
+    
+    .divider-line.accent {
+      background: var(--verdigris);
+    }
+    
+    /* --- Divider 2: Double line --- */
+    .divider-double {
+      height: 7px;
+      background: transparent;
+      border-top: 1px solid var(--mortar);
+      border-bottom: 1px solid var(--mortar);
+    }
+    
+    /* --- Divider 3: Triple line --- */
+    .divider-triple {
+      height: 11px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .divider-triple span {
+      height: 1px;
+      background: var(--mortar);
+    }
+    
+    .divider-triple span:nth-child(2) {
+      background: var(--verdigris);
+    }
+    
+    /* --- Divider 4: Grid fragment (window mullion inspired) --- */
+    .divider-grid {
+      height: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .divider-grid svg {
+      height: 100%;
+      width: auto;
+    }
+    
+    /* --- Divider 5: Labyrinth/meander pattern --- */
+    .divider-labyrinth {
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .divider-labyrinth svg {
+      height: 100%;
+      width: auto;
+    }
+    
+    /* --- Divider 6: Stepped line (door relief inspired) --- */
+    .divider-stepped {
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .divider-stepped svg {
+      height: 100%;
+      width: auto;
+    }
+    
+    /* --- Divider 7: Bracket --- */
+    .divider-bracket {
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .divider-bracket svg {
+      height: 100%;
+      width: auto;
+    }
+    
+    /* --- Divider 8: Center square with lines --- */
+    .divider-square {
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    
+    .divider-square::before,
+    .divider-square::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--mortar);
+    }
+    
+    .divider-square i {
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--charcoal);
+      margin: 0 var(--space-3);
+    }
+
+    /* =========================================
+       DECORATIVE ELEMENTS - CORNERS & BORDERS
+       ========================================= */
+    
+    /* Corner accents */
+    .corner-accents {
+      position: relative;
+    }
+    
+    .corner-accents::before,
+    .corner-accents::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-color: var(--charcoal);
+      border-style: solid;
+    }
+    
+    .corner-accents::before {
+      top: 0;
+      left: 0;
+      border-width: 1px 0 0 1px;
+    }
+    
+    .corner-accents::after {
+      bottom: 0;
+      right: 0;
+      border-width: 0 1px 1px 0;
+    }
+    
+    /* Double border frame */
+    .frame-double {
+      border: 1px solid var(--charcoal);
+      padding: 6px;
+    }
+    
+    .frame-double-inner {
+      border: 1px solid var(--mortar);
+      padding: var(--space-4);
+    }
+    
+    /* Geometric frame with top accent */
+    .frame-geometric {
+      border: 1px solid var(--charcoal);
+      position: relative;
+      padding: var(--space-4);
+    }
+    
+    .frame-geometric::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      border: 1px solid var(--mortar);
+      pointer-events: none;
+    }
+
+    /* =========================================
+       BUTTONS
+       ========================================= */
+    
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: var(--space-2) var(--space-4);
+      border: 1px solid;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    /* Primary - solid verdigris */
+    .btn-primary {
+      background: var(--verdigris);
+      border-color: var(--verdigris);
+      color: var(--warm-white);
+    }
+    
+    .btn-primary:hover {
+      background: var(--verdigris-dark);
+      border-color: var(--verdigris-dark);
+      color: var(--warm-white);
+    }
+    
+    /* Secondary - outlined */
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--charcoal);
+      color: var(--charcoal);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--charcoal);
+      color: var(--warm-white);
+    }
+    
+    /* Tertiary - minimal underline */
+    .btn-tertiary {
+      background: transparent;
+      border-color: transparent;
+      color: var(--verdigris);
+      padding-left: 0;
+      padding-right: 0;
+      border-bottom: 1px solid var(--verdigris);
+    }
+    
+    .btn-tertiary:hover {
+      color: var(--verdigris-dark);
+      border-bottom-color: var(--verdigris-dark);
+    }
+    
+    /* Double border button */
+    .btn-double {
+      background: var(--warm-white);
+      border: 1px solid var(--charcoal);
+      color: var(--charcoal);
+      position: relative;
+    }
+    
+    .btn-double::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      right: 3px;
+      bottom: 3px;
+      border: 1px solid var(--mortar);
+      pointer-events: none;
+    }
+    
+    .btn-double:hover {
+      background: var(--charcoal);
+      color: var(--warm-white);
+    }
+    
+    .btn-double:hover::after {
+      border-color: var(--charcoal-light);
+    }
+    
+    /* Arrow link */
+    .btn-arrow {
+      background: transparent;
+      border: none;
+      color: var(--verdigris);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      padding: var(--space-1) 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    
+    .btn-arrow::after {
+      content: '→';
+      transition: transform 0.2s ease;
+    }
+    
+    .btn-arrow:hover {
+      color: var(--verdigris-dark);
+    }
+    
+    .btn-arrow:hover::after {
+      transform: translateX(4px);
+    }
+
+    /* =========================================
+       SECTION HEADERS
+       ========================================= */
+    
+    /* Header with side lines */
+    .header-lined {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    
+    .header-lined::before,
+    .header-lined::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--mortar);
+    }
+    
+    /* Header with underline accent */
+    .header-underline {
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--mortar);
+      position: relative;
+    }
+    
+    .header-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 48px;
+      height: 1px;
+      background: var(--verdigris);
+    }
+
+    /* =========================================
+       BACKGROUND PATTERNS
+       ========================================= */
+    
+    /* Grid lines (window mullion inspired) */
+    .pattern-grid {
+      background-image: 
+        linear-gradient(var(--mortar) 1px, transparent 1px),
+        linear-gradient(90deg, var(--mortar) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-color: var(--warm-white);
+    }
+    
+    /* Horizontal lines only */
+    .pattern-lines {
+      background-image: linear-gradient(var(--mortar) 1px, transparent 1px);
+      background-size: 100% 24px;
+      background-color: var(--warm-white);
+    }
+    
+    /* Fine crosshatch */
+    .pattern-crosshatch {
+      background-image: 
+        linear-gradient(45deg, var(--mortar) 1px, transparent 1px),
+        linear-gradient(-45deg, var(--mortar) 1px, transparent 1px);
+      background-size: 16px 16px;
+      background-color: var(--warm-white);
+    }
+    
+    /* Dots */
+    .pattern-dots {
+      background-image: radial-gradient(var(--mortar) 1px, transparent 1px);
+      background-size: 16px 16px;
+      background-color: var(--warm-white);
+    }
+
+    /* =========================================
+       LAYOUT
+       ========================================= */
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 var(--space-3);
+    }
+    
+    section {
+      padding: var(--space-6) 0;
+    }
+    
+    /* ===== HEADER ===== */
+    
+    header {
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--mortar);
+      padding: var(--space-4) 0;
+    }
+    
+    .site-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    nav ul {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+    
+    nav a {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: var(--charcoal-light);
+      letter-spacing: 0.05em;
+      transition: color 0.2s ease;
+    }
+    
+    nav a:hover {
+      color: var(--verdigris);
+    }
+    
+    /* ===== TYPOGRAPHY ===== */
+    
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+    }
+    
+    h1 { font-size: 2.5rem; margin-bottom: var(--space-3); }
+    h2 { font-size: 1.75rem; margin-bottom: var(--space-3); }
+    h3 { font-size: 1.25rem; margin-bottom: var(--space-2); }
+    
+    p {
+      margin-bottom: var(--space-3);
+      max-width: 65ch;
+    }
+    
+    a {
+      color: var(--verdigris);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
+    
+    a:hover {
+      color: var(--verdigris-dark);
+    }
+    
+    blockquote {
+      border-left: 2px solid var(--verdigris);
+      padding-left: var(--space-3);
+      margin: var(--space-4) 0;
+      font-style: italic;
+      color: var(--charcoal-light);
+    }
+    
+    /* ===== CARDS ===== */
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-4);
+    }
+    
+    .card {
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      padding: var(--space-4);
+      transition: all 0.2s ease;
+    }
+    
+    .card:hover {
+      border-color: var(--verdigris-light);
+    }
+    
+    .card h3 { color: var(--oak); }
+    .card p { color: var(--charcoal-light); font-size: 0.95rem; }
+    
+    /* ===== COLOR SWATCHES ===== */
+    
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--space-3);
+    }
+    
+    .swatch { text-align: center; }
+    
+    .swatch-color {
+      height: 60px;
+      border: 1px solid var(--mortar);
+      margin-bottom: var(--space-1);
+    }
+    
+    .swatch-name {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+    }
+    
+    /* ===== PHOTO GRID ===== */
+    
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--charcoal);
+      padding: 2px;
+    }
+    
+    .photo-grid-item {
+      aspect-ratio: 4/3;
+      background: var(--mortar);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--stone-gray);
+    }
+    
+    /* ===== FOOTER ===== */
+    
+    footer {
+      background: var(--charcoal);
+      color: var(--mortar);
+      padding: var(--space-5) 0;
+      margin-top: var(--space-6);
+    }
+    
+    footer a { color: var(--verdigris-light); }
+    
+    /* ===== UTILITIES ===== */
+    
+    .mt-3 { margin-top: var(--space-3); }
+    .mt-4 { margin-top: var(--space-4); }
+    .mt-5 { margin-top: var(--space-5); }
+    .mb-4 { margin-bottom: var(--space-4); }
+    .p-4 { padding: var(--space-4); }
+    .text-center { text-align: center; }
+    .text-small { font-size: 0.85rem; }
+    .text-mono { font-family: var(--font-mono); }
+    
+    .demo-box {
+      background: var(--warm-white);
+      padding: var(--space-4);
+      margin: var(--space-3) 0;
+    }
+    
+    .element-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+      margin-bottom: var(--space-2);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    
+    .flex-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+    
+    .divider-showcase {
+      padding: var(--space-4) 0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="site-title">Hugh Koeze</div>
+        <ul>
+          <li><a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#">Writing</a></li>
+          <li><a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#">Photography</a></li>
+          <li><a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <h1>Design System</h1>
+      <p>A toolkit of colors, typography, and decorative elements. Line-based geometric patterns inspired by leaded glass windows and bronze door reliefs.</p>
+    </div>
+  </section>
+
+  <div class="divider-line"></div>
+
+  <section>
+    <div class="container">
+      <h2 class="header-underline">Color Palette</h2>
+      
+      <h3 class="mt-4">Warm Tones</h3>
+      <div class="swatch-grid mt-3">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #7D5244;"></div>
+          <div class="swatch-name">Brick</div>
+          <div class="swatch-hex">#7D5244</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #8B5142;"></div>
+          <div class="swatch-name">Sienna</div>
+          <div class="swatch-hex">#8B5142</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #5C3D2E;"></div>
+          <div class="swatch-name">Umber</div>
+          <div class="swatch-hex">#5C3D2E</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #CFC4B3;"></div>
+          <div class="swatch-name">Mortar</div>
+          <div class="swatch-hex">#CFC4B3</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #D5CBBA;"></div>
+          <div class="swatch-name">Sandstone</div>
+          <div class="swatch-hex">#D5CBBA</div>
+        </div>
+      </div>
+      
+      <h3 class="mt-5">Accents</h3>
+      <div class="swatch-grid mt-3">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #3D7A7A;"></div>
+          <div class="swatch-name">Verdigris</div>
+          <div class="swatch-hex">#3D7A7A</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #5A9494;"></div>
+          <div class="swatch-name">Verdigris Light</div>
+          <div class="swatch-hex">#5A9494</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #9BB0A5;"></div>
+          <div class="swatch-name">Sage</div>
+          <div class="swatch-hex">#9BB0A5</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #4A3728;"></div>
+          <div class="swatch-name">Oak</div>
+          <div class="swatch-hex">#4A3728</div>
+        </div>
+      </div>
+      
+      <h3 class="mt-5">Neutrals</h3>
+      <div class="swatch-grid mt-3">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #36332F;"></div>
+          <div class="swatch-name">Charcoal</div>
+          <div class="swatch-hex">#36332F</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #8E8A85;"></div>
+          <div class="swatch-name">Stone Gray</div>
+          <div class="swatch-hex">#8E8A85</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #F6F4F0;"></div>
+          <div class="swatch-name">Warm White</div>
+          <div class="swatch-hex">#F6F4F0</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #FAFAF7;"></div>
+          <div class="swatch-name">Cream</div>
+          <div class="swatch-hex">#FAFAF7</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-double"></div>
+
+  <section>
+    <div class="container">
+      <h2 class="header-underline">Typography</h2>
+      <p>Josefin Sans for headings, Source Serif 4 for body text.</p>
+      
+      <div class="demo-box mt-4">
+        <h1>Heading One</h1>
+        <h2>Heading Two</h2>
+        <h3>Heading Three</h3>
+        <p class="mt-4">Body text demonstrates comfortable reading at 18px with generous line-height. Long passages should remain readable while maintaining visual warmth. The interplay between heading and body fonts creates hierarchy without harshness.</p>
+        <blockquote>A blockquote uses the verdigris accent color, providing visual distinction for quoted material or callouts.</blockquote>
+        <p>Links appear in <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#">verdigris with subtle underlines</a>, maintaining readability while signaling interactivity.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-line thick"></div>
+
+  <section style="background: var(--warm-white);">
+    <div class="container">
+      <h2 class="header-underline">Dividers &amp; Spacers</h2>
+      <p>Line-based geometric elements for section breaks. Inspired by window mullions and door relief patterns.</p>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Simple line</div>
+        <div class="divider-line"></div>
+      </div>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Thick line</div>
+        <div class="divider-line thick"></div>
+      </div>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Accent line</div>
+        <div class="divider-line accent"></div>
+      </div>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Double line</div>
+        <div class="divider-double"></div>
+      </div>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Triple line</div>
+        <div class="divider-triple">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Center square</div>
+        <div class="divider-square"><i></i></div>
+      </div>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Grid fragment (window mullion)</div>
+        <div class="divider-grid">
+          <svg width="240" height="48" viewBox="0 0 240 48" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#36332F" stroke-width="1" fill="none">
+              <!-- Outer frame -->
+              <rect x="60" y="4" width="120" height="40"></rect>
+              <!-- Vertical divisions -->
+              <line x1="100" y1="4" x2="100" y2="44"></line>
+              <line x1="140" y1="4" x2="140" y2="44"></line>
+              <!-- Horizontal division -->
+              <line x1="60" y1="24" x2="180" y2="24"></line>
+              <!-- Inner geometric details -->
+              <rect x="68" y="10" width="24" height="8" stroke="#CFC4B3"></rect>
+              <rect x="108" y="10" width="24" height="8" stroke="#CFC4B3"></rect>
+              <rect x="148" y="10" width="24" height="8" stroke="#CFC4B3"></rect>
+              <rect x="68" y="30" width="24" height="8" stroke="#CFC4B3"></rect>
+              <rect x="108" y="30" width="24" height="8" stroke="#CFC4B3"></rect>
+              <rect x="148" y="30" width="24" height="8" stroke="#CFC4B3"></rect>
+            </g>
+            <!-- Extended lines -->
+            <line x1="0" y1="24" x2="56" y2="24" stroke="#CFC4B3" stroke-width="1"></line>
+            <line x1="184" y1="24" x2="240" y2="24" stroke="#CFC4B3" stroke-width="1"></line>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Labyrinth / meander</div>
+        <div class="divider-labyrinth">
+          <svg width="280" height="24" viewBox="0 0 280 24" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#36332F" stroke-width="1" fill="none">
+              <!-- Central labyrinth pattern -->
+              <path d="M100 12 L108 12 L108 4 L124 4 L124 12 L132 12 L132 20 L124 20 L124 12"></path>
+              <path d="M148 12 L156 12 L156 20 L172 20 L172 12 L180 12 L180 4 L172 4 L172 12"></path>
+            </g>
+            <!-- Extended lines -->
+            <line x1="0" y1="12" x2="96" y2="12" stroke="#CFC4B3" stroke-width="1"></line>
+            <line x1="184" y1="12" x2="280" y2="12" stroke="#CFC4B3" stroke-width="1"></line>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Stepped (door relief)</div>
+        <div class="divider-stepped">
+          <svg width="200" height="32" viewBox="0 0 200 32" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#36332F" stroke-width="1" fill="none">
+              <!-- Left stepped pattern -->
+              <path d="M60 16 L68 16 L68 8 L76 8 L76 4 L84 4"></path>
+              <path d="M60 16 L68 16 L68 24 L76 24 L76 28 L84 28"></path>
+              <!-- Right stepped pattern (mirrored) -->
+              <path d="M140 16 L132 16 L132 8 L124 8 L124 4 L116 4"></path>
+              <path d="M140 16 L132 16 L132 24 L124 24 L124 28 L116 28"></path>
+              <!-- Center vertical -->
+              <line x1="100" y1="4" x2="100" y2="28"></line>
+            </g>
+            <!-- Extended lines -->
+            <line x1="0" y1="16" x2="56" y2="16" stroke="#CFC4B3" stroke-width="1"></line>
+            <line x1="144" y1="16" x2="200" y2="16" stroke="#CFC4B3" stroke-width="1"></line>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="divider-showcase">
+        <div class="element-label">Bracket</div>
+        <div class="divider-bracket">
+          <svg width="200" height="20" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#36332F" stroke-width="1" fill="none">
+              <!-- Left bracket -->
+              <path d="M70 4 L78 4 L78 10 L92 10 L92 4 L100 4"></path>
+              <!-- Right bracket -->
+              <path d="M100 4 L108 4 L108 10 L122 10 L122 4 L130 4"></path>
+              <!-- Bottom connectors -->
+              <line x1="85" y1="10" x2="85" y2="16"></line>
+              <line x1="115" y1="10" x2="115" y2="16"></line>
+            </g>
+            <!-- Extended lines -->
+            <line x1="0" y1="10" x2="66" y2="10" stroke="#CFC4B3" stroke-width="1"></line>
+            <line x1="134" y1="10" x2="200" y2="10" stroke="#CFC4B3" stroke-width="1"></line>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-triple">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <section>
+    <div class="container">
+      <h2 class="header-underline">Buttons</h2>
+      
+      <div class="flex-wrap mt-4">
+        <div>
+          <div class="element-label">Primary</div>
+          <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#" class="btn btn-primary">Primary</a>
+        </div>
+        <div>
+          <div class="element-label">Secondary</div>
+          <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#" class="btn btn-secondary">Secondary</a>
+        </div>
+        <div>
+          <div class="element-label">Tertiary</div>
+          <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#" class="btn btn-tertiary">Tertiary</a>
+        </div>
+        <div>
+          <div class="element-label">Double border</div>
+          <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#" class="btn btn-double">Double</a>
+        </div>
+        <div>
+          <div class="element-label">Arrow link</div>
+          <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#" class="btn-arrow">View more</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-square"><i></i></div>
+
+  <section style="background: var(--warm-white);">
+    <div class="container">
+      <h2 class="header-underline">Frames &amp; Borders</h2>
+      
+      <div class="card-grid mt-4">
+        <div>
+          <div class="element-label">Corner accents</div>
+          <div class="corner-accents demo-box">
+            <p style="margin:0;">Content with corner accent marks for a subtle geometric touch.</p>
+          </div>
+        </div>
+        
+        <div>
+          <div class="element-label">Double frame</div>
+          <div class="frame-double">
+            <div class="frame-double-inner">
+              <p style="margin:0;">Nested borders create depth without shadows.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="element-label">Geometric frame</div>
+          <div class="frame-geometric">
+            <p style="margin:0;">Outer and inner rules with breathing room between.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-labyrinth">
+    <svg width="280" height="24" viewBox="0 0 280 24" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#36332F" stroke-width="1" fill="none">
+        <path d="M100 12 L108 12 L108 4 L124 4 L124 12 L132 12 L132 20 L124 20 L124 12"></path>
+        <path d="M148 12 L156 12 L156 20 L172 20 L172 12 L180 12 L180 4 L172 4 L172 12"></path>
+      </g>
+      <line x1="0" y1="12" x2="96" y2="12" stroke="#CFC4B3" stroke-width="1"></line>
+      <line x1="184" y1="12" x2="280" y2="12" stroke="#CFC4B3" stroke-width="1"></line>
+    </svg>
+  </div>
+
+  <section>
+    <div class="container">
+      <h2 class="header-underline">Header Styles</h2>
+      
+      <div class="mt-5">
+        <div class="element-label">Lined (centered)</div>
+        <h3 class="header-lined">Section Title</h3>
+      </div>
+      
+      <div class="mt-5">
+        <div class="element-label">Underline with accent</div>
+        <h3 class="header-underline">Section Title</h3>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-grid">
+    <svg width="240" height="48" viewBox="0 0 240 48" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#36332F" stroke-width="1" fill="none">
+        <rect x="60" y="4" width="120" height="40"></rect>
+        <line x1="100" y1="4" x2="100" y2="44"></line>
+        <line x1="140" y1="4" x2="140" y2="44"></line>
+        <line x1="60" y1="24" x2="180" y2="24"></line>
+        <rect x="68" y="10" width="24" height="8" stroke="#CFC4B3"></rect>
+        <rect x="108" y="10" width="24" height="8" stroke="#CFC4B3"></rect>
+        <rect x="148" y="10" width="24" height="8" stroke="#CFC4B3"></rect>
+        <rect x="68" y="30" width="24" height="8" stroke="#CFC4B3"></rect>
+        <rect x="108" y="30" width="24" height="8" stroke="#CFC4B3"></rect>
+        <rect x="148" y="30" width="24" height="8" stroke="#CFC4B3"></rect>
+      </g>
+      <line x1="0" y1="24" x2="56" y2="24" stroke="#CFC4B3" stroke-width="1"></line>
+      <line x1="184" y1="24" x2="240" y2="24" stroke="#CFC4B3" stroke-width="1"></line>
+    </svg>
+  </div>
+
+  <section style="background: var(--warm-white);">
+    <div class="container">
+      <h2 class="header-underline">Background Patterns</h2>
+      
+      <div class="card-grid mt-4">
+        <div>
+          <div class="element-label">Grid</div>
+          <div class="pattern-grid p-4" style="height: 120px;"></div>
+        </div>
+        <div>
+          <div class="element-label">Horizontal lines</div>
+          <div class="pattern-lines p-4" style="height: 120px;"></div>
+        </div>
+        <div>
+          <div class="element-label">Crosshatch</div>
+          <div class="pattern-crosshatch p-4" style="height: 120px;"></div>
+        </div>
+        <div>
+          <div class="element-label">Dots</div>
+          <div class="pattern-dots p-4" style="height: 120px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-stepped">
+    <svg width="200" height="32" viewBox="0 0 200 32" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#36332F" stroke-width="1" fill="none">
+        <path d="M60 16 L68 16 L68 8 L76 8 L76 4 L84 4"></path>
+        <path d="M60 16 L68 16 L68 24 L76 24 L76 28 L84 28"></path>
+        <path d="M140 16 L132 16 L132 8 L124 8 L124 4 L116 4"></path>
+        <path d="M140 16 L132 16 L132 24 L124 24 L124 28 L116 28"></path>
+        <line x1="100" y1="4" x2="100" y2="28"></line>
+      </g>
+      <line x1="0" y1="16" x2="56" y2="16" stroke="#CFC4B3" stroke-width="1"></line>
+      <line x1="144" y1="16" x2="200" y2="16" stroke="#CFC4B3" stroke-width="1"></line>
+    </svg>
+  </div>
+
+  <section>
+    <div class="container">
+      <h2 class="header-underline">Cards</h2>
+      
+      <div class="card-grid mt-4">
+        <div class="card">
+          <h3>Writing</h3>
+          <p>Essays on literature, pedagogy, and the craft of teaching.</p>
+          <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#" class="btn-arrow">Read more</a>
+        </div>
+        <div class="card">
+          <h3>Photography</h3>
+          <p>Visual essays exploring place, memory, and texture.</p>
+          <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#" class="btn-arrow">View gallery</a>
+        </div>
+        <div class="card">
+          <h3>Projects</h3>
+          <p>Interactive experiments and data visualizations.</p>
+          <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#" class="btn-arrow">Explore</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p><a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#">Contact</a> · <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#">CV</a> · <a href="file:///Users/hughkoeze/Downloads/design-system-v4.html#">RSS</a></p>
+    </div>
+  </footer>
+
+
+
+</body></html>
