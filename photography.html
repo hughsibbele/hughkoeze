@@ -39,25 +39,6 @@
       text-decoration: underline;
     }
 
-    .photo-links {
-      display: flex;
-      gap: var(--space-3);
-      margin-top: var(--space-2);
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-    }
-
-    .photo-links a {
-      color: var(--charcoal-light);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .photo-links a:hover {
-      color: var(--verdigris);
-    }
-
     /* Masonry grid - positioned by JS */
     .photo-grid {
       position: relative;
@@ -187,10 +168,6 @@
       .photo-header {
         padding: var(--space-3) var(--space-2) var(--space-2);
       }
-      .photo-links {
-        flex-direction: column;
-        gap: var(--space-1);
-      }
     }
   </style>
 </head>
@@ -214,9 +191,6 @@
     <section class="photo-header">
       <h1>Photography</h1>
       <p><a href="about.html">Let me know if you'd like a print!</a></p>
-      <div class="photo-links">
-        <a href="https://instagram.com/hughsibbele" target="_blank" rel="noopener">Instagram</a>
-      </div>
     </section>
 
     <div class="photo-grid" id="photoGrid">
