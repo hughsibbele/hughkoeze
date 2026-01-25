@@ -476,9 +476,10 @@ footer a { color: var(--verdigris); }
 
 .footer-subtle {
   font-size: 0.65rem;
-  color: var(--mortar);
-  opacity: 0.6;
+  color: var(--brick);
+  opacity: 0.5;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .footer-subtle a {
