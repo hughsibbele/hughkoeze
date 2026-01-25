@@ -4,11 +4,11 @@
 A personal portfolio website for Hugh, a high school English teacher. The site should be clear and subtly distinctive.
 
 ## Structure
-- **Home** — Brief intro (2-3 sentences), navigation, strong but simple visual element
-- **CV** — Timeline or sectioned layout; selective use of embedded media (videos, presentations) only where they add genuine value; papers and standard items as clean links
-- **Writing** — Featured papers with summaries/downloads; links to photo/writing projects (some with dedicated pages)
-- **Photography** — May include immersive photo essays with full-bleed images, scroll-based pacing, text overlays
-- **Contact** — Email, social links (Instagram, Twitter/X, Substack), possibly a contact form
+- **Home** — Name, tagline (Teacher, Writer, Photographer), portrait photo
+- **Teaching** — Timeline/sectioned layout; embedded media where valuable; papers as clean links
+- **Writing** — Featured papers with summaries/downloads; links to projects
+- **Photography** — Infinite-scroll masonry gallery, randomly loads from `images/photography/`
+- **About** — Bio, contact info, social links
 
 ## Design System (MUST FOLLOW)
 The site has an established design system documented in `Design System.html`. **All new pages and components must adhere to this system.** Reference it for:
@@ -46,15 +46,25 @@ Key mobile considerations:
 ## File Structure
 ```
 /index.html
-/cv.html
+/teaching.html
 /writing.html
 /photography.html
-/contact.html
+/about.html
 /css/styles.css
 /images/
-/files/
-/projects/[immersive-project]/index.html
+/images/photography/     ← photos for the gallery
+/photos.json             ← manifest of available photos
+/scripts/
 ```
+
+## Maintenance Scripts
+
+### Update Photography Gallery
+After adding or removing photos from `images/photography/`, run:
+```bash
+./scripts/update-photos.sh
+```
+This regenerates `photos.json` with all image filenames. The photography page randomly loads from this list.
 
 ## Open Questions
 1. Who is the primary audience (employers, academics, general readers)?

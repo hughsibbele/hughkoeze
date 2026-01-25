@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teaching — Hugh Koeze</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Josefin+Sans:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* =========================================
+       CV PAGE LAYOUT
+       All values from design system
+       ========================================= */
+
+    .cv-layout {
+      display: flex;
+      min-height: calc(100vh - 89px);
+    }
+
+    .cv-main {
+      flex: 1;
+      padding: var(--space-4) var(--space-4);
+      padding-right: var(--space-4);
+      overflow-y: auto;
+      transition: padding-right 0.3s ease;
+    }
+
+    .cv-main.preview-open {
+      padding-right: calc(40% + var(--space-4));
+    }
+
+    /* =========================================
+       PREVIEW PANEL
+       ========================================= */
+
+    .cv-preview {
+      position: fixed;
+      top: 89px;
+      right: 0;
+      width: 40%;
+      height: calc(100vh - 89px);
+      background: var(--warm-white);
+      border-left: 1px solid var(--mortar);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .cv-preview.open {
+      transform: translateX(0);
+    }
+
+    /* Preview: Empty State */
+    .cv-preview-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: var(--space-4);
+      text-align: center;
+    }
+
+    .cv-preview-empty-title {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--stone-gray);
+      margin-bottom: var(--space-2);
+    }
+
+    .cv-preview-empty-hint {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--mortar);
+      max-width: 200px;
+    }
+
+    /* Preview: Content */
+    .cv-preview-content {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .cv-preview-content.active {
+      display: flex;
+    }
+
+    /* Preview: Header */
+    .cv-preview-header {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--mortar);
+      background: var(--cream);
+      border-left: 3px solid var(--verdigris);
+    }
+
+    .cv-preview-type {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--brick);
+      margin-bottom: var(--space-1);
+    }
+
+    .cv-preview-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+      margin-bottom: var(--space-1);
+    }
+
+    .cv-preview-context {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--charcoal-light);
+      line-height: 1.5;
+    }
+
+    /* Preview: Body */
+    .cv-preview-body {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3);
+      background: var(--warm-white);
+    }
+
+    .cv-preview-body iframe {
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--mortar);
+    }
+
+    .cv-preview-body img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border: 1px solid var(--mortar);
+    }
+
+    .cv-preview-body .video-container {
+      width: 100%;
+      aspect-ratio: 16/9;
+    }
+
+    .cv-preview-body .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Preview: Footer */
+    .cv-preview-footer {
+      padding: var(--space-3) var(--space-4);
+      border-top: 1px solid var(--mortar);
+      background: var(--cream);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cv-preview-hints {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+    }
+
+    .cv-preview-hints kbd {
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      padding: 2px 6px;
+      margin: 0 2px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+    }
+
+    /* Open full link */
+    .cv-preview-open {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      color: var(--verdigris);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cv-preview-open::after {
+      content: '↗';
+      transition: transform 0.2s ease;
+    }
+
+    .cv-preview-open:hover {
+      color: var(--verdigris-dark);
+    }
+
+    .cv-preview-open:hover::after {
+      transform: translate(2px, -2px);
+    }
+
+    /* =========================================
+       PREVIEW TOGGLE BUTTON
+       ========================================= */
+
+    .cv-preview-toggle {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      border-right: none;
+      padding: var(--space-2) var(--space-1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cv-preview-toggle:hover {
+      background: var(--cream);
+      border-color: var(--verdigris);
+    }
+
+    .cv-preview-toggle .toggle-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--charcoal-light);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    .cv-preview-toggle.panel-open {
+      right: 40%;
+    }
+
+    /* =========================================
+       CV CONTENT
+       ========================================= */
+
+    .cv-header {
+      margin-bottom: var(--space-3);
+      max-width: 60%;
+    }
+
+    .cv-header h1 {
+      font-size: 1.75rem;
+      margin-bottom: var(--space-1);
+      color: var(--oak);
+    }
+
+    .cv-header .intro {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--charcoal-light);
+      margin-bottom: var(--space-2);
+      line-height: 1.5;
+    }
+
+    /* CV Sections */
+    .cv-section {
+      margin-bottom: var(--space-1);
+      padding-top: var(--space-1);
+      max-width: 60%;
+      border-top: 1px solid var(--mortar);
+    }
+
+    .cv-section:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .cv-section h2 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--brick);
+      margin-bottom: var(--space-2);
+      position: relative;
+      display: inline-block;
+    }
+
+    .cv-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--verdigris);
+    }
+
+    /* CV Items */
+    .cv-item {
+      margin-bottom: var(--space-2);
+    }
+
+    .cv-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* CV Items with hover effect (not current position) */
+    .cv-item-hoverable {
+      padding-left: var(--space-2);
+      border-left: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .cv-item-hoverable:hover {
+      border-left-color: var(--sage);
+    }
+
+    .cv-item-hoverable.active {
+      border-left-color: var(--verdigris);
+    }
+
+    .cv-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0;
+      gap: var(--space-2);
+    }
+
+    .cv-item-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+
+    /* Clickable teaching role */
+    .cv-role-clickable {
+      padding-left: var(--space-2);
+      border-left: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      margin-top: var(--space-1);
+      margin-bottom: var(--space-1);
+    }
+
+    .cv-role-clickable:hover {
+      border-left-color: var(--sage);
+    }
+
+    .cv-role-clickable.active {
+      border-left-color: var(--verdigris);
+    }
+
+    .cv-role-clickable .cv-item-desc {
+      margin-bottom: 0;
+    }
+
+    .cv-item-date {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+      white-space: nowrap;
+    }
+
+    .cv-item-org {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--brick);
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 2px;
+    }
+
+    .cv-item-org .location {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--charcoal-light);
+      font-size: 0.85rem;
+    }
+
+    /* Leadership section - prominent sub-items */
+    .cv-leadership-section {
+      margin-top: var(--space-2);
+      padding-top: var(--space-2);
+      border-top: 1px dashed var(--mortar);
+    }
+
+    .cv-leadership-header {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--stone-gray);
+      margin-bottom: var(--space-1);
+    }
+
+    .cv-leadership-item {
+      margin-bottom: var(--space-2);
+      padding-left: var(--space-2);
+      border-left: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .cv-leadership-item:hover {
+      border-left-color: var(--sage);
+    }
+
+    .cv-leadership-item.active {
+      border-left-color: var(--verdigris);
+    }
+
+    .cv-leadership-item:last-child {
+      margin-bottom: var(--space-1);
+    }
+
+    .cv-leadership-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+    }
+
+    .cv-leadership-date {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--stone-gray);
+      white-space: nowrap;
+    }
+
+    .cv-leadership-desc {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--charcoal-light);
+      margin-top: 2px;
+    }
+
+    .cv-item-desc {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--charcoal-light);
+      margin-bottom: var(--space-1);
+    }
+
+    /* Expandable sections */
+    .cv-expandable {
+      margin-top: var(--space-1);
+    }
+
+    .cv-expand-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--verdigris);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 0;
+      transition: color 0.2s ease;
+    }
+
+    .cv-expand-toggle:hover {
+      color: var(--verdigris-dark);
+    }
+
+    .cv-expand-toggle .arrow {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.6rem;
+    }
+
+    .cv-expand-toggle.expanded .arrow {
+      transform: rotate(90deg);
+    }
+
+    .cv-expandable-content {
+      display: none;
+      margin-top: var(--space-1);
+      margin-left: var(--space-1);
+      padding-left: var(--space-2);
+      border-left: 1px solid var(--mortar);
+      animation: slideDown 0.2s ease;
+    }
+
+    .cv-expandable-content.open {
+      display: block;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Sub-items (courses, etc.) */
+    .cv-sub-items {
+      margin-top: var(--space-1);
+      margin-left: var(--space-1);
+      padding-left: var(--space-2);
+      border-left: 1px solid var(--mortar);
+    }
+
+    .cv-sub-item {
+      margin-bottom: var(--space-1);
+      padding-left: var(--space-2);
+      border-left: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .cv-sub-item:hover {
+      border-left-color: var(--sage);
+    }
+
+    .cv-sub-item.active {
+      border-left-color: var(--verdigris);
+    }
+
+    .cv-sub-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .cv-sub-item-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .cv-sub-item-meta {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--stone-gray);
+      margin-left: 4px;
+    }
+
+    .cv-sub-item-desc {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: var(--charcoal-light);
+      margin-top: 1px;
+    }
+
+    .cv-sub-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-2);
+    }
+
+    .cv-sub-item-compact {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-2);
+      margin-bottom: 4px;
+    }
+
+    .cv-sub-item-compact:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Multiple expandable sections */
+    .cv-expandables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1) var(--space-3);
+      margin-top: var(--space-1);
+    }
+
+    .cv-expandables .cv-expandable {
+      margin-top: 0;
+    }
+
+    /* Indentation to match English Teacher title */
+    .cv-indented {
+      margin-left: var(--space-2);
+    }
+
+    /* CV Item Links - design system aligned */
+    .cv-item-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1);
+      margin-top: var(--space-1);
+    }
+
+    .cv-item-link {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 6px 12px;
+      background: transparent;
+      border: 1px solid var(--charcoal);
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cv-item-link:hover {
+      background: var(--charcoal);
+      color: var(--warm-white);
+    }
+
+    .cv-item-link.active {
+      background: var(--verdigris);
+      border-color: var(--verdigris);
+      color: var(--warm-white);
+    }
+
+    /* Placeholder badge for missing content */
+    .cv-item-link.placeholder {
+      border-style: dashed;
+      border-color: var(--mortar);
+      color: var(--stone-gray);
+    }
+
+    .cv-item-link.placeholder:hover {
+      border-color: var(--charcoal);
+      color: var(--charcoal);
+      background: transparent;
+    }
+
+    /* Two-line button */
+    .cv-item-link.two-line {
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .cv-item-link .btn-title {
+      display: block;
+      font-weight: 500;
+    }
+
+    .cv-item-link .btn-subtitle {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      opacity: 0.85;
+    }
+
+    /* Evaluation buttons row */
+    .cv-evaluations {
+      display: flex;
+      gap: var(--space-1);
+      margin-top: var(--space-2);
+    }
+
+    /* Teaching photo collage for default preview */
+    .teaching-collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+      max-height: 280px;
+      padding: var(--space-2);
+    }
+
+    .teaching-collage .photo {
+      background: var(--mortar);
+      border: 1px solid var(--mortar);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--stone-gray);
+      overflow: hidden;
+    }
+
+    .teaching-collage .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .teaching-collage .photo:nth-child(1) {
+      grid-row: span 2;
+    }
+
+    .teaching-collage .photo:nth-child(2) {
+      aspect-ratio: 4/3;
+    }
+
+    .teaching-collage .photo:nth-child(3) {
+      aspect-ratio: 3/2;
+    }
+
+    /* Placeholder for demo */
+    .placeholder-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--warm-white);
+      border: 1px dashed var(--mortar);
+      padding: var(--space-4);
+      text-align: center;
+      width: 100%;
+      min-height: 250px;
+    }
+
+    .placeholder-content .icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-2);
+      color: var(--mortar);
+    }
+
+    .placeholder-content span {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--stone-gray);
+    }
+
+    .placeholder-content .placeholder-note {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--brick);
+      margin-top: var(--space-1);
+      font-style: italic;
+    }
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
+    @media (max-width: 1024px) {
+      .cv-preview {
+        width: 50%;
+      }
+
+      .cv-main.preview-open {
+        padding-right: calc(50% + var(--space-4));
+      }
+
+      .cv-preview-toggle.panel-open {
+        right: 50%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cv-preview {
+        width: 100%;
+        top: 0;
+        height: 100vh;
+        z-index: 100;
+      }
+
+      .cv-main.preview-open {
+        padding-right: var(--space-4);
+      }
+
+      .cv-preview-toggle {
+        display: none;
+      }
+
+      .cv-preview-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .cv-preview-close-mobile {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--stone-gray);
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+      }
+
+      /* CV content mobile adjustments */
+      .cv-section {
+        max-width: 100%;
+      }
+
+      .cv-header {
+        max-width: 100%;
+      }
+
+      .cv-main {
+        padding: var(--space-3) var(--space-2);
+      }
+
+      .cv-item-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .cv-item-org {
+        font-size: 0.95rem;
+      }
+
+      .cv-expandables {
+        flex-direction: column;
+        gap: var(--space-1);
+      }
+
+      .cv-indented {
+        margin-left: var(--space-1);
+      }
+
+      .cv-item-links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cv-item-link.two-line {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .cv-evaluations {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cv-sub-item-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .cv-leadership-section .cv-sub-item-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .teaching-collage {
+        max-height: 200px;
+      }
+
+      /* Touch-friendly button sizes */
+      .cv-item-link {
+        padding: 8px 12px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
+
+      .cv-expand-toggle {
+        min-height: 44px;
+        padding: 8px 0;
+      }
+
+      .cv-role-clickable,
+      .cv-leadership-item {
+        padding: var(--space-2);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cv-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .cv-section h2 {
+        font-size: 0.7rem;
+      }
+
+      .cv-item-org {
+        font-size: 0.9rem;
+      }
+
+      .cv-item-title {
+        font-size: 0.85rem;
+      }
+
+      .cv-item-desc {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .cv-preview-close-mobile {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="site-title">Hugh Koeze</a>
+        <ul>
+          <li><a href="teaching.html">Teaching</a></li>
+          <li><a href="writing.html">Writing</a></li>
+          <li><a href="photography.html">Photography</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Toggle button for preview panel -->
+  <button class="cv-preview-toggle" id="preview-toggle" title="Toggle preview panel">
+    <span class="toggle-label" id="toggle-label">Open Preview</span>
+  </button>
+
+  <div class="cv-layout">
+    <main class="cv-main" id="cv-main">
+      <div class="cv-header">
+        <h1>Curriculum Vitae</h1>
+        <p class="intro">Skilled, flexible & experienced educator.</p>
+      </div>
+
+      <!-- Content will be loaded dynamically from JSON -->
+      <div id="cv-content"></div>
+
+    </main>
+
+    <aside class="cv-preview" id="cv-preview">
+      <div class="cv-preview-empty" id="preview-empty">
+        <div class="cv-preview-empty-title">Preview Panel</div>
+        <p class="cv-preview-empty-hint">Click any preview button to see examples of my work</p>
+      </div>
+      <div class="cv-preview-content" id="preview-content">
+        <div class="cv-preview-header">
+          <div>
+            <div class="cv-preview-type" id="preview-type">PDF</div>
+            <div class="cv-preview-title" id="preview-title">Title</div>
+            <p class="cv-preview-context" id="preview-context">Context goes here</p>
+          </div>
+          <button class="cv-preview-close-mobile" id="preview-close-mobile" aria-label="Close preview">×</button>
+        </div>
+        <div class="cv-preview-body" id="preview-body">
+          <!-- Dynamic content loads here -->
+        </div>
+        <div class="cv-preview-footer">
+          <span class="cv-preview-hints"><kbd>Esc</kbd> to close</span>
+          <a href="#" class="cv-preview-open" id="open-link">Open full</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Elements
+    const cvMain = document.getElementById('cv-main');
+    const cvPreview = document.getElementById('cv-preview');
+    const previewToggle = document.getElementById('preview-toggle');
+    const toggleLabel = document.getElementById('toggle-label');
+    const previewContent = document.getElementById('preview-content');
+    const previewEmpty = document.getElementById('preview-empty');
+    const previewType = document.getElementById('preview-type');
+    const previewTitle = document.getElementById('preview-title');
+    const previewContext = document.getElementById('preview-context');
+    const previewBody = document.getElementById('preview-body');
+    const openLink = document.getElementById('open-link');
+    const closeMobile = document.getElementById('preview-close-mobile');
+    const cvContent = document.getElementById('cv-content');
+
+    let panelOpen = false;
+    let cvData = null;
+
+    // Load CV data from JSON
+    async function loadCV() {
+      try {
+        const response = await fetch('data/cv.json');
+        cvData = await response.json();
+        renderCV();
+      } catch (error) {
+        console.error('Failed to load CV data:', error);
+        cvContent.innerHTML = '<p>Failed to load CV content.</p>';
+      }
+    }
+
+    // Render CV content from data
+    function renderCV() {
+      let html = '';
+
+      // Current Position (includes leadership, awards, coaching)
+      html += renderCurrentPosition();
+
+      // Education
+      html += renderSection('Education', cvData.education, renderEducationItem);
+
+      // Previous Experience
+      html += renderSection('Previous Experience', cvData.teaching.previous, renderPreviousTeachingItem);
+
+      // Certifications
+      html += renderSection('Certifications', cvData.certifications, renderCertificationItem);
+
+      cvContent.innerHTML = html;
+      attachLinkListeners();
+    }
+
+    // Render current position with courses, leadership, awards, coaching
+    function renderCurrentPosition() {
+      const pos = cvData.teaching.current;
+
+      let html = `
+        <section class="cv-section">
+          <h2>Current Position</h2>
+          <div class="cv-item" data-item="${pos.id}">
+            <div class="cv-item-header">
+              <span class="cv-item-org">${pos.institution} <span class="location">— ${pos.location}</span></span>
+              <span class="cv-item-date">${pos.dates}</span>
+            </div>
+            <div class="cv-role-clickable" data-default-preview="true">
+              <div class="cv-item-title">${pos.title}</div>
+              <p class="cv-item-desc">${pos.description}</p>
+            </div>
+
+            <div class="cv-expandables cv-indented">
+      `;
+
+      // Courses
+      html += renderExpandableSection('courses', 'Courses Taught', pos.courses, renderCourseItem);
+
+      // Coaching
+      html += renderExpandableSection('coaching', 'Coaching', pos.coaching, renderCoachingItem);
+
+      // Masterships
+      html += renderExpandableSection('masterships', 'Masterships', pos.awards, (item) => {
+        return `
+          <div class="cv-sub-item cv-sub-item-compact">
+            <span class="cv-sub-item-title">${item.title}</span>
+            <span class="cv-sub-item-meta">${item.dates}</span>
+          </div>
+        `;
+      });
+
+      // Other Roles
+      html += renderExpandableSection('other-roles', 'Other Roles', pos.otherRoles, (item) => {
+        return `
+          <div class="cv-sub-item cv-sub-item-compact">
+            <span class="cv-sub-item-title">${item.title}</span>
+            <span class="cv-sub-item-meta">${item.dates}</span>
+          </div>
+        `;
+      });
+
+      html += `
+            </div>
+      `;
+
+      // Evaluations row (after expandables)
+      if (pos.evaluations) {
+        html += `
+          <div class="cv-evaluations cv-indented">
+            <a class="cv-item-link placeholder"
+               data-preview="pdf"
+               data-src="${pos.evaluations.student.src}"
+               data-title="${pos.evaluations.student.title}"
+               data-context="${pos.evaluations.student.context}"
+               data-type="PDF"
+               data-placeholder="true">
+              Student Evaluations
+            </a>
+            <a class="cv-item-link placeholder"
+               data-preview="pdf"
+               data-src="${pos.evaluations.faculty.src}"
+               data-title="${pos.evaluations.faculty.title}"
+               data-context="${pos.evaluations.faculty.context}"
+               data-type="PDF"
+               data-placeholder="true">
+              Faculty Evaluations
+            </a>
+          </div>
+        `;
+      }
+
+      // Leadership section - displayed prominently, not as expandable
+      if (pos.leadership && pos.leadership.length > 0) {
+        html += `
+          <div class="cv-leadership-section">
+            <div class="cv-leadership-header">Leadership</div>
+        `;
+
+        pos.leadership.forEach(item => {
+          html += `
+            <div class="cv-leadership-item">
+              <div class="cv-sub-item-header">
+                <span class="cv-leadership-title">${item.title}</span>
+                <span class="cv-leadership-date">${item.dates}</span>
+              </div>
+              ${item.description ? `<p class="cv-leadership-desc">${item.description}</p>` : ''}
+          `;
+
+          // Add preview buttons if available
+          if (item.previews && item.previews.length > 0) {
+            html += '<div class="cv-item-links">';
+            item.previews.forEach(preview => {
+              html += `
+                <a class="cv-item-link placeholder"
+                   data-preview="${preview.type}"
+                   data-src="${preview.src}"
+                   data-title="${preview.title}"
+                   data-context="${preview.context}"
+                   data-type="${preview.type.toUpperCase()}"
+                   data-placeholder="true">
+                  ${preview.label}
+                </a>
+              `;
+            });
+            html += '</div>';
+          }
+
+          html += '</div>';
+        });
+
+        html += `
+          </div>
+        `;
+      }
+
+      html += `
+          </div>
+        </section>
+      `;
+      return html;
+    }
+
+    // Helper to render expandable sections
+    function renderExpandableSection(id, title, items, renderItem) {
+      if (!items || items.length === 0) return '';
+
+      const toggleId = `toggle-${id}`;
+      const contentId = `content-${id}`;
+
+      let html = `
+        <div class="cv-expandable">
+          <button class="cv-expand-toggle" id="${toggleId}" aria-expanded="false" aria-controls="${contentId}">
+            <span class="arrow">▶</span> ${title}
+          </button>
+          <div class="cv-expandable-content" id="${contentId}">
+      `;
+
+      items.forEach(item => {
+        html += renderItem(item);
+      });
+
+      html += `
+          </div>
+        </div>
+      `;
+      return html;
+    }
+
+    // Render course item with optional preview button
+    function renderCourseItem(course) {
+      const displayName = course.shortName ? `${course.name} <span class="cv-sub-item-meta">(${course.shortName})</span>` : course.name;
+      let html = `
+        <div class="cv-sub-item">
+          <span class="cv-sub-item-title">${displayName}</span>
+          ${course.grades ? `<span class="cv-sub-item-meta">${course.grades}</span>` : ''}
+          ${course.description ? `<p class="cv-sub-item-desc">${course.description}</p>` : ''}
+      `;
+
+      if (course.hasPreview) {
+        html += `
+          <div class="cv-item-links">
+            <a class="cv-item-link placeholder"
+               data-preview="${course.previewType}"
+               data-src="${course.previewSrc}"
+               data-title="${course.previewTitle}"
+               data-context="${course.previewContext}"
+               data-type="Collage"
+               data-placeholder="true">
+              Course Materials
+            </a>
+          </div>
+        `;
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    // Render coaching item with optional preview button
+    function renderCoachingItem(item) {
+      let html = `
+        <div class="cv-sub-item ${item.description ? '' : 'cv-sub-item-compact'}">
+          <div class="cv-sub-item-header">
+            <span class="cv-sub-item-title">${item.name}</span>
+            <span class="cv-sub-item-meta">${item.dates}</span>
+          </div>
+          ${item.description ? `<p class="cv-sub-item-desc">${item.description}</p>` : ''}
+      `;
+
+      if (item.hasPreview) {
+        html += `
+          <div class="cv-item-links">
+            <a class="cv-item-link placeholder"
+               data-preview="${item.previewType}"
+               data-src="${item.previewSrc}"
+               data-title="${item.previewTitle}"
+               data-context="${item.previewContext}"
+               data-type="Photos"
+               data-placeholder="true">
+              Expedition Photos
+            </a>
+          </div>
+        `;
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    // Render a section
+    function renderSection(title, items, renderFn) {
+      if (!items || items.length === 0) return '';
+
+      let html = `
+        <section class="cv-section">
+          <h2>${title}</h2>
+      `;
+
+      items.forEach(item => {
+        html += renderFn(item);
+      });
+
+      html += '</section>';
+      return html;
+    }
+
+    // Render education item
+    function renderEducationItem(item) {
+      let html = `
+        <div class="cv-item cv-item-hoverable" data-item="${item.id}">
+          <div class="cv-item-header">
+            <span class="cv-item-org">${item.institution} <span class="location">— ${item.location}</span></span>
+            <span class="cv-item-date">${item.dates}</span>
+          </div>
+          <div class="cv-item-title">${item.degree}</div>
+      `;
+
+      if (item.honors) {
+        html += `<p class="cv-item-desc">${item.honors}</p>`;
+      }
+
+      if (item.description) {
+        html += `<p class="cv-item-desc">${item.description}</p>`;
+      }
+
+      // Thesis
+      if (item.thesis) {
+        const thesis = item.thesis;
+        html += `
+          <div class="cv-item-links">
+            <a class="cv-item-link two-line placeholder"
+               data-preview="${thesis.previewType || 'pdf'}"
+               data-src="${thesis.previewSrc || ''}"
+               data-title="${thesis.previewTitle || thesis.title}"
+               data-context="${thesis.previewContext || 'Honors thesis.'}"
+               data-type="PDF"
+               data-placeholder="true">
+              <span class="btn-title">${thesis.title}</span>
+              <span class="btn-subtitle">${thesis.subtitle}</span>
+            </a>
+          </div>
+        `;
+      }
+
+      // Capstones
+      if (item.capstones && item.capstones.length > 0) {
+        html += '<div class="cv-item-links">';
+        item.capstones.forEach(cap => {
+          html += `
+            <a class="cv-item-link two-line placeholder"
+               data-preview="${cap.previewType || 'pdf'}"
+               data-src="${cap.previewSrc || ''}"
+               data-title="${cap.previewTitle || cap.title}"
+               data-context="${cap.previewContext || 'Capstone project.'}"
+               data-type="${cap.type}"
+               data-placeholder="true">
+              <span class="btn-title">${cap.title}</span>
+              <span class="btn-subtitle">${cap.subtitle}</span>
+            </a>
+          `;
+        });
+        html += '</div>';
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    // Render previous teaching item
+    function renderPreviousTeachingItem(item) {
+      let html = `
+        <div class="cv-item cv-item-hoverable" data-item="${item.id}">
+          <div class="cv-item-header">
+            <span class="cv-item-org">${item.institution} <span class="location">— ${item.location}</span></span>
+            <span class="cv-item-date">${item.dates}</span>
+          </div>
+          <div class="cv-item-title">${item.title}</div>
+          ${item.description ? `<p class="cv-item-desc">${item.description}</p>` : ''}
+      `;
+
+      // Add expandables container if we have courses, coaching, or other roles
+      if ((item.courses && item.courses.length > 0) || (item.coaching && item.coaching.length > 0) || (item.otherRoles && item.otherRoles.length > 0)) {
+        html += '<div class="cv-expandables">';
+
+        // Add expandable courses if present
+        if (item.courses && item.courses.length > 0) {
+          const toggleId = `toggle-${item.id}-courses`;
+          const contentId = `content-${item.id}-courses`;
+          html += `
+            <div class="cv-expandable">
+              <button class="cv-expand-toggle" id="${toggleId}" aria-expanded="false" aria-controls="${contentId}">
+                <span class="arrow">▶</span> Courses Taught
+              </button>
+              <div class="cv-expandable-content" id="${contentId}">
+          `;
+
+          item.courses.forEach(course => {
+            html += `
+                <div class="cv-sub-item cv-sub-item-compact">
+                  <span class="cv-sub-item-title">${course.name}</span>
+                </div>
+            `;
+          });
+
+          html += `
+              </div>
+            </div>
+          `;
+        }
+
+        // Add expandable coaching if present
+        if (item.coaching && item.coaching.length > 0) {
+          const toggleId = `toggle-${item.id}-coaching`;
+          const contentId = `content-${item.id}-coaching`;
+          html += `
+            <div class="cv-expandable">
+              <button class="cv-expand-toggle" id="${toggleId}" aria-expanded="false" aria-controls="${contentId}">
+                <span class="arrow">▶</span> Coaching
+              </button>
+              <div class="cv-expandable-content" id="${contentId}">
+          `;
+
+          item.coaching.forEach(coach => {
+            html += `
+                <div class="cv-sub-item cv-sub-item-compact">
+                  <span class="cv-sub-item-title">${coach.name}</span>
+                  <span class="cv-sub-item-meta">${coach.dates}</span>
+                </div>
+            `;
+          });
+
+          html += `
+              </div>
+            </div>
+          `;
+        }
+
+        // Add expandable other roles if present
+        if (item.otherRoles && item.otherRoles.length > 0) {
+          const toggleId = `toggle-${item.id}-other-roles`;
+          const contentId = `content-${item.id}-other-roles`;
+          html += `
+            <div class="cv-expandable">
+              <button class="cv-expand-toggle" id="${toggleId}" aria-expanded="false" aria-controls="${contentId}">
+                <span class="arrow">▶</span> Other Roles
+              </button>
+              <div class="cv-expandable-content" id="${contentId}">
+          `;
+
+          item.otherRoles.forEach(role => {
+            html += `
+                <div class="cv-sub-item cv-sub-item-compact">
+                  <span class="cv-sub-item-title">${role.title}</span>
+                  <span class="cv-sub-item-meta">${role.dates}</span>
+                </div>
+            `;
+          });
+
+          html += `
+              </div>
+            </div>
+          `;
+        }
+
+        html += '</div>';
+      }
+
+      // Add preview button if item has one
+      if (item.hasPreview) {
+        html += `
+          <div class="cv-item-links">
+            <a class="cv-item-link placeholder"
+               data-preview="${item.previewType}"
+               data-src="${item.previewSrc}"
+               data-title="${item.previewTitle}"
+               data-context="${item.previewContext}"
+               data-type="Photos"
+               data-placeholder="true">
+              Expedition Gallery
+            </a>
+          </div>
+        `;
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    // Render certification item
+    function renderCertificationItem(item) {
+      return `
+        <div class="cv-item cv-item-hoverable" data-item="${item.id}">
+          <div class="cv-item-header">
+            <span class="cv-item-title">${item.title}</span>
+            <span class="cv-item-date">${item.dates}</span>
+          </div>
+          <div class="cv-item-org">${item.organization}</div>
+        </div>
+      `;
+    }
+
+    // Get icon for content type
+    function getIconForType(type) {
+      const icons = {
+        'PDF': '📄',
+        'Video': '🎬',
+        'Photo': '📷',
+        'Presentation': '📊',
+        'Spreadsheet': '📊',
+        'Slides': '📊'
+      };
+      return icons[type] || '📄';
+    }
+
+    // Toggle panel visibility
+    function togglePanel(open) {
+      panelOpen = open;
+      if (open) {
+        cvPreview.classList.add('open');
+        cvMain.classList.add('preview-open');
+        previewToggle.classList.add('panel-open');
+        toggleLabel.textContent = 'Close Preview';
+      } else {
+        cvPreview.classList.remove('open');
+        cvMain.classList.remove('preview-open');
+        previewToggle.classList.remove('panel-open');
+        toggleLabel.textContent = 'Open Preview';
+      }
+    }
+
+    // Show preview content
+    function showPreview(link) {
+      const type = link.dataset.preview;
+      const src = link.dataset.src;
+      const title = link.dataset.title;
+      const context = link.dataset.context;
+      const typeLabel = link.dataset.type;
+      const isPlaceholder = link.dataset.placeholder === 'true';
+
+      // Update active states - clear all
+      document.querySelectorAll('.cv-item-link').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.cv-item-hoverable').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.cv-role-clickable').forEach(r => r.classList.remove('active'));
+      document.querySelectorAll('.cv-leadership-item').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.cv-sub-item').forEach(s => s.classList.remove('active'));
+
+      // Mark clicked link as active
+      link.classList.add('active');
+
+      // Find and mark the parent section as active
+      const parentLeadership = link.closest('.cv-leadership-item');
+      const parentHoverable = link.closest('.cv-item-hoverable');
+      const parentSubItem = link.closest('.cv-sub-item');
+
+      if (parentLeadership) {
+        parentLeadership.classList.add('active');
+      } else if (parentSubItem) {
+        parentSubItem.classList.add('active');
+      } else if (parentHoverable) {
+        parentHoverable.classList.add('active');
+      }
+
+      // Update header
+      previewType.textContent = typeLabel;
+      previewTitle.textContent = title;
+      previewContext.textContent = context;
+
+      // Clear and populate body
+      previewBody.innerHTML = '';
+
+      if (isPlaceholder || !src) {
+        // Show placeholder for missing content
+        previewBody.innerHTML = `
+          <div class="placeholder-content">
+            <span>${title}</span>
+            <p class="placeholder-note">Content to be added</p>
+          </div>
+        `;
+        openLink.style.display = 'none';
+      } else if (type === 'pdf') {
+        previewBody.innerHTML = `<iframe src="${src}"></iframe>`;
+        openLink.href = src;
+        openLink.style.display = 'inline-flex';
+      } else if (type === 'image' || type === 'photo' || type === 'slides' || type === 'collage') {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = title;
+        previewBody.appendChild(img);
+        openLink.href = src;
+        openLink.style.display = 'inline-flex';
+      } else if (type === 'video') {
+        previewBody.innerHTML = `
+          <div class="video-container">
+            <iframe src="${src}" frameborder="0" allowfullscreen></iframe>
+          </div>
+        `;
+        openLink.href = src;
+        openLink.style.display = 'inline-flex';
+      } else {
+        previewBody.innerHTML = `
+          <div class="placeholder-content">
+            <span>${title}</span>
+          </div>
+        `;
+        openLink.style.display = 'none';
+      }
+
+      // Show preview panel and content
+      previewEmpty.style.display = 'none';
+      previewContent.classList.add('active');
+      togglePanel(true);
+    }
+
+    // Show default teaching preview
+    function showDefaultPreview() {
+      if (!cvData || !cvData.teaching.current.defaultPreview) return;
+
+      const preview = cvData.teaching.current.defaultPreview;
+
+      // Update header
+      previewType.textContent = 'TEACHING';
+      previewTitle.textContent = preview.title;
+      previewContext.textContent = '';
+
+      // Build teaching collage
+      let collageHtml = '<div class="teaching-collage">';
+      preview.images.forEach((img, i) => {
+        collageHtml += `
+          <div class="photo">
+            <span>Photo ${i + 1}</span>
+          </div>
+        `;
+      });
+      collageHtml += '</div>';
+
+      previewBody.innerHTML = collageHtml;
+      openLink.style.display = 'none';
+
+      // Mark the role as active
+      const roleEl = document.querySelector('.cv-role-clickable');
+      if (roleEl) roleEl.classList.add('active');
+
+      // Show preview
+      previewEmpty.style.display = 'none';
+      previewContent.classList.add('active');
+      togglePanel(true);
+    }
+
+    // Close preview
+    function closePreview() {
+      previewContent.classList.remove('active');
+      previewEmpty.style.display = 'flex';
+      document.querySelectorAll('.cv-item-link').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.cv-item-hoverable').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.cv-role-clickable').forEach(r => r.classList.remove('active'));
+      document.querySelectorAll('.cv-leadership-item').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.cv-sub-item').forEach(s => s.classList.remove('active'));
+    }
+
+    // Attach event listeners to dynamically created links
+    function attachLinkListeners() {
+      document.querySelectorAll('.cv-item-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          showPreview(link);
+        });
+      });
+
+      // Attach click listener to clickable role for default preview
+      document.querySelectorAll('.cv-role-clickable').forEach(el => {
+        el.addEventListener('click', () => {
+          showDefaultPreview();
+        });
+      });
+
+      // Attach expand/collapse listeners
+      document.querySelectorAll('.cv-expand-toggle').forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          const contentId = toggle.getAttribute('aria-controls');
+          const content = document.getElementById(contentId);
+          const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+          if (isExpanded) {
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.classList.remove('expanded');
+            content.classList.remove('open');
+          } else {
+            toggle.setAttribute('aria-expanded', 'true');
+            toggle.classList.add('expanded');
+            content.classList.add('open');
+          }
+        });
+      });
+
+      // Show default preview on page load
+      showDefaultPreview();
+    }
+
+    // Event: Toggle button
+    previewToggle.addEventListener('click', () => {
+      if (panelOpen) {
+        togglePanel(false);
+        closePreview();
+      } else {
+        togglePanel(true);
+      }
+    });
+
+    // Event: Mobile close button
+    closeMobile.addEventListener('click', () => {
+      togglePanel(false);
+      closePreview();
+    });
+
+    // Event: Keyboard (Escape to close)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && panelOpen) {
+        togglePanel(false);
+        closePreview();
+      }
+    });
+
+    // Initialize
+    togglePanel(false);
+    loadCV();
+  </script>
+
+</body>
+</html>

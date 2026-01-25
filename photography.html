@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photography — Hugh Koeze</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Josefin+Sans:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* =========================================
+       PHOTOGRAPHY PAGE
+       ========================================= */
+
+    .photo-header {
+      padding: var(--space-5) var(--space-3) var(--space-4);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .photo-header h1 {
+      margin-bottom: var(--space-1);
+    }
+
+    .photo-header p {
+      font-size: 0.95rem;
+      color: var(--charcoal-light);
+      margin-bottom: 0;
+    }
+
+    .photo-header a {
+      color: var(--verdigris);
+      text-decoration: none;
+    }
+
+    .photo-header a:hover {
+      color: var(--verdigris-dark);
+      text-decoration: underline;
+    }
+
+    .photo-links {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-2);
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .photo-links a {
+      color: var(--charcoal-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .photo-links a:hover {
+      color: var(--verdigris);
+    }
+
+    /* Masonry grid - positioned by JS */
+    .photo-grid {
+      position: relative;
+      padding: 0 var(--space-3) var(--space-5);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .photo-item {
+      position: absolute;
+      transition: transform 0.2s ease, opacity 0.3s ease;
+    }
+
+    .photo-item img {
+      width: 100%;
+      display: block;
+      cursor: pointer;
+    }
+
+    /* Featured photos are wider */
+    .photo-item.featured {
+      /* Width set by JS */
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(54, 51, 47, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox img {
+      max-width: 85vw;
+      max-height: 85vh;
+      object-fit: contain;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      cursor: default;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: var(--space-3);
+      right: var(--space-3);
+      color: var(--warm-white);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+    }
+
+    .lightbox-year {
+      position: absolute;
+      bottom: var(--space-3);
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--warm-white);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      opacity: 0.7;
+    }
+
+    .lightbox-year:empty {
+      display: none;
+    }
+
+    /* Loading indicator */
+    .photo-loading {
+      text-align: center;
+      padding: var(--space-4);
+      color: var(--charcoal-light);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .photo-loading.hidden {
+      display: none;
+    }
+
+    /* End message */
+    .photo-end {
+      text-align: center;
+      padding: var(--space-4);
+      color: var(--stone-gray);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    .photo-end.hidden {
+      display: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .photo-header {
+        padding: var(--space-4) var(--space-3) var(--space-3);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .photo-grid {
+        padding: 0 var(--space-2) var(--space-4);
+      }
+      .photo-header {
+        padding: var(--space-3) var(--space-2) var(--space-2);
+      }
+      .photo-links {
+        flex-direction: column;
+        gap: var(--space-1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="site-title">Hugh Koeze</a>
+        <ul>
+          <li><a href="teaching.html">Teaching</a></li>
+          <li><a href="writing.html">Writing</a></li>
+          <li><a href="photography.html">Photography</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="photo-header">
+      <h1>Photography</h1>
+      <p><a href="about.html">Let me know if you'd like a print!</a></p>
+      <div class="photo-links">
+        <a href="https://instagram.com/hughsibbele" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </section>
+
+    <div class="photo-grid" id="photoGrid">
+      <!-- Photos loaded dynamically -->
+    </div>
+
+    <div class="photo-loading" id="loadingIndicator">Loading...</div>
+    <div class="photo-end hidden" id="endMessage"></div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" aria-label="Close">ESC</button>
+      <img src="" alt="Enlarged photograph" id="lightboxImg">
+      <div class="lightbox-year" id="lightboxYear"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container text-center">
+      <p class="footer-subtle"><a href="https://claude.ai/claude-code">Wondering how an English teacher made this website?</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const BATCH_SIZE = 20;
+      const MAX_PHOTOS = 1000;
+      const IMAGE_PATH = 'images/photography/';
+      const GAP = 16; // var(--space-2)
+
+      let shuffledPhotos = [];
+      let displayedCount = 0;
+      let totalAvailable = 0;
+      let isLoading = false;
+      let allDone = false;
+
+      // Masonry state
+      let columnHeights = [];
+      let numColumns = 4;
+      let columnWidth = 0;
+      let pendingItems = []; // Items waiting to be positioned
+
+      const grid = document.getElementById('photoGrid');
+      const loader = document.getElementById('loadingIndicator');
+      const endMsg = document.getElementById('endMessage');
+
+      // Fisher-Yates shuffle
+      function shuffle(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // Calculate grid dimensions
+      function calculateGrid() {
+        const containerWidth = grid.clientWidth;
+        if (containerWidth < 480) numColumns = 1;
+        else if (containerWidth < 768) numColumns = 2;
+        else if (containerWidth < 1000) numColumns = 3;
+        else numColumns = 4;
+
+        columnWidth = (containerWidth - (numColumns - 1) * GAP) / numColumns;
+        columnHeights = new Array(numColumns).fill(0);
+      }
+
+      // Find best position for an item
+      function findPosition(span) {
+        if (span === 1) {
+          // Find shortest column
+          let minHeight = Math.min(...columnHeights);
+          let col = columnHeights.indexOf(minHeight);
+          return { col, top: minHeight };
+        } else {
+          // Find best pair of adjacent columns
+          let bestCol = 0;
+          let bestTop = Math.max(columnHeights[0], columnHeights[1] || 0);
+          for (let i = 0; i < numColumns - 1; i++) {
+            const top = Math.max(columnHeights[i], columnHeights[i + 1]);
+            if (top < bestTop) {
+              bestTop = top;
+              bestCol = i;
+            }
+          }
+          return { col: bestCol, top: bestTop };
+        }
+      }
+
+      // Position a single item
+      function positionItem(item, img, isFeatured) {
+        const span = (isFeatured && numColumns > 1) ? 2 : 1;
+        const itemWidth = span === 2 ? (columnWidth * 2 + GAP) : columnWidth;
+        const aspectRatio = img.naturalHeight / img.naturalWidth;
+        const itemHeight = itemWidth * aspectRatio;
+
+        const pos = findPosition(span);
+
+        item.style.left = (pos.col * (columnWidth + GAP)) + 'px';
+        item.style.top = pos.top + 'px';
+        item.style.width = itemWidth + 'px';
+
+        // Update column heights
+        const newHeight = pos.top + itemHeight + GAP;
+        for (let i = 0; i < span; i++) {
+          columnHeights[pos.col + i] = newHeight;
+        }
+
+        // Update grid height
+        grid.style.height = Math.max(...columnHeights) + 'px';
+      }
+
+      // Process pending items in order
+      function processPending() {
+        while (pendingItems.length > 0 && pendingItems[0].ready) {
+          const { item, img, isFeatured } = pendingItems.shift();
+          positionItem(item, img, isFeatured);
+        }
+      }
+
+      // Load next batch
+      function loadBatch() {
+        if (isLoading || allDone) return;
+
+        const maxToShow = Math.min(totalAvailable, MAX_PHOTOS);
+        if (displayedCount >= maxToShow) {
+          allDone = true;
+          loader.classList.add('hidden');
+          endMsg.classList.remove('hidden');
+          return;
+        }
+
+        isLoading = true;
+        loader.classList.remove('hidden');
+
+        const remaining = maxToShow - displayedCount;
+        const batchSize = Math.min(BATCH_SIZE, remaining);
+        const batch = shuffledPhotos.slice(displayedCount, displayedCount + batchSize);
+
+        if (batch.length === 0) {
+          allDone = true;
+          loader.classList.add('hidden');
+          isLoading = false;
+          return;
+        }
+
+        let loadedCount = 0;
+
+        batch.forEach((photo, i) => {
+          const item = document.createElement('div');
+          item.className = 'photo-item';
+
+          const maybeFeature = Math.random() < 0.2;
+          const pendingEntry = { item, img: null, isFeatured: false, ready: false };
+          pendingItems.push(pendingEntry);
+
+          const img = document.createElement('img');
+          img.src = IMAGE_PATH + photo.file;
+          img.alt = 'Photograph';
+          if (photo.year) {
+            img.dataset.year = photo.year;
+          }
+
+          img.onload = () => {
+            const isFeatured = maybeFeature && img.naturalWidth > img.naturalHeight;
+            if (isFeatured) item.classList.add('featured');
+
+            pendingEntry.img = img;
+            pendingEntry.isFeatured = isFeatured;
+            pendingEntry.ready = true;
+            processPending();
+
+            loadedCount++;
+            if (loadedCount === batch.length) {
+              loader.classList.add('hidden');
+              isLoading = false;
+            }
+          };
+
+          img.onerror = () => {
+            // Remove from pending
+            const idx = pendingItems.indexOf(pendingEntry);
+            if (idx > -1) pendingItems.splice(idx, 1);
+            item.remove();
+            processPending();
+
+            loadedCount++;
+            if (loadedCount === batch.length) {
+              loader.classList.add('hidden');
+              isLoading = false;
+            }
+          };
+
+          item.appendChild(img);
+          grid.appendChild(item);
+        });
+
+        displayedCount += batch.length;
+      }
+
+      // Relayout all items
+      function relayout() {
+        calculateGrid();
+        const items = Array.from(grid.querySelectorAll('.photo-item'));
+        items.forEach(item => {
+          const img = item.querySelector('img');
+          if (img && img.naturalWidth) {
+            const isFeatured = item.classList.contains('featured');
+            positionItem(item, img, isFeatured);
+          }
+        });
+      }
+
+      // Scroll detection
+      function checkScroll() {
+        if (allDone) return;
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+
+        if (scrollY + windowHeight >= docHeight - 500) {
+          loadBatch();
+        }
+      }
+
+      // Lightbox
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxYear = document.getElementById('lightboxYear');
+
+      function openLightbox(src, year) {
+        lightboxImg.src = src;
+        lightboxYear.textContent = year || '';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+
+      grid.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG') {
+          openLightbox(e.target.src, e.target.dataset.year);
+        }
+      });
+
+      // Handle resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(relayout, 150);
+      });
+
+      // Initialize
+      calculateGrid();
+      fetch('photos.json')
+        .then(res => res.json())
+        .then(photos => {
+          totalAvailable = photos.length;
+          shuffledPhotos = shuffle(photos);
+          loadBatch();
+          window.addEventListener('scroll', checkScroll);
+        })
+        .catch(err => {
+          loader.textContent = 'No photos found.';
+          console.error('Failed to load photos manifest:', err);
+        });
+    })();
+  </script>
+
+</body>
+</html>

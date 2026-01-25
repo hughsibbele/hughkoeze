@@ -1,0 +1,9 @@
+images/photography/*.jpg filter=lfs diff=lfs merge=lfs -text
+images/photography/*.jpeg filter=lfs diff=lfs merge=lfs -text
+images/photography/*.png filter=lfs diff=lfs merge=lfs -text
+images/photography/*.gif filter=lfs diff=lfs merge=lfs -text
+images/photography/*.webp filter=lfs diff=lfs merge=lfs -text
+images/photography/*.HEIC filter=lfs diff=lfs merge=lfs -text
+images/photography/*.heic filter=lfs diff=lfs merge=lfs -text
+images/photography/*.JPG filter=lfs diff=lfs merge=lfs -text
+images/photography/*.JPEG filter=lfs diff=lfs merge=lfs -text
