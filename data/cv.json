@@ -7,6 +7,30 @@
       "dates": "August 2018–Present",
       "location": "Alexandria, VA",
       "description": "Teach literary analysis and writing through close reading, supportive, discussion-centered classrooms, and an emphasis on authentic student voice. Led a collaborative redesign of the 9th grade English curriculum. Developed elective courses drawing on my graduate work in Russian and world literature. Currently leading the school's adaptation to Artificial Intelligence. Beyond the classroom, serve as advisor, coach, and dorm parent, and founded an outdoor leadership program.",
+      "defaultPreview": {
+        "type": "teaching-collage",
+        "title": "English Teacher",
+        "context": "Teaching in action at Episcopal High School.",
+        "images": [
+          "images/cv/teaching/teaching-1.jpg",
+          "images/cv/teaching/teaching-2.jpg",
+          "images/cv/teaching/teaching-3.jpg"
+        ]
+      },
+      "evaluations": {
+        "student": {
+          "type": "pdf",
+          "src": "images/cv/evaluations/student-evaluations.pdf",
+          "title": "Student Evaluations",
+          "context": "Compiled student feedback and course evaluations."
+        },
+        "faculty": {
+          "type": "pdf",
+          "src": "images/cv/evaluations/faculty-evaluations.pdf",
+          "title": "Faculty Evaluations",
+          "context": "Peer and supervisor observations and feedback."
+        }
+      },
       "otherRoles": [
         {
           "id": "advisor",
@@ -24,25 +48,45 @@
           "id": "fundamentals",
           "name": "Fundamentals in Literature and Composition",
           "shortName": "9th Grade English",
-          "description": "A skills-based course redesigned collaboratively with the 9th grade English team. The curriculum centers on competency development in close reading, writing in many forms, metacognition and character growth, grounded in place-based learning that uses Washington, DC as a living text."
+          "description": "A skills-based course redesigned collaboratively with the 9th grade English team. The curriculum centers on competency development in close reading, writing in many forms, metacognition and character growth, grounded in place-based learning that uses Washington, DC as a living text.",
+          "hasPreview": true,
+          "previewType": "collage",
+          "previewSrc": "images/cv/courses/flc-collage.jpg",
+          "previewTitle": "FLC Course Materials",
+          "previewContext": "Sample assignments, student work, and course artifacts."
         },
         {
           "id": "chekhov",
           "name": "Chekhov",
           "grades": "Elective",
-          "description": "A single-author course tracing Chekhov's development from early work to the extraordinary pieces of his final years. His short stories and plays become a lens for exploring realist aesthetics, while his humble, humanist worldview offers a model for living."
+          "description": "A single-author course tracing Chekhov's development from early work to the extraordinary pieces of his final years. His short stories and plays become a lens for exploring realist aesthetics, while his humble, humanist worldview offers a model for living.",
+          "hasPreview": true,
+          "previewType": "collage",
+          "previewSrc": "images/cv/courses/chekhov-collage.jpg",
+          "previewTitle": "Chekhov Course Materials",
+          "previewContext": "Sample assignments, student work, and course artifacts."
         },
         {
           "id": "gothic-lit",
           "name": "Gothic Literature Across Two Centuries",
           "grades": "Elective",
-          "description": "Gothic literature reinterpreted across cultures and centuries. Each society's use of gothic tropes reveals what it finds unspeakably terrifying, making the genre a window into collective fears—from Victorian anxieties to contemporary Latin American gothic."
+          "description": "Gothic literature reinterpreted across cultures and centuries. Each society's use of gothic tropes reveals what it finds unspeakably terrifying, making the genre a window into collective fears—from Victorian anxieties to contemporary Latin American gothic.",
+          "hasPreview": true,
+          "previewType": "collage",
+          "previewSrc": "images/cv/courses/gothic-collage.jpg",
+          "previewTitle": "Gothic Literature Course Materials",
+          "previewContext": "Sample assignments, student work, and course artifacts."
         },
         {
           "id": "middle-eastern-lit",
           "name": "Middle Eastern Voices",
           "grades": "Elective",
-          "description": "Contemporary literature from across the Middle East, chosen to complicate and contest stereotypical understandings of the region. The emphasis on diversity of perspective, genre, and content teaches broader lessons about humility and curiosity when encountering unfamiliar cultures."
+          "description": "Contemporary literature from across the Middle East, chosen to complicate and contest stereotypical understandings of the region. The emphasis on diversity of perspective, genre, and content teaches broader lessons about humility and curiosity when encountering unfamiliar cultures.",
+          "hasPreview": true,
+          "previewType": "collage",
+          "previewSrc": "images/cv/courses/mev-collage.jpg",
+          "previewTitle": "Middle Eastern Voices Course Materials",
+          "previewContext": "Sample assignments, student work, and course artifacts."
         },
         {
           "id": "russian-lit",
@@ -66,7 +110,23 @@
           "id": "ai-taskforce",
           "title": "AI Task Force Lead",
           "dates": "2025–Present",
-          "description": "Lead Episcopal's adaptation to the rise of Artificial Intelligence. Facilitate faculty workshops on AI integration, developing training resources and implementation frameworks. Shape institutional policy emphasizing ethical, honorable and effective integration of AI in collaboration with the Leadership Team."
+          "description": "Lead Episcopal's adaptation to the rise of Artificial Intelligence. Facilitate faculty workshops on AI integration, developing training resources and implementation frameworks. Shape institutional policy emphasizing ethical, honorable and effective integration of AI in collaboration with the Leadership Team.",
+          "previews": [
+            {
+              "label": "Chapel Talk",
+              "type": "video",
+              "src": "images/cv/leadership/ai-chapel-talk.mp4",
+              "title": "AI Chapel Talk",
+              "context": "Chapel address on AI and education."
+            },
+            {
+              "label": "Workshop Materials",
+              "type": "pdf",
+              "src": "images/cv/leadership/workshop-materials.pdf",
+              "title": "Faculty Workshop Materials",
+              "context": "Training resources for AI integration."
+            }
+          ]
         },
         {
           "id": "interim-chair",
@@ -79,6 +139,21 @@
           "title": "9th Grade Dean & Dorm Head",
           "dates": "2021–2023",
           "description": "Supervised residential life for 9th grade boys, coordinating grade-level programming, parent communication, and dorm policies. Partnered with Academic Support Center to support struggling students through individualized intervention plans."
+        },
+        {
+          "id": "outdoor-leadership",
+          "title": "Outdoor Leadership Program",
+          "dates": "2020–2022",
+          "description": "Designed four-tier experiential leadership curriculum progressing from foundational skills to expedition leadership. Led backpacking, kayaking, and climbing trips facilitating personal development and wilderness competency.",
+          "previews": [
+            {
+              "label": "Expedition Photos",
+              "type": "collage",
+              "src": "images/cv/coaching/expedition-photos.jpg",
+              "title": "Expedition Photos",
+              "context": "Photos from backpacking, kayaking, and climbing expeditions."
+            }
+          ]
         }
       ],
       "awards": [
@@ -104,13 +179,6 @@
         }
       ],
       "coaching": [
-        {
-          "id": "outdoor-leadership",
-          "name": "Outdoor Leadership Program",
-          "role": "Founder & Lead Instructor",
-          "dates": "2020–2022",
-          "description": "Designed four-tier experiential leadership curriculum progressing from foundational skills to expedition leadership. Led backpacking, kayaking, and climbing trips facilitating personal development and wilderness competency."
-        },
         {
           "id": "ultimate",
           "name": "Ultimate Frisbee",
@@ -139,6 +207,11 @@
         "dates": "August 2014–August 2018",
         "location": "Virginia Beach, VA",
         "description": "Founded and led the Outdoor Leadership Series, an experiential outdoor leadership development program. Led international student programs to Panama, Guatemala, and Norway.",
+        "hasPreview": true,
+        "previewType": "collage",
+        "previewSrc": "images/cv/cape-henry/expedition-gallery.jpg",
+        "previewTitle": "Expedition Gallery",
+        "previewContext": "Photos from outdoor leadership expeditions.",
         "courses": [
           {
             "id": "chc-english-9",
@@ -153,6 +226,13 @@
           {
             "id": "chc-crew",
             "name": "Varsity Crew",
+            "dates": "2014–2018"
+          }
+        ],
+        "otherRoles": [
+          {
+            "id": "chc-advisor",
+            "title": "Advisor",
             "dates": "2014–2018"
           }
         ]
@@ -215,17 +295,29 @@
       "degree": "Master of Arts in English",
       "dates": "2018–2022",
       "location": "Ripton, VT",
-      "description": "Graduate study in literature with focus on Russian literature, dramatic forms, and pedagogy. Summers-only program for practicing teachers.",
+      "description": "Graduate study in literature with focus on Russian literature, including capstone projects on Chekhov and In Search of Lost Time",
       "capstones": [
         {
-          "title": "The Steppe and the Sea: Nature in Chekhov",
+          "title": "The Steppe and the Sea",
+          "subtitle": "Nature in Chekhov",
           "year": "2021",
-          "type": "Paper"
+          "type": "Paper",
+          "hasPreview": true,
+          "previewType": "pdf",
+          "previewSrc": "files/cv/steppe-and-sea.pdf",
+          "previewTitle": "The Steppe and the Sea: Nature in Chekhov",
+          "previewContext": "Capstone paper, 2021."
         },
         {
-          "title": "Stranger to the House: Photography and In Search of Lost Time",
+          "title": "Stranger to the House",
+          "subtitle": "Photography in <em>In Search of Lost Time</em>",
           "year": "2022",
-          "type": "Creative Project"
+          "type": "Creative Project",
+          "hasPreview": true,
+          "previewType": "pdf",
+          "previewSrc": "files/cv/stranger-to-the-house.pdf",
+          "previewTitle": "Stranger to the House",
+          "previewContext": "Creative capstone project, 2022."
         }
       ]
     },
@@ -237,8 +329,14 @@
       "location": "Chapel Hill, NC",
       "honors": "Summa cum laude, Phi Beta Kappa",
       "thesis": {
-        "title": "Very Remarkable Men: Villains and Victorian Doubt in Robert Louis Stevenson",
-        "year": "2013"
+        "title": "Honors Thesis",
+        "subtitle": "Villains in Robert Louis Stevenson",
+        "year": "2013",
+        "hasPreview": true,
+        "previewType": "pdf",
+        "previewSrc": "files/cv/very-remarkable-men.pdf",
+        "previewTitle": "Very Remarkable Men: Villains and Victorian Doubt in Robert Louis Stevenson",
+        "previewContext": "Honors thesis, 2013."
       },
       "activities": [
         "Carolina Outdoor Education Center, Lead Instructor",
@@ -265,16 +363,22 @@
 
   "certifications": [
     {
-      "id": "wfr",
-      "title": "Wilderness First Responder",
-      "organization": "NOLS WMI / Center for Wilderness Safety",
-      "dates": "2012–Present"
-    },
-    {
       "id": "cpr",
       "title": "Child/Adult First Aid, CPR and AED",
       "organization": "American Red Cross",
       "dates": "2007–Present"
+    },
+    {
+      "id": "wfa",
+      "title": "Wilderness First Aid (WFA)",
+      "organization": "NOLS WMI",
+      "dates": "2019–2023"
+    },
+    {
+      "id": "wfr",
+      "title": "Wilderness First Responder (WFR)",
+      "organization": "NOLS WMI / Center for Wilderness Safety",
+      "dates": "2012–Present"
     }
   ]
 }

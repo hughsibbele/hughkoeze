@@ -273,25 +273,10 @@
       line-height: 1.5;
     }
 
-    .cv-header .instruction {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--stone-gray);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .cv-header .instruction::before {
-      content: '◆';
-      font-size: 0.4rem;
-      color: var(--verdigris);
-    }
-
     /* CV Sections */
     .cv-section {
-      margin-bottom: var(--space-2);
-      padding-top: var(--space-2);
+      margin-bottom: var(--space-1);
+      padding-top: var(--space-1);
       max-width: 60%;
       border-top: 1px solid var(--mortar);
     }
@@ -324,20 +309,24 @@
     /* CV Items */
     .cv-item {
       margin-bottom: var(--space-2);
-      padding-left: var(--space-2);
-      border-left: 2px solid transparent;
-      transition: border-color 0.2s ease;
     }
 
     .cv-item:last-child {
       margin-bottom: 0;
     }
 
-    .cv-item:hover {
+    /* CV Items with hover effect (not current position) */
+    .cv-item-hoverable {
+      padding-left: var(--space-2);
+      border-left: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .cv-item-hoverable:hover {
       border-left-color: var(--sage);
     }
 
-    .cv-item.active {
+    .cv-item-hoverable.active {
       border-left-color: var(--verdigris);
     }
 
@@ -356,6 +345,28 @@
       letter-spacing: 0.02em;
       color: var(--charcoal);
       margin-bottom: 4px;
+    }
+
+    /* Clickable teaching role */
+    .cv-role-clickable {
+      padding-left: var(--space-2);
+      border-left: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      margin-top: var(--space-1);
+      margin-bottom: var(--space-1);
+    }
+
+    .cv-role-clickable:hover {
+      border-left-color: var(--sage);
+    }
+
+    .cv-role-clickable.active {
+      border-left-color: var(--verdigris);
+    }
+
+    .cv-role-clickable .cv-item-desc {
+      margin-bottom: 0;
     }
 
     .cv-item-date {
@@ -386,7 +397,7 @@
     .cv-leadership-section {
       margin-top: var(--space-2);
       padding-top: var(--space-2);
-      border-top: 1px solid var(--mortar);
+      border-top: 1px dashed var(--mortar);
     }
 
     .cv-leadership-header {
@@ -407,6 +418,10 @@
 
     .cv-leadership-item:hover {
       border-left-color: var(--sage);
+    }
+
+    .cv-leadership-item.active {
+      border-left-color: var(--verdigris);
     }
 
     .cv-leadership-item:last-child {
@@ -512,6 +527,17 @@
 
     .cv-sub-item {
       margin-bottom: var(--space-1);
+      padding-left: var(--space-2);
+      border-left: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .cv-sub-item:hover {
+      border-left-color: var(--sage);
+    }
+
+    .cv-sub-item.active {
+      border-left-color: var(--verdigris);
     }
 
     .cv-sub-item:last-child {
@@ -571,7 +597,12 @@
       margin-top: 0;
     }
 
-    /* CV Item Links - using design system btn styles */
+    /* Indentation to match English Teacher title */
+    .cv-indented {
+      margin-left: var(--space-2);
+    }
+
+    /* CV Item Links - design system aligned */
     .cv-item-links {
       display: flex;
       flex-wrap: wrap;
@@ -580,15 +611,13 @@
     }
 
     .cv-item-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      display: inline-block;
       font-family: var(--font-display);
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 4px 10px;
+      padding: 6px 12px;
       background: transparent;
       border: 1px solid var(--charcoal);
       color: var(--charcoal);
@@ -607,10 +636,6 @@
       color: var(--warm-white);
     }
 
-    .cv-item-link .icon {
-      font-size: 0.75rem;
-    }
-
     /* Placeholder badge for missing content */
     .cv-item-link.placeholder {
       border-style: dashed;
@@ -622,6 +647,72 @@
       border-color: var(--charcoal);
       color: var(--charcoal);
       background: transparent;
+    }
+
+    /* Two-line button */
+    .cv-item-link.two-line {
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .cv-item-link .btn-title {
+      display: block;
+      font-weight: 500;
+    }
+
+    .cv-item-link .btn-subtitle {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      opacity: 0.85;
+    }
+
+    /* Evaluation buttons row */
+    .cv-evaluations {
+      display: flex;
+      gap: var(--space-1);
+      margin-top: var(--space-2);
+    }
+
+    /* Teaching photo collage for default preview */
+    .teaching-collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+      max-height: 280px;
+      padding: var(--space-2);
+    }
+
+    .teaching-collage .photo {
+      background: var(--mortar);
+      border: 1px solid var(--mortar);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--stone-gray);
+      overflow: hidden;
+    }
+
+    .teaching-collage .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .teaching-collage .photo:nth-child(1) {
+      grid-row: span 2;
+    }
+
+    .teaching-collage .photo:nth-child(2) {
+      aspect-ratio: 4/3;
+    }
+
+    .teaching-collage .photo:nth-child(3) {
+      aspect-ratio: 3/2;
     }
 
     /* Placeholder for demo */
@@ -708,6 +799,106 @@
         padding: 0;
         line-height: 1;
       }
+
+      /* CV content mobile adjustments */
+      .cv-section {
+        max-width: 100%;
+      }
+
+      .cv-header {
+        max-width: 100%;
+      }
+
+      .cv-main {
+        padding: var(--space-3) var(--space-2);
+      }
+
+      .cv-item-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .cv-item-org {
+        font-size: 0.95rem;
+      }
+
+      .cv-expandables {
+        flex-direction: column;
+        gap: var(--space-1);
+      }
+
+      .cv-indented {
+        margin-left: var(--space-1);
+      }
+
+      .cv-item-links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cv-item-link.two-line {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .cv-evaluations {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cv-sub-item-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .cv-leadership-section .cv-sub-item-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .teaching-collage {
+        max-height: 200px;
+      }
+
+      /* Touch-friendly button sizes */
+      .cv-item-link {
+        padding: 8px 12px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
+
+      .cv-expand-toggle {
+        min-height: 44px;
+        padding: 8px 0;
+      }
+
+      .cv-role-clickable,
+      .cv-leadership-item {
+        padding: var(--space-2);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cv-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .cv-section h2 {
+        font-size: 0.7rem;
+      }
+
+      .cv-item-org {
+        font-size: 0.9rem;
+      }
+
+      .cv-item-title {
+        font-size: 0.85rem;
+      }
+
+      .cv-item-desc {
+        font-size: 0.85rem;
+      }
     }
 
     @media (min-width: 769px) {
@@ -742,8 +933,7 @@
     <main class="cv-main" id="cv-main">
       <div class="cv-header">
         <h1>Curriculum Vitae</h1>
-        <p class="intro">Reader, writer, and teacher. My work explores how literature shapes and is shaped by place, technology, and community.</p>
-        <p class="instruction">Click highlighted items to preview examples</p>
+        <p class="intro">Skilled, flexible & experienced educator.</p>
       </div>
 
       <!-- Content will be loaded dynamically from JSON -->
@@ -839,33 +1029,36 @@
               <span class="cv-item-org">${pos.institution} <span class="location">— ${pos.location}</span></span>
               <span class="cv-item-date">${pos.dates}</span>
             </div>
-            <div class="cv-item-title">${pos.title}</div>
-            <p class="cv-item-desc">${pos.description}</p>
+            <div class="cv-role-clickable" data-default-preview="true">
+              <div class="cv-item-title">${pos.title}</div>
+              <p class="cv-item-desc">${pos.description}</p>
+            </div>
 
-            <div class="cv-expandables">
+            <div class="cv-expandables cv-indented">
       `;
 
       // Courses
-      html += renderExpandableSection('courses', 'Courses Taught', pos.courses, (course) => {
-        const displayName = course.shortName ? `${course.name} <span class="cv-sub-item-meta">(${course.shortName})</span>` : course.name;
+      html += renderExpandableSection('courses', 'Courses Taught', pos.courses, renderCourseItem);
+
+      // Coaching
+      html += renderExpandableSection('coaching', 'Coaching', pos.coaching, renderCoachingItem);
+
+      // Masterships
+      html += renderExpandableSection('masterships', 'Masterships', pos.awards, (item) => {
         return `
-          <div class="cv-sub-item">
-            <span class="cv-sub-item-title">${displayName}</span>
-            ${course.grades ? `<span class="cv-sub-item-meta">${course.grades}</span>` : ''}
-            ${course.description ? `<p class="cv-sub-item-desc">${course.description}</p>` : ''}
+          <div class="cv-sub-item cv-sub-item-compact">
+            <span class="cv-sub-item-title">${item.title}</span>
+            <span class="cv-sub-item-meta">${item.dates}</span>
           </div>
         `;
       });
 
-      // Coaching
-      html += renderExpandableSection('coaching', 'Coaching', pos.coaching, (item) => {
+      // Other Roles
+      html += renderExpandableSection('other-roles', 'Other Roles', pos.otherRoles, (item) => {
         return `
-          <div class="cv-sub-item ${item.description ? '' : 'cv-sub-item-compact'}">
-            <div class="cv-sub-item-header">
-              <span class="cv-sub-item-title">${item.name}</span>
-              <span class="cv-sub-item-meta">${item.dates}</span>
-            </div>
-            ${item.description ? `<p class="cv-sub-item-desc">${item.description}</p>` : ''}
+          <div class="cv-sub-item cv-sub-item-compact">
+            <span class="cv-sub-item-title">${item.title}</span>
+            <span class="cv-sub-item-meta">${item.dates}</span>
           </div>
         `;
       });
@@ -873,6 +1066,32 @@
       html += `
             </div>
       `;
+
+      // Evaluations row (after expandables)
+      if (pos.evaluations) {
+        html += `
+          <div class="cv-evaluations cv-indented">
+            <a class="cv-item-link placeholder"
+               data-preview="pdf"
+               data-src="${pos.evaluations.student.src}"
+               data-title="${pos.evaluations.student.title}"
+               data-context="${pos.evaluations.student.context}"
+               data-type="PDF"
+               data-placeholder="true">
+              Student Evaluations
+            </a>
+            <a class="cv-item-link placeholder"
+               data-preview="pdf"
+               data-src="${pos.evaluations.faculty.src}"
+               data-title="${pos.evaluations.faculty.title}"
+               data-context="${pos.evaluations.faculty.context}"
+               data-type="PDF"
+               data-placeholder="true">
+              Faculty Evaluations
+            </a>
+          </div>
+        `;
+      }
 
       // Leadership section - displayed prominently, not as expandable
       if (pos.leadership && pos.leadership.length > 0) {
@@ -889,32 +1108,31 @@
                 <span class="cv-leadership-date">${item.dates}</span>
               </div>
               ${item.description ? `<p class="cv-leadership-desc">${item.description}</p>` : ''}
-            </div>
           `;
+
+          // Add preview buttons if available
+          if (item.previews && item.previews.length > 0) {
+            html += '<div class="cv-item-links">';
+            item.previews.forEach(preview => {
+              html += `
+                <a class="cv-item-link placeholder"
+                   data-preview="${preview.type}"
+                   data-src="${preview.src}"
+                   data-title="${preview.title}"
+                   data-context="${preview.context}"
+                   data-type="${preview.type.toUpperCase()}"
+                   data-placeholder="true">
+                  ${preview.label}
+                </a>
+              `;
+            });
+            html += '</div>';
+          }
+
+          html += '</div>';
         });
 
-        // Masterships and Other Roles under leadership
         html += `
-            <div class="cv-expandables" style="margin-top: var(--space-1);">
-        `;
-        html += renderExpandableSection('masterships', 'Masterships', pos.awards, (item) => {
-          return `
-            <div class="cv-sub-item cv-sub-item-compact">
-              <span class="cv-sub-item-title">${item.title}</span>
-              <span class="cv-sub-item-meta">${item.dates}</span>
-            </div>
-          `;
-        });
-        html += renderExpandableSection('other-roles', 'Other Roles', pos.otherRoles, (item) => {
-          return `
-            <div class="cv-sub-item cv-sub-item-compact">
-              <span class="cv-sub-item-title">${item.title}</span>
-              <span class="cv-sub-item-meta">${item.dates}</span>
-            </div>
-          `;
-        });
-        html += `
-            </div>
           </div>
         `;
       }
@@ -952,6 +1170,67 @@
       return html;
     }
 
+    // Render course item with optional preview button
+    function renderCourseItem(course) {
+      const displayName = course.shortName ? `${course.name} <span class="cv-sub-item-meta">(${course.shortName})</span>` : course.name;
+      let html = `
+        <div class="cv-sub-item">
+          <span class="cv-sub-item-title">${displayName}</span>
+          ${course.grades ? `<span class="cv-sub-item-meta">${course.grades}</span>` : ''}
+          ${course.description ? `<p class="cv-sub-item-desc">${course.description}</p>` : ''}
+      `;
+
+      if (course.hasPreview) {
+        html += `
+          <div class="cv-item-links">
+            <a class="cv-item-link placeholder"
+               data-preview="${course.previewType}"
+               data-src="${course.previewSrc}"
+               data-title="${course.previewTitle}"
+               data-context="${course.previewContext}"
+               data-type="Collage"
+               data-placeholder="true">
+              Course Materials
+            </a>
+          </div>
+        `;
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    // Render coaching item with optional preview button
+    function renderCoachingItem(item) {
+      let html = `
+        <div class="cv-sub-item ${item.description ? '' : 'cv-sub-item-compact'}">
+          <div class="cv-sub-item-header">
+            <span class="cv-sub-item-title">${item.name}</span>
+            <span class="cv-sub-item-meta">${item.dates}</span>
+          </div>
+          ${item.description ? `<p class="cv-sub-item-desc">${item.description}</p>` : ''}
+      `;
+
+      if (item.hasPreview) {
+        html += `
+          <div class="cv-item-links">
+            <a class="cv-item-link placeholder"
+               data-preview="${item.previewType}"
+               data-src="${item.previewSrc}"
+               data-title="${item.previewTitle}"
+               data-context="${item.previewContext}"
+               data-type="Photos"
+               data-placeholder="true">
+              Expedition Photos
+            </a>
+          </div>
+        `;
+      }
+
+      html += '</div>';
+      return html;
+    }
+
     // Render a section
     function renderSection(title, items, renderFn) {
       if (!items || items.length === 0) return '';
@@ -972,7 +1251,7 @@
     // Render education item
     function renderEducationItem(item) {
       let html = `
-        <div class="cv-item" data-item="${item.id}">
+        <div class="cv-item cv-item-hoverable" data-item="${item.id}">
           <div class="cv-item-header">
             <span class="cv-item-org">${item.institution} <span class="location">— ${item.location}</span></span>
             <span class="cv-item-date">${item.dates}</span>
@@ -990,16 +1269,18 @@
 
       // Thesis
       if (item.thesis) {
+        const thesis = item.thesis;
         html += `
           <div class="cv-item-links">
-            <a class="cv-item-link placeholder"
-               data-preview="pdf"
-               data-src=""
-               data-title="${item.thesis.title}"
-               data-context="Honors thesis."
+            <a class="cv-item-link two-line placeholder"
+               data-preview="${thesis.previewType || 'pdf'}"
+               data-src="${thesis.previewSrc || ''}"
+               data-title="${thesis.previewTitle || thesis.title}"
+               data-context="${thesis.previewContext || 'Honors thesis.'}"
                data-type="PDF"
                data-placeholder="true">
-              <span class="icon">📄</span> Thesis
+              <span class="btn-title">${thesis.title}</span>
+              <span class="btn-subtitle">${thesis.subtitle}</span>
             </a>
           </div>
         `;
@@ -1009,16 +1290,16 @@
       if (item.capstones && item.capstones.length > 0) {
         html += '<div class="cv-item-links">';
         item.capstones.forEach(cap => {
-          const icon = cap.type === 'Paper' ? '📄' : '📷';
           html += `
-            <a class="cv-item-link placeholder"
-               data-preview="${cap.type === 'Paper' ? 'pdf' : 'image'}"
-               data-src=""
-               data-title="${cap.title}"
-               data-context="Bread Loaf capstone project."
+            <a class="cv-item-link two-line placeholder"
+               data-preview="${cap.previewType || 'pdf'}"
+               data-src="${cap.previewSrc || ''}"
+               data-title="${cap.previewTitle || cap.title}"
+               data-context="${cap.previewContext || 'Capstone project.'}"
                data-type="${cap.type}"
                data-placeholder="true">
-              <span class="icon">${icon}</span> ${cap.type === 'Paper' ? 'Paper' : 'Project'}
+              <span class="btn-title">${cap.title}</span>
+              <span class="btn-subtitle">${cap.subtitle}</span>
             </a>
           `;
         });
@@ -1032,7 +1313,7 @@
     // Render previous teaching item
     function renderPreviousTeachingItem(item) {
       let html = `
-        <div class="cv-item" data-item="${item.id}">
+        <div class="cv-item cv-item-hoverable" data-item="${item.id}">
           <div class="cv-item-header">
             <span class="cv-item-org">${item.institution} <span class="location">— ${item.location}</span></span>
             <span class="cv-item-date">${item.dates}</span>
@@ -1041,8 +1322,8 @@
           ${item.description ? `<p class="cv-item-desc">${item.description}</p>` : ''}
       `;
 
-      // Add expandables container if we have courses or coaching
-      if ((item.courses && item.courses.length > 0) || (item.coaching && item.coaching.length > 0)) {
+      // Add expandables container if we have courses, coaching, or other roles
+      if ((item.courses && item.courses.length > 0) || (item.coaching && item.coaching.length > 0) || (item.otherRoles && item.otherRoles.length > 0)) {
         html += '<div class="cv-expandables">';
 
         // Add expandable courses if present
@@ -1098,7 +1379,51 @@
           `;
         }
 
+        // Add expandable other roles if present
+        if (item.otherRoles && item.otherRoles.length > 0) {
+          const toggleId = `toggle-${item.id}-other-roles`;
+          const contentId = `content-${item.id}-other-roles`;
+          html += `
+            <div class="cv-expandable">
+              <button class="cv-expand-toggle" id="${toggleId}" aria-expanded="false" aria-controls="${contentId}">
+                <span class="arrow">▶</span> Other Roles
+              </button>
+              <div class="cv-expandable-content" id="${contentId}">
+          `;
+
+          item.otherRoles.forEach(role => {
+            html += `
+                <div class="cv-sub-item cv-sub-item-compact">
+                  <span class="cv-sub-item-title">${role.title}</span>
+                  <span class="cv-sub-item-meta">${role.dates}</span>
+                </div>
+            `;
+          });
+
+          html += `
+              </div>
+            </div>
+          `;
+        }
+
         html += '</div>';
+      }
+
+      // Add preview button if item has one
+      if (item.hasPreview) {
+        html += `
+          <div class="cv-item-links">
+            <a class="cv-item-link placeholder"
+               data-preview="${item.previewType}"
+               data-src="${item.previewSrc}"
+               data-title="${item.previewTitle}"
+               data-context="${item.previewContext}"
+               data-type="Photos"
+               data-placeholder="true">
+              Expedition Gallery
+            </a>
+          </div>
+        `;
       }
 
       html += '</div>';
@@ -1108,7 +1433,7 @@
     // Render certification item
     function renderCertificationItem(item) {
       return `
-        <div class="cv-item" data-item="${item.id}">
+        <div class="cv-item cv-item-hoverable" data-item="${item.id}">
           <div class="cv-item-header">
             <span class="cv-item-title">${item.title}</span>
             <span class="cv-item-date">${item.dates}</span>
@@ -1156,11 +1481,28 @@
       const typeLabel = link.dataset.type;
       const isPlaceholder = link.dataset.placeholder === 'true';
 
-      // Update active states
+      // Update active states - clear all
       document.querySelectorAll('.cv-item-link').forEach(l => l.classList.remove('active'));
-      document.querySelectorAll('.cv-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.cv-item-hoverable').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.cv-role-clickable').forEach(r => r.classList.remove('active'));
+      document.querySelectorAll('.cv-leadership-item').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.cv-sub-item').forEach(s => s.classList.remove('active'));
+
+      // Mark clicked link as active
       link.classList.add('active');
-      link.closest('.cv-item').classList.add('active');
+
+      // Find and mark the parent section as active
+      const parentLeadership = link.closest('.cv-leadership-item');
+      const parentHoverable = link.closest('.cv-item-hoverable');
+      const parentSubItem = link.closest('.cv-sub-item');
+
+      if (parentLeadership) {
+        parentLeadership.classList.add('active');
+      } else if (parentSubItem) {
+        parentSubItem.classList.add('active');
+      } else if (parentHoverable) {
+        parentHoverable.classList.add('active');
+      }
 
       // Update header
       previewType.textContent = typeLabel;
@@ -1172,11 +1514,9 @@
 
       if (isPlaceholder || !src) {
         // Show placeholder for missing content
-        const icon = getIconForType(typeLabel);
         previewBody.innerHTML = `
           <div class="placeholder-content">
-            <div class="icon">${icon}</div>
-            <span>${typeLabel}<br>${title}</span>
+            <span>${title}</span>
             <p class="placeholder-note">Content to be added</p>
           </div>
         `;
@@ -1185,7 +1525,7 @@
         previewBody.innerHTML = `<iframe src="${src}"></iframe>`;
         openLink.href = src;
         openLink.style.display = 'inline-flex';
-      } else if (type === 'image' || type === 'photo' || type === 'slides') {
+      } else if (type === 'image' || type === 'photo' || type === 'slides' || type === 'collage') {
         const img = document.createElement('img');
         img.src = src;
         img.alt = title;
@@ -1201,11 +1541,9 @@
         openLink.href = src;
         openLink.style.display = 'inline-flex';
       } else {
-        const icon = getIconForType(typeLabel);
         previewBody.innerHTML = `
           <div class="placeholder-content">
-            <div class="icon">${icon}</div>
-            <span>${typeLabel}<br>${title}</span>
+            <span>${title}</span>
           </div>
         `;
         openLink.style.display = 'none';
@@ -1217,12 +1555,50 @@
       togglePanel(true);
     }
 
+    // Show default teaching preview
+    function showDefaultPreview() {
+      if (!cvData || !cvData.teaching.current.defaultPreview) return;
+
+      const preview = cvData.teaching.current.defaultPreview;
+
+      // Update header
+      previewType.textContent = 'TEACHING';
+      previewTitle.textContent = preview.title;
+      previewContext.textContent = '';
+
+      // Build teaching collage
+      let collageHtml = '<div class="teaching-collage">';
+      preview.images.forEach((img, i) => {
+        collageHtml += `
+          <div class="photo">
+            <span>Photo ${i + 1}</span>
+          </div>
+        `;
+      });
+      collageHtml += '</div>';
+
+      previewBody.innerHTML = collageHtml;
+      openLink.style.display = 'none';
+
+      // Mark the role as active
+      const roleEl = document.querySelector('.cv-role-clickable');
+      if (roleEl) roleEl.classList.add('active');
+
+      // Show preview
+      previewEmpty.style.display = 'none';
+      previewContent.classList.add('active');
+      togglePanel(true);
+    }
+
     // Close preview
     function closePreview() {
       previewContent.classList.remove('active');
       previewEmpty.style.display = 'flex';
       document.querySelectorAll('.cv-item-link').forEach(l => l.classList.remove('active'));
-      document.querySelectorAll('.cv-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.cv-item-hoverable').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.cv-role-clickable').forEach(r => r.classList.remove('active'));
+      document.querySelectorAll('.cv-leadership-item').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.cv-sub-item').forEach(s => s.classList.remove('active'));
     }
 
     // Attach event listeners to dynamically created links
@@ -1231,6 +1607,13 @@
         link.addEventListener('click', (e) => {
           e.preventDefault();
           showPreview(link);
+        });
+      });
+
+      // Attach click listener to clickable role for default preview
+      document.querySelectorAll('.cv-role-clickable').forEach(el => {
+        el.addEventListener('click', () => {
+          showDefaultPreview();
         });
       });
 
@@ -1253,6 +1636,9 @@
           }
         });
       });
+
+      // Show default preview on page load
+      showDefaultPreview();
     }
 
     // Event: Toggle button
