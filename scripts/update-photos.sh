@@ -36,7 +36,8 @@ while IFS= read -r file; do
     year="null"
     if [ "$HAS_EXIFTOOL" = true ]; then
       extracted=$(exiftool -DateTimeOriginal -CreateDate -ModifyDate -d "%Y" -s -s -s "$file" 2>/dev/null | head -1)
-      if [ -n "$extracted" ]; then
+      # Validate: must be exactly 4 digits and a reasonable year (1900-2099)
+      if [[ "$extracted" =~ ^(19|20)[0-9]{2}$ ]]; then
         year="$extracted"
       fi
     fi
