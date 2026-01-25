@@ -488,15 +488,19 @@
       // Initialize
       calculateGrid();
       fetch('photos.json')
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
         .then(photos => {
+          console.log('Loaded', photos.length, 'photos');
           totalAvailable = photos.length;
           shuffledPhotos = shuffle(photos);
           loadBatch();
           window.addEventListener('scroll', checkScroll);
         })
         .catch(err => {
-          loader.textContent = 'No photos found.';
+          loader.textContent = 'No photos found. Error: ' + err.message;
           console.error('Failed to load photos manifest:', err);
         });
     })();
