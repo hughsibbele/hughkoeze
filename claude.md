@@ -64,7 +64,27 @@ After adding or removing photos from `images/photography/`, run:
 ```bash
 ./scripts/update-photos.sh
 ```
-This regenerates `photos.json` with all image filenames. The photography page randomly loads from this list.
+This regenerates `photos.json` with all image filenames and extracts year from EXIF metadata. The photography page randomly loads from this list.
+
+## Git LFS (Large File Storage)
+
+Photography images are stored using Git LFS to keep the repo lightweight. This was set up in January 2026.
+
+**How it works:**
+- Photos in `images/photography/` are tracked by LFS (configured in `.gitattributes`)
+- GitHub stores tiny pointer files; actual images live on LFS servers
+- When you push, LFS automatically uploads large files separately
+- Netlify fetches the real files during deploy
+
+**No maintenance required** — just commit and push as normal. LFS handles everything automatically.
+
+**Tracked file types:** `*.jpg`, `*.jpeg`, `*.png`, `*.gif`, `*.webp`, `*.JPG`, `*.JPEG`, `*.HEIC`, `*.heic`
+
+**If cloning on a new machine:**
+```bash
+git lfs install   # One-time setup
+git clone <repo>  # LFS files download automatically
+```
 
 ## Open Questions
 1. Who is the primary audience (employers, academics, general readers)?
