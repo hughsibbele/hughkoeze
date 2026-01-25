@@ -474,6 +474,23 @@ footer p {
 
 footer a { color: var(--verdigris); }
 
+.footer-subtle {
+  font-size: 0.65rem;
+  color: var(--mortar);
+  opacity: 0.6;
+  letter-spacing: 0.02em;
+}
+
+.footer-subtle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-subtle a:hover {
+  color: var(--verdigris-light);
+  opacity: 1;
+}
+
 /* =========================================
    UTILITIES
    ========================================= */
@@ -510,6 +527,7 @@ footer a { color: var(--verdigris); }
   display: flex;
   align-items: center;
   gap: var(--space-5);
+  flex-direction: row-reverse; /* Name first (left), photo second (right) */
 }
 
 .hero-text {
@@ -518,13 +536,13 @@ footer a { color: var(--verdigris); }
 
 .hero-name {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 5rem);
+  font-size: clamp(3.5rem, 10vw, 6rem);
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--charcoal);
-  margin-bottom: var(--space-2);
-  line-height: 1;
+  margin-bottom: var(--space-3);
+  line-height: 0.95;
   display: flex;
   flex-direction: column;
 }
@@ -548,18 +566,147 @@ footer a { color: var(--verdigris); }
   margin-bottom: var(--space-1);
 }
 
-.hero-nav {
+.hero-portrait {
+  flex-shrink: 0;
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+  border: 1px solid var(--mortar);
+  display: block;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+/* =========================================
+   ABOUT PAGE
+   ========================================= */
+
+.about-page {
+  padding: var(--space-5) 0;
+}
+
+.about-content {
+  max-width: 800px;
+}
+
+.about-primary {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--space-4);
+  align-items: start;
+  margin-bottom: var(--space-4);
+}
+
+.about-photo-main {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+}
+
+.about-bio-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--charcoal);
+}
+
+.about-photos-strip {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.about-photos-strip img {
+  flex: 1;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* Connect Section */
+.about-connect {
+  display: flex;
+  gap: var(--space-5);
+  align-items: flex-start;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--mortar);
+  max-width: 800px;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  color: var(--charcoal-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.social-link:hover {
+  color: var(--verdigris);
+}
+
+.social-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Contact Form */
+.contact-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-row {
   display: flex;
   gap: var(--space-2);
 }
 
-.hero-portrait {
-  flex-shrink: 0;
-  width: 340px;
-  height: 425px;
-  object-fit: cover;
+.form-row input {
+  flex: 1;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  background: var(--warm-white);
   border: 1px solid var(--mortar);
-  display: block;
+  transition: border-color 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--verdigris);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form .btn {
+  align-self: flex-start;
+}
+
+/* Active nav state */
+.nav-active {
+  color: var(--verdigris) !important;
 }
 
 /* =========================================
@@ -590,13 +737,12 @@ footer a { color: var(--verdigris); }
   }
 
   .hero-portrait {
-    width: 260px;
-    height: 325px;
+    width: 160px;
+    height: 200px;
   }
 
-  .hero-nav {
-    flex-wrap: wrap;
-    justify-content: center;
+  .hero-content {
+    flex-direction: column; /* Stack on mobile: name on top */
   }
 
   .hero-tagline,
@@ -606,5 +752,37 @@ footer a { color: var(--verdigris); }
 
   .hero-name {
     letter-spacing: 0.05em;
+  }
+
+  /* About page responsive */
+  .about-primary {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .about-photo-main {
+    max-width: 200px;
+  }
+
+  .about-photos-strip {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .about-photos-strip img {
+    height: 200px;
+  }
+
+  .about-connect {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+  }
+
+  .form-row {
+    flex-direction: column;
   }
 }

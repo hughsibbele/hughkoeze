@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Hugh Koeze</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Josefin+Sans:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="site-title">Hugh Koeze</a>
+        <ul>
+          <li><a href="teaching.html">Teaching</a></li>
+          <li><a href="writing.html">Writing</a></li>
+          <li><a href="photography.html">Photography</a></li>
+          <li><a href="about.html" class="nav-active">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="about-page">
+    <div class="container">
+
+      <div class="about-content">
+        <!-- Main photo + bio -->
+        <div class="about-primary">
+          <img src="images/about/hugh-family.jpg" alt="Hugh with family" class="about-photo-main">
+          <div class="about-bio-text">
+            <!-- YOUR BIO GOES HERE -->
+            [Your bio will go here. Write about your background, what drives your teaching, your interests outside the classroom, and what matters to you.]
+          </div>
+        </div>
+
+        <!-- Additional photos woven in -->
+        <div class="about-photos-strip">
+          <img src="images/about/photo-1.jpg" alt="">
+          <img src="images/about/photo-2.jpg" alt="">
+          <img src="images/about/photo-3.jpg" alt="">
+        </div>
+      </div>
+
+      <!-- Connect + Form -->
+      <div class="about-connect">
+        <div class="social-links">
+          <a href="https://instagram.com/hughsibbele" class="social-link" target="_blank" rel="noopener">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="18" cy="6" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+            <span>Instagram</span>
+          </a>
+          <a href="https://twitter.com/hughsibbele" class="social-link" target="_blank" rel="noopener">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.4-8M20 4l-6.4 8"/>
+            </svg>
+            <span>X</span>
+          </a>
+          <a href="https://hughkoeze.substack.com" class="social-link" target="_blank" rel="noopener">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 4h16M4 8h16M4 12l8 6 8-6"/>
+            </svg>
+            <span>Substack</span>
+          </a>
+        </div>
+
+        <form name="contact" method="POST" data-netlify="true" class="contact-form">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+          </div>
+          <textarea name="message" placeholder="Message" rows="4" required></textarea>
+          <button type="submit" class="btn btn-secondary">Send</button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container text-center">
+      <p class="footer-subtle"><a href="https://claude.ai/claude-code">Wondering how an English teacher made this website?</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
