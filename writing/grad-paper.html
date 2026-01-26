@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graduate Thesis Title — Hugh Koeze</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Josefin+Sans:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* =========================================
+       PAPER PAGE LAYOUT
+       ========================================= */
+
+    .paper-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .paper-content {
+      flex: 1;
+      padding: var(--space-5) 0;
+    }
+
+    .paper-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+      align-items: start;
+    }
+
+    /* Left column: metadata and summary */
+    .paper-info {
+      position: sticky;
+      top: var(--space-4);
+    }
+
+    .paper-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: var(--verdigris);
+      text-decoration: none;
+      margin-bottom: var(--space-3);
+    }
+
+    .paper-back::before {
+      content: '←';
+      transition: transform 0.2s ease;
+    }
+
+    .paper-back:hover {
+      color: var(--verdigris-dark);
+    }
+
+    .paper-back:hover::before {
+      transform: translateX(-4px);
+    }
+
+    .paper-type {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--brick);
+      margin-bottom: var(--space-1);
+    }
+
+    .paper-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+      line-height: 1.2;
+      margin-bottom: var(--space-2);
+    }
+
+    .paper-meta {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--charcoal-light);
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--mortar);
+    }
+
+    .paper-meta span {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .paper-reading-time {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+    }
+
+    /* Summary section */
+    .paper-summary {
+      margin-bottom: var(--space-4);
+    }
+
+    .paper-summary-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--stone-gray);
+      margin-bottom: var(--space-2);
+    }
+
+    .paper-summary-text {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--charcoal);
+    }
+
+    .paper-summary-text p {
+      margin-bottom: var(--space-2);
+    }
+
+    .paper-summary-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Actions */
+    .paper-actions {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .paper-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid var(--charcoal);
+      color: var(--charcoal);
+      transition: all 0.2s ease;
+    }
+
+    .paper-action:hover {
+      background: var(--charcoal);
+      color: var(--warm-white);
+    }
+
+    .paper-action.primary {
+      background: var(--verdigris);
+      border-color: var(--verdigris);
+      color: var(--warm-white);
+    }
+
+    .paper-action.primary:hover {
+      background: var(--verdigris-dark);
+      border-color: var(--verdigris-dark);
+    }
+
+    /* Right column: PDF embed */
+    .paper-embed {
+      background: var(--stone-gray);
+      border: 1px solid var(--mortar);
+      aspect-ratio: 8.5/11;
+      max-height: 80vh;
+    }
+
+    .paper-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
+    @media (max-width: 900px) {
+      .paper-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .paper-info {
+        position: static;
+      }
+
+      .paper-embed {
+        aspect-ratio: auto;
+        height: 70vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .paper-title {
+        font-size: 1.4rem;
+      }
+
+      .paper-action {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body class="paper-page">
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="../index.html" class="site-title">Hugh Koeze</a>
+        <ul>
+          <li><a href="../teaching.html">Teaching</a></li>
+          <li><a href="../writing.html" class="nav-active">Writing</a></li>
+          <li><a href="../photography.html">Photography</a></li>
+          <li><a href="../about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="paper-content">
+    <div class="container">
+      <div class="paper-layout">
+
+        <div class="paper-info">
+          <a href="../writing.html" class="paper-back">Back to Writing</a>
+
+          <div class="paper-type">Master's Thesis</div>
+          <h1 class="paper-title">Your Graduate Thesis Title Goes Here</h1>
+
+          <div class="paper-meta">
+            <span><strong>Institution:</strong> University Name</span>
+            <span><strong>Year:</strong> 2024</span>
+            <span><strong>Advisor:</strong> Professor Name</span>
+            <span class="paper-reading-time">~45 min read</span>
+          </div>
+
+          <div class="paper-summary">
+            <div class="paper-summary-label">AI Summary</div>
+            <div class="paper-summary-text">
+              <p>This is where the AI-generated summary of your thesis goes. It should capture the main argument, methodology, and conclusions in accessible language. The goal is to give readers who don't have time for the full paper a solid understanding of your contribution.</p>
+
+              <p>The second paragraph can cover the key evidence or case studies you examine, and why they matter. What did you discover? What's the significance?</p>
+
+              <p>A third paragraph might touch on implications or connections to broader debates in your field. This helps readers understand where your work fits in the larger conversation.</p>
+            </div>
+          </div>
+
+          <div class="paper-actions">
+            <a href="../documents/grad-thesis.pdf" class="paper-action primary" download>Download PDF</a>
+            <a href="../documents/grad-thesis.pdf" class="paper-action" target="_blank">Open in New Tab</a>
+          </div>
+        </div>
+
+        <div class="paper-embed">
+          <iframe src="../documents/grad-thesis.pdf" title="Graduate thesis PDF"></iframe>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container text-center">
+      <p class="footer-subtle"><a href="https://hughkoeze.substack.com/p/placeholder">Wonder how an English teacher made this website?</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
