@@ -25,6 +25,8 @@ Do not invent new colors, fonts, or decorative styles. Maintain visual consisten
 ## Style Direction
 Key principle: distinctive creative choices on a subtle scale. Balance clarity and content with distinctive design. Text-forward on home and CV pages.
 
+**Vertical spacing**: Prefer compact layouts with minimal dead space. Reduce padding and margins to keep content dense and navigation elements visible on load. Avoid large gaps between sections.
+
 ## Technical Approach
 - **Hosting**: Netlify (free tier), connected to GitHub repo for auto-deploy
 - **Stack**: Static HTML/CSS, no frameworks or build tools

@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Evaluations — Hugh Koeze</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Josefin+Sans:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* =========================================
+       EVALUATION PAGE
+       ========================================= */
+
+    .eval-page {
+      background: var(--cream);
+      min-height: 100vh;
+    }
+
+    .eval-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-3) var(--space-3);
+    }
+
+    /* Header */
+    .eval-header {
+      text-align: center;
+      padding: var(--space-3) 0 var(--space-2);
+      border-bottom: 1px solid var(--mortar);
+      margin-bottom: var(--space-2);
+    }
+
+    .eval-header h1 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--oak);
+      margin: 0 0 6px 0;
+    }
+
+    .eval-header .subtitle {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--charcoal);
+      margin: 0 0 4px 0;
+    }
+
+    .eval-header .meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+
+    /* Key Stats Banner */
+    .eval-stats-banner {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-3);
+      padding: var(--space-2) 0;
+      margin-bottom: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .eval-stat {
+      text-align: center;
+      padding: 0 var(--space-3);
+      border-right: 1px solid var(--mortar);
+    }
+
+    .eval-stat:last-child {
+      border-right: none;
+    }
+
+    .eval-stat-value {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--verdigris);
+      line-height: 1;
+    }
+
+    .eval-stat-value.highlight {
+      color: var(--brick);
+    }
+
+    .eval-stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--stone-gray);
+      margin-top: 2px;
+    }
+
+    /* Section Navigation */
+    .eval-nav {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: var(--space-2) 0;
+      margin-bottom: var(--space-3);
+      border-top: 1px solid var(--mortar);
+      border-bottom: 1px solid var(--mortar);
+      position: sticky;
+      top: 0;
+      background: var(--cream);
+      z-index: 10;
+    }
+
+    .eval-nav-btn {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--charcoal);
+      color: var(--charcoal);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .eval-nav-btn:hover {
+      background: var(--charcoal);
+      color: var(--warm-white);
+    }
+
+    /* Sections */
+    .eval-section {
+      margin-bottom: var(--space-4);
+      scroll-margin-top: 60px;
+    }
+
+    .eval-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      margin-bottom: var(--space-2);
+      padding-bottom: var(--space-1);
+      border-bottom: 1px solid var(--mortar);
+    }
+
+    .eval-section-header h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--brick);
+      margin: 0;
+    }
+
+    .eval-section-header .section-note {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--stone-gray);
+      font-style: italic;
+    }
+
+    /* Competency Grid */
+    .competency-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-2);
+    }
+
+    .competency-item {
+      background: var(--warm-white);
+      padding: var(--space-2);
+      border: 1px solid var(--mortar);
+    }
+
+    .competency-label {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .competency-bar-container {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .competency-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--mortar);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .competency-bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: var(--verdigris);
+      transition: width 0.5s ease;
+    }
+
+    .competency-bar-fill.perfect {
+      background: var(--sage);
+    }
+
+    .competency-value {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--charcoal);
+      min-width: 35px;
+      text-align: right;
+    }
+
+    .competency-comparison {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--stone-gray);
+      margin-top: 4px;
+    }
+
+    .competency-comparison .above {
+      color: var(--verdigris-dark);
+    }
+
+    /* Timeline */
+    .timeline-chart {
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      padding: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--mortar);
+    }
+
+    .timeline-row:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-term {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    .timeline-bars {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .timeline-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .timeline-bar-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--stone-gray);
+      width: 50px;
+      flex-shrink: 0;
+    }
+
+    .timeline-bar {
+      height: 12px;
+      background: var(--verdigris);
+      transition: width 0.5s ease;
+    }
+
+    .timeline-bar.dept {
+      background: var(--mortar);
+      height: 6px;
+    }
+
+    .timeline-bar.school {
+      background: var(--stone-gray);
+      height: 4px;
+    }
+
+    .timeline-bar-value {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--charcoal);
+      min-width: 30px;
+    }
+
+    /* Course Cards */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-2);
+    }
+
+    .course-card {
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      padding: var(--space-2);
+      border-left: 3px solid var(--verdigris);
+    }
+
+    .course-card.elective {
+      border-left-color: var(--brick);
+    }
+
+    .course-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .course-card-name {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .course-card-term {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--stone-gray);
+    }
+
+    .course-card-score {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--verdigris);
+    }
+
+    .course-card-score.perfect {
+      color: var(--sage);
+    }
+
+    .course-card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--stone-gray);
+    }
+
+    .course-card-bar {
+      height: 4px;
+      background: var(--mortar);
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .course-card-bar-fill {
+      height: 100%;
+      background: var(--verdigris);
+    }
+
+    /* Qualitative Themes */
+    .themes-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .theme-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      padding: var(--space-2);
+    }
+
+    .theme-icon {
+      font-size: 1.25rem;
+      width: 32px;
+      text-align: center;
+    }
+
+    .theme-content {
+      flex: 1;
+    }
+
+    .theme-name {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .theme-example {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--stone-gray);
+      font-style: italic;
+    }
+
+    .theme-pct {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--verdigris);
+      min-width: 45px;
+      text-align: right;
+    }
+
+    .theme-pct.high {
+      color: var(--verdigris-dark);
+    }
+
+    /* Quotes */
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-3);
+    }
+
+    .quote-card {
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      border-left: 3px solid var(--verdigris);
+      padding: var(--space-3);
+    }
+
+    .quote-text {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--charcoal);
+      font-style: italic;
+      margin-bottom: var(--space-2);
+    }
+
+    .quote-text::before {
+      content: '"';
+      color: var(--verdigris);
+      font-size: 1.5rem;
+      line-height: 0;
+      vertical-align: -0.3em;
+      margin-right: 2px;
+    }
+
+    .quote-text::after {
+      content: '"';
+      color: var(--verdigris);
+      font-size: 1.5rem;
+      line-height: 0;
+      vertical-align: -0.3em;
+      margin-left: 2px;
+    }
+
+    .quote-attribution {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+    }
+
+    /* Strengths & Notes */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+
+    @media (max-width: 768px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .strengths-box, .notes-box {
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      padding: var(--space-3);
+    }
+
+    .strengths-box {
+      border-left: 3px solid var(--sage);
+    }
+
+    .notes-box {
+      border-left: 3px solid var(--brick);
+    }
+
+    .box-title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-2);
+    }
+
+    .strengths-box .box-title {
+      color: var(--sage);
+    }
+
+    .notes-box .box-title {
+      color: var(--brick);
+    }
+
+    .box-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .box-list li {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--charcoal);
+      line-height: 1.5;
+      padding: 6px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .box-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--stone-gray);
+    }
+
+    .context-note {
+      margin-top: var(--space-2);
+      padding: var(--space-2);
+      background: rgba(166, 107, 90, 0.1);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--charcoal-light);
+      font-style: italic;
+    }
+
+    /* Summary Box */
+    .summary-box {
+      background: var(--warm-white);
+      border: 2px solid var(--verdigris);
+      padding: var(--space-3);
+      margin-top: var(--space-3);
+    }
+
+    .eval-summary-top {
+      margin-bottom: var(--space-2);
+    }
+
+    .eval-summary-top .summary-box {
+      margin-top: 0;
+    }
+
+    .summary-box h3 {
+      font-size: 0.9rem;
+      color: var(--oak);
+      margin-bottom: var(--space-1);
+    }
+
+    .summary-box p {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--charcoal);
+      margin: 0;
+    }
+
+    .summary-box strong {
+      color: var(--verdigris-dark);
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: var(--verdigris);
+      text-decoration: none;
+      margin-bottom: var(--space-3);
+    }
+
+    .back-link::before {
+      content: '←';
+    }
+
+    .back-link:hover {
+      color: var(--verdigris-dark);
+    }
+
+    /* Growth metrics */
+    .growth-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-2);
+    }
+
+    .growth-item {
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      padding: var(--space-2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .growth-label {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      color: var(--charcoal);
+    }
+
+    .growth-values {
+      text-align: right;
+    }
+
+    .growth-change {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+    }
+
+    .growth-pct {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--sage);
+      background: rgba(125, 148, 117, 0.15);
+      padding: 2px 8px;
+      margin-left: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .eval-stats-banner {
+        gap: var(--space-2);
+      }
+
+      .eval-stat {
+        padding: 0 var(--space-2);
+      }
+
+      .eval-stat-value {
+        font-size: 1.75rem;
+      }
+
+      .eval-nav {
+        position: static;
+      }
+
+      .eval-nav-btn {
+        font-size: 0.65rem;
+        padding: 6px 10px;
+      }
+
+      .timeline-term {
+        width: 60px;
+        font-size: 0.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .eval-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .course-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quotes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="eval-page">
+
+  <main class="eval-container">
+    <a href="teaching.html" class="back-link">Back to Teaching</a>
+
+    <header class="eval-header">
+      <h1>Student Course Evaluations</h1>
+      <p class="subtitle">Episcopal High School · English Department</p>
+      <p class="meta">Fall 2020 – Fall 2025 · 355 Student Responses · 18 Course Sections</p>
+    </header>
+
+    <div class="eval-stats-banner">
+      <div class="eval-stat">
+        <div class="eval-stat-value">4.85</div>
+        <div class="eval-stat-label">Overall Average</div>
+      </div>
+      <div class="eval-stat">
+        <div class="eval-stat-value highlight">+4.3%</div>
+        <div class="eval-stat-label">vs Department</div>
+      </div>
+      <div class="eval-stat">
+        <div class="eval-stat-value">48</div>
+        <div class="eval-stat-label">Perfect 5.0 Scores</div>
+      </div>
+      <div class="eval-stat">
+        <div class="eval-stat-value">18</div>
+        <div class="eval-stat-label">Courses Taught</div>
+      </div>
+    </div>
+
+    <!-- Executive Summary - moved to top -->
+    <section class="eval-section eval-summary-top" id="summary">
+      <div class="summary-box">
+        <h3>Executive Summary</h3>
+        <p>
+          Over five years and 18 course sections, these evaluations demonstrate <strong>consistently exceptional teaching performance</strong>, averaging <strong>4.85/5.0</strong> across all metrics—significantly above both English department (4.71) and school-wide averages. Performance shows a <strong>positive trajectory</strong>, reaching near-perfect ratings in Fall 2025 (4.97 avg). Students particularly value the <strong>engaging discussions, passionate teaching, and high-quality feedback</strong>. Success spans both specialized electives (Russian Fiction, Chekhov, Gothic Literature, Middle Eastern Voices) and core 9th-grade curriculum, demonstrating exceptional versatility. Innovation in using AI tools for writing feedback reflects a forward-thinking pedagogical approach.
+        </p>
+      </div>
+    </section>
+
+    <nav class="eval-nav">
+      <a href="#competencies" class="eval-nav-btn">Competencies</a>
+      <a href="#trends" class="eval-nav-btn">Trends</a>
+      <a href="#courses" class="eval-nav-btn">Courses</a>
+      <a href="#themes" class="eval-nav-btn">Themes</a>
+      <a href="#quotes" class="eval-nav-btn">Quotes</a>
+    </nav>
+
+    <!-- Competencies Section -->
+    <section class="eval-section" id="competencies">
+      <div class="eval-section-header">
+        <h2>Teaching Competencies</h2>
+        <span class="section-note">Aggregate scores across all 18 sections</span>
+      </div>
+
+      <div class="competency-grid">
+        <div class="competency-item">
+          <div class="competency-label">Organization</div>
+          <div class="competency-bar-container">
+            <div class="competency-bar">
+              <div class="competency-bar-fill perfect" style="width: 99.2%"></div>
+            </div>
+            <span class="competency-value">4.96</span>
+          </div>
+          <div class="competency-comparison">Dept avg: 4.80 · <span class="above">+3.3%</span></div>
+        </div>
+
+        <div class="competency-item">
+          <div class="competency-label">Inclusivity</div>
+          <div class="competency-bar-container">
+            <div class="competency-bar">
+              <div class="competency-bar-fill perfect" style="width: 99%"></div>
+            </div>
+            <span class="competency-value">4.95</span>
+          </div>
+          <div class="competency-comparison">Dept avg: 4.88 · <span class="above">+1.4%</span></div>
+        </div>
+
+        <div class="competency-item">
+          <div class="competency-label">Diverse Perspectives</div>
+          <div class="competency-bar-container">
+            <div class="competency-bar">
+              <div class="competency-bar-fill" style="width: 98.2%"></div>
+            </div>
+            <span class="competency-value">4.91</span>
+          </div>
+          <div class="competency-comparison">Dept avg: 4.82 · <span class="above">+1.9%</span></div>
+        </div>
+
+        <div class="competency-item">
+          <div class="competency-label">Feedback Quality</div>
+          <div class="competency-bar-container">
+            <div class="competency-bar">
+              <div class="competency-bar-fill" style="width: 97.2%"></div>
+            </div>
+            <span class="competency-value">4.86</span>
+          </div>
+          <div class="competency-comparison">Dept avg: 4.72 · <span class="above">+3.0%</span></div>
+        </div>
+
+        <div class="competency-item">
+          <div class="competency-label">Student Interest</div>
+          <div class="competency-bar-container">
+            <div class="competency-bar">
+              <div class="competency-bar-fill" style="width: 96.8%"></div>
+            </div>
+            <span class="competency-value">4.84</span>
+          </div>
+          <div class="competency-comparison">Dept avg: 4.72 · <span class="above">+2.5%</span></div>
+        </div>
+
+        <div class="competency-item">
+          <div class="competency-label">Accessibility</div>
+          <div class="competency-bar-container">
+            <div class="competency-bar">
+              <div class="competency-bar-fill" style="width: 96.2%"></div>
+            </div>
+            <span class="competency-value">4.81</span>
+          </div>
+          <div class="competency-comparison">Dept avg: 4.65 · <span class="above">+3.4%</span></div>
+        </div>
+
+        <div class="competency-item">
+          <div class="competency-label">Fair Grading</div>
+          <div class="competency-bar-container">
+            <div class="competency-bar">
+              <div class="competency-bar-fill" style="width: 95.6%"></div>
+            </div>
+            <span class="competency-value">4.78</span>
+          </div>
+          <div class="competency-comparison">Dept avg: 4.55 · <span class="above">+5.1%</span></div>
+        </div>
+
+        <div class="competency-item">
+          <div class="competency-label">Clear Expectations</div>
+          <div class="competency-bar-container">
+            <div class="competency-bar">
+              <div class="competency-bar-fill" style="width: 91.4%"></div>
+            </div>
+            <span class="competency-value">4.57</span>
+          </div>
+          <div class="competency-comparison">Dept avg: 4.50 · <span class="above">+1.6%</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trends Section -->
+    <section class="eval-section" id="trends">
+      <div class="eval-section-header">
+        <h2>Performance Over Time</h2>
+        <span class="section-note">Term-by-term comparison with benchmarks</span>
+      </div>
+
+      <div class="timeline-chart">
+        <div class="timeline-row">
+          <div class="timeline-term">Fall 2020</div>
+          <div class="timeline-bars">
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Koeze</span>
+              <div class="timeline-bar" style="width: 76%"></div>
+              <span class="timeline-bar-value">4.82</span>
+            </div>
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Dept</span>
+              <div class="timeline-bar dept" style="width: 54%"></div>
+              <span class="timeline-bar-value">4.65</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-term">Fall 2021</div>
+          <div class="timeline-bars">
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Koeze</span>
+              <div class="timeline-bar" style="width: 68%"></div>
+              <span class="timeline-bar-value">4.76</span>
+            </div>
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Dept</span>
+              <div class="timeline-bar dept" style="width: 52%"></div>
+              <span class="timeline-bar-value">4.62</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-term">Fall 2022</div>
+          <div class="timeline-bars">
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Koeze</span>
+              <div class="timeline-bar" style="width: 64%"></div>
+              <span class="timeline-bar-value">4.74</span>
+            </div>
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Dept</span>
+              <div class="timeline-bar dept" style="width: 60%"></div>
+              <span class="timeline-bar-value">4.68</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-term">Spring 2023</div>
+          <div class="timeline-bars">
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Koeze</span>
+              <div class="timeline-bar" style="width: 82%"></div>
+              <span class="timeline-bar-value">4.86</span>
+            </div>
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Dept</span>
+              <div class="timeline-bar dept" style="width: 64%"></div>
+              <span class="timeline-bar-value">4.70</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-term">Fall 2023</div>
+          <div class="timeline-bars">
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Koeze</span>
+              <div class="timeline-bar" style="width: 90%"></div>
+              <span class="timeline-bar-value">4.91</span>
+            </div>
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Dept</span>
+              <div class="timeline-bar dept" style="width: 68%"></div>
+              <span class="timeline-bar-value">4.76</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-term">Spring 2024</div>
+          <div class="timeline-bars">
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Koeze</span>
+              <div class="timeline-bar" style="width: 94%"></div>
+              <span class="timeline-bar-value">4.93</span>
+            </div>
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Dept</span>
+              <div class="timeline-bar dept" style="width: 70%"></div>
+              <span class="timeline-bar-value">4.77</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-term">Fall 2024</div>
+          <div class="timeline-bars">
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Koeze</span>
+              <div class="timeline-bar" style="width: 84%"></div>
+              <span class="timeline-bar-value">4.87</span>
+            </div>
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Dept</span>
+              <div class="timeline-bar dept" style="width: 66%"></div>
+              <span class="timeline-bar-value">4.72</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-term">Spring 2025</div>
+          <div class="timeline-bars">
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Koeze</span>
+              <div class="timeline-bar" style="width: 76%"></div>
+              <span class="timeline-bar-value">4.82</span>
+            </div>
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Dept</span>
+              <div class="timeline-bar dept" style="width: 68%"></div>
+              <span class="timeline-bar-value">4.75</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-term">Fall 2025</div>
+          <div class="timeline-bars">
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Koeze</span>
+              <div class="timeline-bar" style="width: 98%"></div>
+              <span class="timeline-bar-value">4.97</span>
+            </div>
+            <div class="timeline-bar-row">
+              <span class="timeline-bar-label">Dept</span>
+              <div class="timeline-bar dept" style="width: 76%"></div>
+              <span class="timeline-bar-value">4.82</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="eval-section-header" style="margin-top: var(--space-4);">
+        <h2>Growth Metrics</h2>
+        <span class="section-note">Year 1 (2020) to Year 5 (2025)</span>
+      </div>
+
+      <div class="growth-grid">
+        <div class="growth-item">
+          <span class="growth-label">Organization</span>
+          <div class="growth-values">
+            <span class="growth-change">4.85 → 5.00</span>
+            <span class="growth-pct">+3.1%</span>
+          </div>
+        </div>
+        <div class="growth-item">
+          <span class="growth-label">Student Interest</span>
+          <div class="growth-values">
+            <span class="growth-change">4.79 → 4.97</span>
+            <span class="growth-pct">+3.8%</span>
+          </div>
+        </div>
+        <div class="growth-item">
+          <span class="growth-label">Feedback Quality</span>
+          <div class="growth-values">
+            <span class="growth-change">4.77 → 5.00</span>
+            <span class="growth-pct">+4.8%</span>
+          </div>
+        </div>
+        <div class="growth-item">
+          <span class="growth-label">Clear Expectations</span>
+          <div class="growth-values">
+            <span class="growth-change">4.48 → 4.89</span>
+            <span class="growth-pct">+9.2%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="eval-section" id="courses">
+      <div class="eval-section-header">
+        <h2>Course-by-Course Results</h2>
+        <span class="section-note">Sorted by average score</span>
+      </div>
+
+      <div class="course-grid">
+        <div class="course-card elective">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Gothic Literature</div>
+              <div class="course-card-term">Fall 2025</div>
+            </div>
+            <div class="course-card-score perfect">5.00</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Advanced Elective</span>
+            <span>15 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 100%"></div></div>
+        </div>
+
+        <div class="course-card elective">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Chekhov Seminar</div>
+              <div class="course-card-term">Spring 2024</div>
+            </div>
+            <div class="course-card-score perfect">4.95</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Advanced Elective</span>
+            <span>9 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 99%"></div></div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Lit & Composition</div>
+              <div class="course-card-term">Fall 2025</div>
+            </div>
+            <div class="course-card-score perfect">4.95</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Core · 9th Grade</span>
+            <span>18 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 99%"></div></div>
+        </div>
+
+        <div class="course-card elective">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Middle Eastern Voices</div>
+              <div class="course-card-term">Fall 2023</div>
+            </div>
+            <div class="course-card-score">4.91</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Advanced Elective</span>
+            <span>22 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 98%"></div></div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Lit & Composition</div>
+              <div class="course-card-term">Fall 2023</div>
+            </div>
+            <div class="course-card-score">4.91</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Core · 9th Grade</span>
+            <span>19 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 98%"></div></div>
+        </div>
+
+        <div class="course-card elective">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Gothic Literature</div>
+              <div class="course-card-term">Fall 2024</div>
+            </div>
+            <div class="course-card-score">4.90</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Advanced Elective</span>
+            <span>25 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 98%"></div></div>
+        </div>
+
+        <div class="course-card elective">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Russian Short Fiction</div>
+              <div class="course-card-term">Fall 2020</div>
+            </div>
+            <div class="course-card-score">4.88</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Advanced Elective</span>
+            <span>20 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 97%"></div></div>
+        </div>
+
+        <div class="course-card elective">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Chekhov Seminar</div>
+              <div class="course-card-term">Spring 2023</div>
+            </div>
+            <div class="course-card-score">4.86</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Advanced Elective</span>
+            <span>17 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 97%"></div></div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Lit & Composition</div>
+              <div class="course-card-term">Fall 2024</div>
+            </div>
+            <div class="course-card-score">4.84</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Core · 9th Grade</span>
+            <span>24 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 96%"></div></div>
+        </div>
+
+        <div class="course-card elective">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Chekhov Seminar</div>
+              <div class="course-card-term">Spring 2025</div>
+            </div>
+            <div class="course-card-score">4.82</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Advanced Elective</span>
+            <span>15 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 96%"></div></div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Lit & Composition</div>
+              <div class="course-card-term">Fall 2020</div>
+            </div>
+            <div class="course-card-score">4.80</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Core · 9th Grade</span>
+            <span>22 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 96%"></div></div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Lit & Composition</div>
+              <div class="course-card-term">Spring 2024</div>
+            </div>
+            <div class="course-card-score">4.79</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Core · 9th Grade</span>
+            <span>20 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 95%"></div></div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Lit & Composition</div>
+              <div class="course-card-term">Spring 2025</div>
+            </div>
+            <div class="course-card-score">4.79</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Core · 9th Grade</span>
+            <span>24 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 95%"></div></div>
+        </div>
+
+        <div class="course-card elective">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Russian Short Fiction</div>
+              <div class="course-card-term">Fall 2021</div>
+            </div>
+            <div class="course-card-score">4.78</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Advanced Elective</span>
+            <span>23 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 95%"></div></div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Lit & Composition</div>
+              <div class="course-card-term">Fall 2021</div>
+            </div>
+            <div class="course-card-score">4.75</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Core · 9th Grade</span>
+            <span>23 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 95%"></div></div>
+        </div>
+
+        <div class="course-card elective">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Middle Eastern Voices</div>
+              <div class="course-card-term">Fall 2022</div>
+            </div>
+            <div class="course-card-score">4.73</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Advanced Elective</span>
+            <span>23 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 94%"></div></div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Lit & Composition</div>
+              <div class="course-card-term">Fall 2022</div>
+            </div>
+            <div class="course-card-score">4.72</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Core · 9th Grade</span>
+            <span>23 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 94%"></div></div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-header">
+            <div>
+              <div class="course-card-name">Lit & Composition</div>
+              <div class="course-card-term">Spring 2023</div>
+            </div>
+            <div class="course-card-score">4.68</div>
+          </div>
+          <div class="course-card-meta">
+            <span>Core · 9th Grade</span>
+            <span>17 responses</span>
+          </div>
+          <div class="course-card-bar"><div class="course-card-bar-fill" style="width: 93%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Themes Section -->
+    <section class="eval-section" id="themes">
+      <div class="eval-section-header">
+        <h2>What Students Say Most</h2>
+        <span class="section-note">Themes from open-ended comments</span>
+      </div>
+
+      <div class="themes-list">
+        <div class="theme-item">
+          <span class="theme-icon">💬</span>
+          <div class="theme-content">
+            <div class="theme-name">Engaging Discussions</div>
+            <div class="theme-example">"Harkness discussions help me learn..."</div>
+          </div>
+          <span class="theme-pct high">62%</span>
+        </div>
+
+        <div class="theme-item">
+          <span class="theme-icon">🔥</span>
+          <div class="theme-content">
+            <div class="theme-name">Passionate & Enthusiastic</div>
+            <div class="theme-example">"His enthusiasm makes me want to learn..."</div>
+          </div>
+          <span class="theme-pct high">50%</span>
+        </div>
+
+        <div class="theme-item">
+          <span class="theme-icon">✍️</span>
+          <div class="theme-content">
+            <div class="theme-name">Helpful Feedback</div>
+            <div class="theme-example">"Detailed comments help me improve..."</div>
+          </div>
+          <span class="theme-pct">46%</span>
+        </div>
+
+        <div class="theme-item">
+          <span class="theme-icon">🤝</span>
+          <div class="theme-content">
+            <div class="theme-name">Available & Supportive</div>
+            <div class="theme-example">"Always there during office hours..."</div>
+          </div>
+          <span class="theme-pct">42%</span>
+        </div>
+
+        <div class="theme-item">
+          <span class="theme-icon">📋</span>
+          <div class="theme-content">
+            <div class="theme-name">Well-Organized</div>
+            <div class="theme-example">"Everything is clear on Canvas..."</div>
+          </div>
+          <span class="theme-pct">37%</span>
+        </div>
+
+        <div class="theme-item">
+          <span class="theme-icon">⭐</span>
+          <div class="theme-content">
+            <div class="theme-name">Fun & Interesting</div>
+            <div class="theme-example">"One of my favorite classes..."</div>
+          </div>
+          <span class="theme-pct">34%</span>
+        </div>
+
+        <div class="theme-item">
+          <span class="theme-icon">🧠</span>
+          <div class="theme-content">
+            <div class="theme-name">Encourages Deep Thinking</div>
+            <div class="theme-example">"Pushes us to think critically..."</div>
+          </div>
+          <span class="theme-pct">32%</span>
+        </div>
+
+        <div class="theme-item">
+          <span class="theme-icon">🏠</span>
+          <div class="theme-content">
+            <div class="theme-name">Safe Environment</div>
+            <div class="theme-example">"Feel comfortable sharing ideas..."</div>
+          </div>
+          <span class="theme-pct">24%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section class="eval-section" id="quotes">
+      <div class="eval-section-header">
+        <h2>Notable Student Comments</h2>
+      </div>
+
+      <div class="quotes-grid">
+        <div class="quote-card">
+          <p class="quote-text">Mr. Koeze is an amazing teacher. It's not that he encourages you to perform, he inspires you to.</p>
+          <p class="quote-attribution">Russian Short Fiction, Fall 2021</p>
+        </div>
+
+        <div class="quote-card">
+          <p class="quote-text">His relentless enthusiasm and devotion to the material contribute immensely to the presentation of the course material and my learning.</p>
+          <p class="quote-attribution">Russian Short Fiction, Fall 2021</p>
+        </div>
+
+        <div class="quote-card">
+          <p class="quote-text">Mr. Koeze really asks amazing thought-provoking questions... I was shocked because I had never questioned why I thought that way.</p>
+          <p class="quote-attribution">Lit & Composition, Fall 2021</p>
+        </div>
+
+        <div class="quote-card">
+          <p class="quote-text">This has been my favorite course of all of Episcopal, and Mr. Koeze does an amazing job of breaking down the complicated text.</p>
+          <p class="quote-attribution">Chekhov Seminar, Spring 2025</p>
+        </div>
+
+        <div class="quote-card">
+          <p class="quote-text">He created a ChatGPT Bot that is very well developed which helps give feedback for essays and it is SUPER helpful.</p>
+          <p class="quote-attribution">Gothic Literature, Fall 2024</p>
+        </div>
+
+        <div class="quote-card">
+          <p class="quote-text">Mr. Koeze is the best English teacher I have ever had.</p>
+          <p class="quote-attribution">Lit & Composition, Spring 2024</p>
+        </div>
+      </div>
+
+      <div class="two-column" style="margin-top: var(--space-4);">
+        <div class="strengths-box">
+          <div class="box-title">Key Strengths</div>
+          <ul class="box-list">
+            <li>Exceptional classroom organization (perfect 5.0 in most recent terms)</li>
+            <li>Creates inclusive, safe environment for diverse perspectives</li>
+            <li>High-quality, detailed feedback on writing assignments</li>
+            <li>Passionate and engaging presentation of course material</li>
+            <li>Innovative use of technology (custom ChatGPT tools for essay feedback)</li>
+            <li>Consistently available during office hours</li>
+            <li>Successfully teaches both advanced electives and core courses</li>
+            <li>Strong discussion facilitation using Harkness method</li>
+          </ul>
+        </div>
+
+        <div class="notes-box">
+          <div class="box-title">Student Suggestions</div>
+          <ul class="box-list">
+            <li>Some students find grading rigorous (though most see this positively)</li>
+            <li>Occasional requests for more time on assignments</li>
+            <li>Advanced courses noted as challenging (appropriate for level)</li>
+            <li>Some students would prefer less Membean/NoRedInk</li>
+          </ul>
+          <div class="context-note">
+            <strong>Context:</strong> The "challenging" feedback consistently appears alongside positive comments about growth and learning, suggesting appropriate academic rigor rather than unfairness.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container text-center">
+      <p class="footer-subtle"><a href="teaching.html">← Back to Teaching</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -174,23 +174,8 @@
       border-top: 1px solid var(--mortar);
       background: var(--cream);
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
-    }
-
-    .cv-preview-hints {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--stone-gray);
-    }
-
-    .cv-preview-hints kbd {
-      background: var(--warm-white);
-      border: 1px solid var(--mortar);
-      padding: 2px 6px;
-      margin: 0 2px;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
     }
 
     /* Open full link */
@@ -683,45 +668,19 @@
       margin-top: var(--space-2);
     }
 
-    /* Teaching photo collage for default preview */
-    .teaching-collage {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 8px;
+    /* Default teaching photo */
+    .teaching-default-photo {
       width: 100%;
-      max-height: 280px;
-      padding: var(--space-2);
-    }
-
-    .teaching-collage .photo {
-      background: var(--mortar);
-      border: 1px solid var(--mortar);
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--stone-gray);
-      overflow: hidden;
     }
 
-    .teaching-collage .photo img {
+    .teaching-default-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    .teaching-collage .photo:nth-child(1) {
-      grid-row: span 2;
-    }
-
-    .teaching-collage .photo:nth-child(2) {
-      aspect-ratio: 4/3;
-    }
-
-    .teaching-collage .photo:nth-child(3) {
-      aspect-ratio: 3/2;
     }
 
     /* Placeholder for demo */
@@ -809,6 +768,61 @@
       transform: translate(-50%, -50%) scale(1.05);
     }
 
+    /* Issuu Magazine Preview */
+    .issuu-preview {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2);
+    }
+
+    .issuu-link {
+      position: relative;
+      display: block;
+      max-height: 100%;
+    }
+
+    .issuu-link img {
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      width: auto;
+      border: 1px solid var(--mortar);
+      display: block;
+      object-fit: contain;
+    }
+
+    .magazine-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(54, 51, 47, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .magazine-overlay span {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      color: var(--warm-white);
+      background: rgba(54, 51, 47, 0.85);
+      padding: 8px 16px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .issuu-link:hover .magazine-overlay {
+      background: rgba(54, 51, 47, 0.3);
+    }
+
+    .issuu-link:hover .magazine-overlay span {
+      opacity: 1;
+    }
+
     /* Slides Tabs Container */
     .slides-tabs-container {
       width: 100%;
@@ -884,6 +898,40 @@
       height: 100%;
       overflow-y: auto;
       position: relative;
+    }
+
+    .mini-gallery-header {
+      padding: var(--space-3) var(--space-3) var(--space-2);
+      background: var(--cream);
+      border-bottom: 1px solid var(--mortar);
+      border-left: 3px solid var(--verdigris);
+      margin-bottom: var(--space-2);
+    }
+
+    .mini-gallery-type {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--brick);
+      margin-bottom: 4px;
+    }
+
+    .mini-gallery-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+
+    .mini-gallery-context {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--charcoal-light);
+      line-height: 1.4;
+      margin: 0;
     }
 
     .mini-gallery-grid {
@@ -962,6 +1010,137 @@
 
     .mini-lightbox-close:hover {
       opacity: 1;
+    }
+
+    /* Evaluation Summary Preview */
+    .eval-summary-preview {
+      width: 100%;
+      padding: var(--space-2);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      align-self: flex-start;
+    }
+
+    .eval-executive-summary {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--charcoal);
+      padding: var(--space-1) var(--space-2);
+      background: var(--cream);
+      border-left: 3px solid var(--verdigris);
+    }
+
+    .eval-executive-summary strong {
+      color: var(--verdigris);
+    }
+
+    .eval-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+
+    .eval-stat {
+      background: var(--cream);
+      padding: var(--space-1);
+      border: 1px solid var(--mortar);
+    }
+
+    .eval-stat-value {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--verdigris);
+      line-height: 1.2;
+    }
+
+    .eval-stat-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--stone-gray);
+      margin-top: 2px;
+    }
+
+    .eval-competencies {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .eval-competency {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: var(--space-1);
+      align-items: center;
+    }
+
+    .eval-comp-name {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--charcoal);
+    }
+
+    .eval-comp-bar {
+      width: 80px;
+      height: 6px;
+      background: var(--mortar);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .eval-comp-fill {
+      height: 100%;
+      background: var(--verdigris);
+      border-radius: 3px;
+    }
+
+    .eval-comp-score {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--charcoal-light);
+      min-width: 28px;
+      text-align: right;
+    }
+
+    .eval-view-full {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: var(--verdigris);
+      text-decoration: none;
+      padding: var(--space-1) var(--space-2);
+      border: 1px solid var(--verdigris);
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .eval-view-full:hover {
+      background: var(--verdigris);
+      color: var(--warm-white);
+    }
+
+    .eval-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .eval-highlight-item {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--charcoal-light);
+      padding: 6px 10px;
+      background: var(--cream);
+      border-left: 2px solid var(--sage);
     }
 
     /* =========================================
@@ -1071,10 +1250,6 @@
         gap: 2px;
       }
 
-      .teaching-collage {
-        max-height: 200px;
-      }
-
       /* Touch-friendly button sizes */
       .cv-item-link {
         padding: 8px 12px;
@@ -1101,6 +1276,24 @@
       .slides-tab {
         padding: 12px;
         min-height: 44px;
+      }
+
+      /* Eval summary mobile */
+      .eval-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .eval-competency {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .eval-comp-bar {
+        width: 100%;
+      }
+
+      .eval-comp-score {
+        text-align: left;
       }
     }
 
@@ -1183,8 +1376,7 @@
         <div class="cv-preview-body" id="preview-body">
           <!-- Dynamic content loads here -->
         </div>
-        <div class="cv-preview-footer">
-          <span class="cv-preview-hints"><kbd>Esc</kbd> to close</span>
+        <div class="cv-preview-footer" id="preview-footer">
           <a href="#" class="cv-preview-open" id="open-link">Open full</a>
         </div>
       </div>
@@ -1206,6 +1398,7 @@
     const openLink = document.getElementById('open-link');
     const closeMobile = document.getElementById('preview-close-mobile');
     const cvContent = document.getElementById('cv-content');
+    const previewFooter = document.getElementById('preview-footer');
 
     let panelOpen = false;
     let cvData = null;
@@ -1294,24 +1487,31 @@
 
       // Evaluations row (after expandables)
       if (pos.evaluations) {
+        const studentEval = pos.evaluations.student;
+        const facultyEval = pos.evaluations.faculty;
+        const isStudentSummary = studentEval.type === 'eval-summary';
+        const isFacultySummary = facultyEval.type === 'eval-summary';
+
         html += `
           <div class="cv-evaluations cv-indented">
-            <a class="cv-item-link placeholder"
-               data-preview="pdf"
-               data-src="${pos.evaluations.student.src}"
-               data-title="${pos.evaluations.student.title}"
-               data-context="${pos.evaluations.student.context}"
-               data-type="PDF"
-               data-placeholder="true">
+            <a class="cv-item-link ${isStudentSummary ? '' : 'placeholder'}"
+               data-preview="${studentEval.type}"
+               data-src="${studentEval.src}"
+               data-title="${studentEval.title}"
+               data-context="${studentEval.context}"
+               data-type="ANALYSIS"
+               data-eval-type="student"
+               data-placeholder="${!isStudentSummary}">
               Student Evaluations
             </a>
-            <a class="cv-item-link placeholder"
-               data-preview="pdf"
-               data-src="${pos.evaluations.faculty.src}"
-               data-title="${pos.evaluations.faculty.title}"
-               data-context="${pos.evaluations.faculty.context}"
-               data-type="PDF"
-               data-placeholder="true">
+            <a class="cv-item-link ${isFacultySummary ? '' : 'placeholder'}"
+               data-preview="${facultyEval.type}"
+               data-src="${facultyEval.src}"
+               data-title="${facultyEval.title}"
+               data-context="${facultyEval.context}"
+               data-type="ANALYSIS"
+               data-eval-type="faculty"
+               data-placeholder="${!isFacultySummary}">
               Faculty Evaluations
             </a>
           </div>
@@ -1342,8 +1542,9 @@
               const isSubstackVideo = preview.type === 'substack-video';
               const isSlidesTabs = preview.type === 'slides-tabs';
               const isPhotoGallery = preview.type === 'photo-gallery';
-              const typeLabel = isSubstackVideo ? 'VIDEO' : isSlidesTabs ? 'SLIDES' : isPhotoGallery ? 'PHOTOS' : preview.type.toUpperCase();
-              const isPlaceholder = !isSubstackVideo && !isSlidesTabs && !isPhotoGallery && !preview.src;
+              const isIssuu = preview.type === 'issuu';
+              const typeLabel = isSubstackVideo ? 'VIDEO' : isSlidesTabs ? 'SLIDES' : isPhotoGallery ? 'PHOTOS' : isIssuu ? 'MAGAZINE' : preview.type.toUpperCase();
+              const isPlaceholder = !isSubstackVideo && !isSlidesTabs && !isPhotoGallery && !isIssuu && !preview.src;
               const slidesData = isSlidesTabs ? JSON.stringify(preview.slides) : '';
               html += `
                 <a class="cv-item-link ${isPlaceholder ? 'placeholder' : ''}"
@@ -1405,34 +1606,16 @@
       return html;
     }
 
-    // Render course item with optional preview button
+    // Render course item
     function renderCourseItem(course) {
       const displayName = course.shortName ? `${course.name} <span class="cv-sub-item-meta">(${course.shortName})</span>` : course.name;
-      let html = `
+      return `
         <div class="cv-sub-item">
           <span class="cv-sub-item-title">${displayName}</span>
           ${course.grades ? `<span class="cv-sub-item-meta">${course.grades}</span>` : ''}
           ${course.description ? `<p class="cv-sub-item-desc">${course.description}</p>` : ''}
+        </div>
       `;
-
-      if (course.hasPreview) {
-        html += `
-          <div class="cv-item-links">
-            <a class="cv-item-link placeholder"
-               data-preview="${course.previewType}"
-               data-src="${course.previewSrc}"
-               data-title="${course.previewTitle}"
-               data-context="${course.previewContext}"
-               data-type="Collage"
-               data-placeholder="true">
-              Course Materials
-            </a>
-          </div>
-        `;
-      }
-
-      html += '</div>';
-      return html;
     }
 
     // Render coaching item with optional preview button
@@ -1505,15 +1688,16 @@
       // Thesis
       if (item.thesis) {
         const thesis = item.thesis;
+        const thesisHasSrc = thesis.previewSrc && thesis.previewSrc.length > 0;
         html += `
           <div class="cv-item-links">
-            <a class="cv-item-link two-line placeholder"
+            <a class="cv-item-link two-line ${thesisHasSrc ? '' : 'placeholder'}"
                data-preview="${thesis.previewType || 'pdf'}"
                data-src="${thesis.previewSrc || ''}"
                data-title="${thesis.previewTitle || thesis.title}"
                data-context="${thesis.previewContext || 'Honors thesis.'}"
                data-type="PDF"
-               data-placeholder="true">
+               data-placeholder="${!thesisHasSrc}">
               <span class="btn-title">${thesis.title}</span>
               <span class="btn-subtitle">${thesis.subtitle}</span>
             </a>
@@ -1525,14 +1709,15 @@
       if (item.capstones && item.capstones.length > 0) {
         html += '<div class="cv-item-links">';
         item.capstones.forEach(cap => {
+          const capHasSrc = cap.previewSrc && cap.previewSrc.length > 0;
           html += `
-            <a class="cv-item-link two-line placeholder"
+            <a class="cv-item-link two-line ${capHasSrc ? '' : 'placeholder'}"
                data-preview="${cap.previewType || 'pdf'}"
                data-src="${cap.previewSrc || ''}"
                data-title="${cap.previewTitle || cap.title}"
                data-context="${cap.previewContext || 'Capstone project.'}"
                data-type="${cap.type}"
-               data-placeholder="true">
+               data-placeholder="${!capHasSrc}">
               <span class="btn-title">${cap.title}</span>
               <span class="btn-subtitle">${cap.subtitle}</span>
             </a>
@@ -1701,7 +1886,7 @@
         cvPreview.classList.add('open');
         cvMain.classList.add('preview-open');
         previewToggle.classList.add('panel-open');
-        toggleLabel.textContent = 'Close Preview';
+        toggleLabel.innerHTML = '→ esc';
       } else {
         cvPreview.classList.remove('open');
         cvMain.classList.remove('preview-open');
@@ -1750,14 +1935,23 @@
 
       // Clear and populate body
       previewBody.innerHTML = '';
+      previewFooter.style.display = '';
 
       if (type === 'photo-gallery') {
         // Mini masonry photo gallery
         const galleryPath = link.dataset.galleryPath;
         const galleryManifest = link.dataset.galleryManifest;
 
+        // Hide the fixed header for galleries - we'll include it in the scroll
+        previewType.parentElement.parentElement.style.display = 'none';
+
         previewBody.innerHTML = `
           <div class="mini-gallery" id="mini-gallery">
+            <div class="mini-gallery-header">
+              <div class="mini-gallery-type">${typeLabel}</div>
+              <div class="mini-gallery-title">${title}</div>
+              <p class="mini-gallery-context">${context}</p>
+            </div>
             <div class="mini-gallery-grid" id="mini-gallery-grid"></div>
             <div class="mini-gallery-loading">Loading photos...</div>
           </div>
@@ -1851,7 +2045,10 @@
           });
 
         openLink.style.display = 'none';
+        previewFooter.style.display = 'none';
       } else if (type === 'slides-tabs') {
+        // Show fixed header for non-gallery types
+        previewType.parentElement.parentElement.style.display = '';
         // Multiple Google Slides in a tabbed interface
         const slides = JSON.parse(link.dataset.slides || '[]');
         let tabsHtml = '<div class="slides-tabs-container">';
@@ -1895,7 +2092,10 @@
         });
 
         openLink.style.display = 'none';
+        previewFooter.style.display = 'none';
       } else if (type === 'substack-video') {
+        // Show fixed header for non-gallery types
+        previewType.parentElement.parentElement.style.display = '';
         // Substack video - show thumbnail with play button overlay
         previewBody.innerHTML = `
           <div class="substack-video-preview">
@@ -1908,7 +2108,124 @@
         openLink.href = src;
         openLink.textContent = 'Read on Substack';
         openLink.style.display = 'inline-flex';
+      } else if (type === 'issuu') {
+        // Show fixed header for non-gallery types
+        previewType.parentElement.parentElement.style.display = '';
+        // Issuu magazine - show thumbnail with link to page
+        previewBody.innerHTML = `
+          <div class="issuu-preview">
+            <a href="${src}" target="_blank" rel="noopener" class="issuu-link">
+              <img src="${thumbnail}" alt="${title}">
+              <div class="magazine-overlay">
+                <span>View in Issuu</span>
+              </div>
+            </a>
+          </div>
+        `;
+        openLink.href = src;
+        openLink.textContent = 'View in Issuu';
+        openLink.style.display = 'inline-flex';
+      } else if (type === 'eval-summary') {
+        // Show fixed header for non-gallery types
+        previewType.parentElement.parentElement.style.display = '';
+        const evalType = link.dataset.evalType;
+
+        if (evalType === 'faculty') {
+          // Faculty evaluation summary
+          previewBody.innerHTML = `
+            <div class="eval-summary-preview">
+              <div class="eval-executive-summary">
+                Supervisors describe <strong>exemplary teaching</strong> where "one can almost feel the learning happening." Praised for combining <strong>high expectations with genuine care</strong>, clear organization, and warm humor that creates a supportive classroom environment.
+              </div>
+              <div class="eval-stats-grid">
+                <div class="eval-stat">
+                  <span class="eval-stat-value">4 yrs</span>
+                  <span class="eval-stat-label">Evaluations</span>
+                </div>
+                <div class="eval-stat">
+                  <span class="eval-stat-value">3</span>
+                  <span class="eval-stat-label">Observations</span>
+                </div>
+                <div class="eval-stat">
+                  <span class="eval-stat-value">100%</span>
+                  <span class="eval-stat-label">Expectations Met</span>
+                </div>
+                <div class="eval-stat">
+                  <span class="eval-stat-value">✓</span>
+                  <span class="eval-stat-label">Meets Standard</span>
+                </div>
+              </div>
+              <div class="eval-highlights">
+                <div class="eval-highlight-item">"Hugh has a true teacher's soul"</div>
+                <div class="eval-highlight-item">"One can almost feel the learning happening"</div>
+                <div class="eval-highlight-item">"Remarkable flexibility and capability"</div>
+              </div>
+              <a href="${src}" class="eval-view-full">View Full Analysis →</a>
+            </div>
+          `;
+        } else {
+          // Student evaluation summary
+          previewBody.innerHTML = `
+            <div class="eval-summary-preview">
+              <div class="eval-executive-summary">
+                Consistently exceptional performance averaging <strong>4.85/5.0</strong> across 18 course sections over five years—significantly above department averages. Students value the engaging discussions, passionate teaching, and high-quality feedback.
+              </div>
+              <div class="eval-stats-grid">
+                <div class="eval-stat">
+                  <span class="eval-stat-value">4.85</span>
+                  <span class="eval-stat-label">Avg. Rating</span>
+                </div>
+                <div class="eval-stat">
+                  <span class="eval-stat-value">355</span>
+                  <span class="eval-stat-label">Responses</span>
+                </div>
+                <div class="eval-stat">
+                  <span class="eval-stat-value">18</span>
+                  <span class="eval-stat-label">Sections</span>
+                </div>
+                <div class="eval-stat">
+                  <span class="eval-stat-value">5 yrs</span>
+                  <span class="eval-stat-label">Data Span</span>
+                </div>
+              </div>
+              <div class="eval-competencies">
+                <div class="eval-competency">
+                  <span class="eval-comp-name">Organization</span>
+                  <div class="eval-comp-bar"><div class="eval-comp-fill" style="width: 99%"></div></div>
+                  <span class="eval-comp-score">4.96</span>
+                </div>
+                <div class="eval-competency">
+                  <span class="eval-comp-name">Inclusivity</span>
+                  <div class="eval-comp-bar"><div class="eval-comp-fill" style="width: 99%"></div></div>
+                  <span class="eval-comp-score">4.95</span>
+                </div>
+                <div class="eval-competency">
+                  <span class="eval-comp-name">Feedback Quality</span>
+                  <div class="eval-comp-bar"><div class="eval-comp-fill" style="width: 98%"></div></div>
+                  <span class="eval-comp-score">4.90</span>
+                </div>
+                <div class="eval-competency">
+                  <span class="eval-comp-name">Student Interest</span>
+                  <div class="eval-comp-bar"><div class="eval-comp-fill" style="width: 96%"></div></div>
+                  <span class="eval-comp-score">4.82</span>
+                </div>
+              </div>
+              <a href="${src}" class="eval-view-full">View Full Analysis →</a>
+            </div>
+          `;
+        }
+        openLink.href = src;
+        openLink.textContent = 'View full analysis';
+        openLink.style.display = 'inline-flex';
+      } else if (type === 'pdf' && src) {
+        previewType.parentElement.parentElement.style.display = '';
+        previewBody.innerHTML = `<iframe src="${src}"></iframe>`;
+        openLink.href = src;
+        openLink.textContent = 'Open full';
+        openLink.style.display = 'inline-flex';
       } else if (isPlaceholder || !src) {
+        // Show fixed header for non-gallery types
+        previewType.parentElement.parentElement.style.display = '';
         // Show placeholder for missing content
         previewBody.innerHTML = `
           <div class="placeholder-content">
@@ -1917,12 +2234,9 @@
           </div>
         `;
         openLink.style.display = 'none';
-      } else if (type === 'pdf') {
-        previewBody.innerHTML = `<iframe src="${src}"></iframe>`;
-        openLink.href = src;
-        openLink.textContent = 'Open full';
-        openLink.style.display = 'inline-flex';
+        previewFooter.style.display = 'none';
       } else if (type === 'image' || type === 'photo' || type === 'slides' || type === 'collage') {
+        previewType.parentElement.parentElement.style.display = '';
         const img = document.createElement('img');
         img.src = src;
         img.alt = title;
@@ -1931,6 +2245,7 @@
         openLink.textContent = 'Open full';
         openLink.style.display = 'inline-flex';
       } else if (type === 'video') {
+        previewType.parentElement.parentElement.style.display = '';
         previewBody.innerHTML = `
           <div class="video-container">
             <iframe src="${src}" frameborder="0" allowfullscreen></iframe>
@@ -1940,12 +2255,14 @@
         openLink.textContent = 'Open full';
         openLink.style.display = 'inline-flex';
       } else {
+        previewType.parentElement.parentElement.style.display = '';
         previewBody.innerHTML = `
           <div class="placeholder-content">
             <span>${title}</span>
           </div>
         `;
         openLink.style.display = 'none';
+        previewFooter.style.display = 'none';
       }
 
       // Show preview panel and content
@@ -1960,28 +2277,17 @@
 
       const preview = cvData.teaching.current.defaultPreview;
 
-      // Update header
-      previewType.textContent = 'TEACHING';
-      previewTitle.textContent = preview.title;
-      previewContext.textContent = '';
+      // Hide the header for default preview - just show the image
+      previewType.parentElement.parentElement.style.display = 'none';
 
-      // Build teaching collage
-      let collageHtml = '<div class="teaching-collage">';
-      preview.images.forEach((img, i) => {
-        collageHtml += `
-          <div class="photo">
-            <span>Photo ${i + 1}</span>
-          </div>
-        `;
-      });
-      collageHtml += '</div>';
-
-      previewBody.innerHTML = collageHtml;
+      // Show single teaching photo
+      previewBody.innerHTML = `
+        <div class="teaching-default-photo">
+          <img src="${preview.image}" alt="Teaching at Episcopal High School">
+        </div>
+      `;
       openLink.style.display = 'none';
-
-      // Mark the role as active
-      const roleEl = document.querySelector('.cv-role-clickable');
-      if (roleEl) roleEl.classList.add('active');
+      previewFooter.style.display = 'none';
 
       // Show preview
       previewEmpty.style.display = 'none';

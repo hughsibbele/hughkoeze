@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Evaluations — Hugh Koeze</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Josefin+Sans:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* =========================================
+       FACULTY EVALUATION PAGE
+       ========================================= */
+
+    .eval-page {
+      background: var(--cream);
+      min-height: 100vh;
+    }
+
+    .eval-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-3) var(--space-3);
+    }
+
+    /* Header */
+    .eval-header {
+      text-align: center;
+      padding: var(--space-3) 0 var(--space-2);
+      border-bottom: 1px solid var(--mortar);
+      margin-bottom: var(--space-2);
+    }
+
+    .eval-header h1 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--oak);
+      margin: 0 0 6px 0;
+    }
+
+    .eval-header .subtitle {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--charcoal);
+      margin: 0 0 4px 0;
+    }
+
+    .eval-header .meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+
+    /* Summary Box */
+    .summary-box {
+      background: var(--warm-white);
+      border: 2px solid var(--verdigris);
+      padding: var(--space-3);
+      margin-bottom: var(--space-2);
+    }
+
+    .summary-box h3 {
+      font-size: 0.9rem;
+      color: var(--oak);
+      margin-bottom: var(--space-1);
+    }
+
+    .summary-box p {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--charcoal);
+      margin: 0;
+    }
+
+    .summary-box strong {
+      color: var(--verdigris);
+    }
+
+    /* Section Navigation */
+    .eval-nav {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-3);
+      padding: var(--space-2) 0;
+      border-top: 1px solid var(--mortar);
+      border-bottom: 1px solid var(--mortar);
+      position: sticky;
+      top: 0;
+      background: var(--cream);
+      z-index: 10;
+    }
+
+    .eval-nav-btn {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 16px;
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      color: var(--charcoal);
+      transition: all 0.2s ease;
+    }
+
+    .eval-nav-btn:hover {
+      background: var(--charcoal);
+      color: var(--warm-white);
+      border-color: var(--charcoal);
+    }
+
+    /* Sections */
+    .eval-section {
+      margin-bottom: var(--space-4);
+      scroll-margin-top: 60px;
+    }
+
+    .eval-section-header {
+      margin-bottom: var(--space-2);
+      padding-bottom: var(--space-1);
+      border-bottom: 1px solid var(--mortar);
+    }
+
+    .eval-section-header h2 {
+      font-size: 1.1rem;
+      color: var(--oak);
+      margin-bottom: 4px;
+    }
+
+    .section-note {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+      letter-spacing: 0.05em;
+    }
+
+    /* Rating Badge */
+    .rating-badge {
+      display: inline-block;
+      background: var(--sage);
+      color: var(--warm-white);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      padding: 6px 14px;
+      margin-bottom: var(--space-2);
+    }
+
+    /* Quote Block */
+    .quote-block {
+      background: var(--warm-white);
+      border-left: 3px solid var(--verdigris);
+      padding: var(--space-2) var(--space-3);
+      margin: var(--space-2) 0;
+    }
+
+    .quote-block p {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--charcoal);
+      margin: 0 0 var(--space-1) 0;
+    }
+
+    .quote-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .quote-block strong {
+      color: var(--verdigris);
+    }
+
+    .quote-attribution {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--stone-gray);
+      margin-top: var(--space-1);
+    }
+
+    /* Area Grid */
+    .area-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-1);
+      margin-top: var(--space-3);
+    }
+
+    .area-card {
+      background: var(--warm-white);
+      padding: var(--space-1) var(--space-2);
+      border-left: 2px solid var(--sage);
+    }
+
+    .area-card-title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 2px;
+    }
+
+    .area-card-note {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--charcoal-light);
+    }
+
+    /* Observation Cards */
+    .observation-card {
+      background: var(--warm-white);
+      border: 1px solid var(--mortar);
+      padding: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+
+    .observation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-2);
+    }
+
+    .observation-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .observation-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--stone-gray);
+    }
+
+    .observation-highlights {
+      margin: var(--space-2) 0;
+    }
+
+    .observation-highlights h4 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--brick);
+      margin-bottom: var(--space-1);
+    }
+
+    .observation-highlights ul {
+      margin: 0;
+      padding-left: var(--space-3);
+    }
+
+    .observation-highlights li {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--charcoal);
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    .observer-quote {
+      background: var(--cream);
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--charcoal-light);
+      line-height: 1.5;
+      border-left: 2px solid var(--verdigris);
+      margin-top: var(--space-2);
+    }
+
+    /* Checklist */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-3);
+    }
+
+    .checklist-category {
+      background: var(--warm-white);
+      padding: var(--space-3);
+      border-left: 3px solid var(--sage);
+    }
+
+    .checklist-category h4 {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: var(--space-2);
+    }
+
+    .checklist-items {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--charcoal-light);
+    }
+
+    .checklist-item .check {
+      color: var(--sage);
+      font-weight: 600;
+    }
+
+    /* Themes Grid */
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-2);
+    }
+
+    .theme-item {
+      background: var(--warm-white);
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--charcoal);
+      border-left: 2px solid var(--verdigris);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .eval-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .eval-nav {
+        gap: 6px;
+      }
+
+      .eval-nav-btn {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+      }
+
+      .area-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .observation-header {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body class="eval-page">
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="site-title">Hugh Koeze</a>
+        <ul>
+          <li><a href="teaching.html">Teaching</a></li>
+          <li><a href="writing.html">Writing</a></li>
+          <li><a href="photography.html">Photography</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="eval-container">
+
+    <div class="eval-header">
+      <h1>Faculty Evaluations</h1>
+      <p class="subtitle">Supervisor assessments, classroom observations & departmental reviews</p>
+      <p class="meta">Episcopal High School · 2021–2025</p>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="summary-box">
+      <h3>Executive Summary</h3>
+      <p>
+        Across four years of formal evaluations, classroom observations, and departmental reviews, supervisors consistently describe <strong>exemplary teaching</strong> where "one can almost feel the learning happening." Evaluators praise the combination of <strong>high expectations with genuine care</strong> for each student, <strong>clear organization</strong>, and <strong>warm humor</strong> that creates a supportive classroom environment. Beyond teaching, contributions to residential life, advising, and curriculum development demonstrate <strong>remarkable flexibility and capability</strong> across all aspects of school life.
+      </p>
+    </div>
+
+    <nav class="eval-nav">
+      <a href="#comprehensive" class="eval-nav-btn">2022-23 Evaluation</a>
+      <a href="#department" class="eval-nav-btn">Department Review</a>
+      <a href="#residential" class="eval-nav-btn">Residential Life</a>
+      <a href="#observations" class="eval-nav-btn">Observations</a>
+      <a href="#themes" class="eval-nav-btn">Themes</a>
+    </nav>
+
+    <!-- Comprehensive Faculty Evaluation 2022-23 -->
+    <section class="eval-section" id="comprehensive">
+      <div class="eval-section-header">
+        <h2>Comprehensive Faculty Evaluation</h2>
+        <span class="section-note">Assistant Head for Academics · June 2023</span>
+      </div>
+
+      <span class="rating-badge">Meets Expectations</span>
+
+      <div class="quote-block">
+        <p>
+          "The highlight of the time I got to spend observing and evaluating Hugh Koeze this year was the time that I witnessed him working with a student in his 9th grade English class. The way that Hugh worked to bring out a <strong>moment of epiphany</strong> for a student who struggled mightily with the fundamentals of reading and writing was truly special. That was the lens through which I was lucky enough to view Hugh this year — <strong>a teacher who holds students to high expectations, but who also sees the beautiful uniqueness of each of his students</strong>, has a sense of humor, and strives to reach each and every student along the way."
+        </p>
+        <p>
+          "Hugh's classes were, no surprise, <strong>exemplary</strong>. This might be the most unscientific sentence ever to be written in an official evaluation, but <strong>one can almost feel the learning happening in the classroom</strong>. Hugh's organization, his sense of orderliness, and his vision for how to bring students along really translates to a true learning experience for his students."
+        </p>
+        <p>
+          "We are lucky to have Hugh as a central figure for our 9th graders but also for our electives. <strong>The variety and depth of his elective offerings add brightness to our curriculum.</strong>"
+        </p>
+      </div>
+
+      <div class="quote-block" style="border-left-color: var(--brick);">
+        <p>
+          "<strong>Hugh has a true teacher's soul.</strong> He cares about his craft, he devotes himself to his students, he reads broadly, he cares about curriculum and, for now, he has eschewed the idea of ascending the ranks of school leadership so that he can pursue his true love of consistent time in the classroom. I deeply respect that about him. <strong>I hope that Hugh will be an important member of the EHS faculty for many years to come.</strong>"
+        </p>
+        <div class="quote-attribution">— Assistant Head for Academics</div>
+      </div>
+
+      <div class="area-grid">
+        <div class="area-card">
+          <div class="area-card-title">Teaching</div>
+          <div class="area-card-note">Exemplary; "feel the learning happening"</div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-title">Advising</div>
+          <div class="area-card-note">Connects naturally; genuine care</div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-title">Dorm Head / Dean</div>
+          <div class="area-card-note">Created Townsend Study Hall program</div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-title">Coaching</div>
+          <div class="area-card-note">Characteristically excellent</div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-title">Outdoor Leadership</div>
+          <div class="area-card-note">Led trips; developing program</div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-title">Electives</div>
+          <div class="area-card-note">Add "brightness to curriculum"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Department Chair Summary -->
+    <section class="eval-section" id="department">
+      <div class="eval-section-header">
+        <h2>Department Chair Review</h2>
+        <span class="section-note">English Department · 2021–22</span>
+      </div>
+
+      <div class="quote-block">
+        <p>
+          "Hugh is a <strong>collegial, kind, intelligent teacher</strong> who brings both joy and wry humor to his work. Always willing to go the extra mile for a student, for a colleague or for the department, he demonstrates a <strong>remarkable flexibility and capability</strong>."
+        </p>
+        <p>
+          "He cares for his students in many ways, holding them to <strong>high standards</strong>, yet making them feel <strong>capable and supported</strong> as they strive. Culturally competent, he models empathy and compassion in his own behavior, in his teaching methods, and in the expectations he sets."
+        </p>
+        <p>
+          "He presents many kinds of assignments, from basic analytical essays to imitations of Russian 'cowboy' stories, making sure students have solid foundations and challenging them to step up to an intellectual challenge."
+        </p>
+        <p>
+          "His Canvas page is <strong>well-organized and reliably up-to-date</strong>. His student surveys reveal no concerns and focus on his support for students, his knowledge and his enthusiasm (he was called the GOAT in one of them)."
+        </p>
+        <div class="quote-attribution">— Department Chair</div>
+      </div>
+    </section>
+
+    <!-- Residential Life Evaluation -->
+    <section class="eval-section" id="residential">
+      <div class="eval-section-header">
+        <h2>Residential Life Evaluation</h2>
+        <span class="section-note">Dorm Head Role · 2023</span>
+      </div>
+
+      <div class="quote-block">
+        <p>
+          "Hugh, it has been a pleasure to work with you for the past few years. I am so glad that we were able to entice you to stay. The 9th graders have been made better through your <strong>steady, kind, compassionate leadership</strong>. I am impressed with the thorough nature of your understanding of the boys; on dorm and in the classroom."
+        </p>
+        <p>
+          "I am also amazed at the <strong>consistency of your patience and understanding</strong> as you discuss life, consequences and impact with 9th grade boys, their parents and the larger community. Thank you for finding the good, adapting strategies, and being a <strong>tireless advocate for what works best for 9th graders</strong>. Thank you for improving upon the program that already existed and adding more excellence."
+        </p>
+        <div class="quote-attribution">— Dean of Residential Life</div>
+      </div>
+
+      <div class="area-grid">
+        <div class="area-card">
+          <div class="area-card-title">Relationship Building</div>
+          <div class="area-card-note">All 5 expectations met</div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-title">Presence</div>
+          <div class="area-card-note">All 5 expectations met</div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-title">Administrative</div>
+          <div class="area-card-note">All 6 expectations met</div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-title">Leadership</div>
+          <div class="area-card-note">All 7 expectations met</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Classroom Observations -->
+    <section class="eval-section" id="observations">
+      <div class="eval-section-header">
+        <h2>Classroom Observations</h2>
+        <span class="section-note">Peer and supervisor visits · 2022–2025</span>
+      </div>
+
+      <div class="observation-card">
+        <div class="observation-header">
+          <div>
+            <div class="observation-title">Fundamentals in Literature & Composition</div>
+            <div class="observation-meta">January 2022 · 10 students in class, 1 online (hybrid period)</div>
+          </div>
+        </div>
+        <div class="observation-highlights">
+          <h4>Observer Notes</h4>
+          <ul>
+            <li>Students working independently with quiet background music; all engaged</li>
+            <li>Responded to student questions with humor while encouraging independent thinking</li>
+            <li>Seamlessly involved remote student by integrating them into group work</li>
+            <li>Clear, repeated instructions with examples; summarized expectations multiple times</li>
+            <li>Projected student work and facilitated peer feedback</li>
+            <li>Used whiteboard effectively to compare texts and capture ideas</li>
+          </ul>
+        </div>
+        <div class="observer-quote">
+          "Hugh is patient, funny, calm and clear. The experience of being in the class feels characterized by respectful humor, light-heartedness, but also commitment to doing serious work... This discussion is so fun!"
+        </div>
+      </div>
+
+      <div class="observation-card">
+        <div class="observation-header">
+          <div>
+            <div class="observation-title">Fundamentals in Literature & Composition</div>
+            <div class="observation-meta">October 2023 · 10 students, teaching American Born Chinese</div>
+          </div>
+        </div>
+        <div class="observation-highlights">
+          <h4>Observer Notes</h4>
+          <ul>
+            <li>Facilitated nuanced discussion about handling difficult language in texts</li>
+            <li>Clearly projected daily plan on board with three distinct activities</li>
+            <li>Circulated and pushed students to connect observations to deeper meaning</li>
+            <li>Prepared students for upcoming Harkness assessment with clear expectations</li>
+            <li>Student-led chapter presentations with teacher scaffolding</li>
+            <li>Encouraged students to elaborate: "Say more about that" / "Explain that"</li>
+          </ul>
+        </div>
+        <div class="observer-quote">
+          "Thanks so very much, Hugh. I really appreciate the opportunity to visit. Makes me wish I were teaching American Born Chinese this year."
+        </div>
+      </div>
+
+      <div class="observation-card">
+        <div class="observation-header">
+          <div>
+            <div class="observation-title">Fundamentals in Literature & Composition</div>
+            <div class="observation-meta">October 2025 · Two observations: 8 students and 7 students</div>
+          </div>
+        </div>
+        <div class="observation-highlights">
+          <h4>Observer Notes</h4>
+          <ul>
+            <li>Class schedule projected with current activity highlighted for student orientation</li>
+            <li>Consistent about repeating directions and checking in with individuals</li>
+            <li>Creative warm-up activities generated genuine student enthusiasm</li>
+            <li>Connected literature to music, art, and cultural aesthetics</li>
+            <li>Let student enthusiasm guide time allocation while maintaining structure</li>
+            <li>Students using literary vocabulary correctly (e.g., "trope," "uncanny")</li>
+          </ul>
+        </div>
+        <div class="observer-quote">
+          "What a great prompt. Getting students to identify voice and style in their peers' writing... Thanks for letting me visit! This was really fun! I'm totally stealing [this activity]."
+        </div>
+      </div>
+    </section>
+
+    <!-- Teaching Expectations Checklist -->
+    <section class="eval-section" id="checklist">
+      <div class="eval-section-header">
+        <h2>Departmental Expectations</h2>
+        <span class="section-note">All expectations met · 2021–22</span>
+      </div>
+
+      <div class="checklist-grid">
+        <div class="checklist-category">
+          <h4>Planning, Assessment & Feedback</h4>
+          <div class="checklist-items">
+            <div class="checklist-item"><span class="check">✓</span> Plans instruction to meet individual, departmental, and program goals</div>
+            <div class="checklist-item"><span class="check">✓</span> Assesses student work and provides instructive feedback</div>
+            <div class="checklist-item"><span class="check">✓</span> Uses Canvas to convey daily assignments and course expectations</div>
+          </div>
+        </div>
+        <div class="checklist-category">
+          <h4>Instruction</h4>
+          <div class="checklist-items">
+            <div class="checklist-item"><span class="check">✓</span> Demonstrates understanding of subject and content material</div>
+            <div class="checklist-item"><span class="check">✓</span> Uses class time intentionally</div>
+            <div class="checklist-item"><span class="check">✓</span> Supports students with disabilities and accommodations</div>
+            <div class="checklist-item"><span class="check">✓</span> Varies modes of instruction and learning</div>
+          </div>
+        </div>
+        <div class="checklist-category">
+          <h4>Learning Environment</h4>
+          <div class="checklist-items">
+            <div class="checklist-item"><span class="check">✓</span> Communicates clear classroom expectations and norms</div>
+            <div class="checklist-item"><span class="check">✓</span> Demonstrates interest in individual student growth</div>
+            <div class="checklist-item"><span class="check">✓</span> Manages behavior and creates supportive atmosphere</div>
+          </div>
+        </div>
+        <div class="checklist-category">
+          <h4>Connecting & Communicating</h4>
+          <div class="checklist-items">
+            <div class="checklist-item"><span class="check">✓</span> Treats students and colleagues with respect</div>
+            <div class="checklist-item"><span class="check">✓</span> Relates to students with cultural sensitivity</div>
+            <div class="checklist-item"><span class="check">✓</span> Responds to communications promptly</div>
+            <div class="checklist-item"><span class="check">✓</span> Collaborates with departmental team</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recurring Themes -->
+    <section class="eval-section" id="themes">
+      <div class="eval-section-header">
+        <h2>Recurring Themes</h2>
+        <span class="section-note">Patterns across all evaluations</span>
+      </div>
+
+      <div class="themes-grid">
+        <div class="theme-item">Clear, repeated instructions</div>
+        <div class="theme-item">Warm humor & rapport</div>
+        <div class="theme-item">High expectations with support</div>
+        <div class="theme-item">Varied instructional modes</div>
+        <div class="theme-item">Student-centered discussions</div>
+        <div class="theme-item">Effective use of technology</div>
+        <div class="theme-item">Cultural sensitivity</div>
+        <div class="theme-item">Patience & consistency</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container text-center">
+      <p class="footer-subtle"><a href="teaching.html">← Back to Teaching</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
