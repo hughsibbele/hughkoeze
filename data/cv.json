@@ -8,27 +8,21 @@
       "location": "Alexandria, VA",
       "description": "Teach literary analysis and writing through close reading, supportive, discussion-centered classrooms, and an emphasis on authentic student voice. Led a collaborative redesign of the 9th grade English curriculum. Developed elective courses drawing on my graduate work in Russian and world literature. Currently leading the school's adaptation to Artificial Intelligence. Beyond the classroom, serve as advisor, coach, and dorm parent, and founded an outdoor leadership program.",
       "defaultPreview": {
-        "type": "teaching-collage",
-        "title": "English Teacher",
-        "context": "Teaching in action at Episcopal High School.",
-        "images": [
-          "images/cv/teaching/teaching-1.jpg",
-          "images/cv/teaching/teaching-2.jpg",
-          "images/cv/teaching/teaching-3.jpg"
-        ]
+        "type": "teaching-photo",
+        "image": "images/cv/teaching/2023_09_25_EHS307-775.jpg"
       },
       "evaluations": {
         "student": {
-          "type": "pdf",
-          "src": "images/cv/evaluations/student-evaluations.pdf",
-          "title": "Student Evaluations",
-          "context": "Compiled student feedback and course evaluations."
+          "type": "eval-summary",
+          "src": "student-evaluations.html",
+          "title": "Student Course Evaluations",
+          "context": "Fall 2020 – Fall 2025 · 355 responses across 18 course sections"
         },
         "faculty": {
-          "type": "pdf",
-          "src": "images/cv/evaluations/faculty-evaluations.pdf",
+          "type": "eval-summary",
+          "src": "faculty-evaluations.html",
           "title": "Faculty Evaluations",
-          "context": "Peer and supervisor observations and feedback."
+          "context": "Supervisor assessments & classroom observations · 2021–2025"
         }
       },
       "otherRoles": [
@@ -139,6 +133,14 @@
                   "id": "1yQWP2xUWgwdCJ4bIlBONq0gm_ZnXOJjlb1cJO0UG5zY"
                 }
               ]
+            },
+            {
+              "label": "EHS Magazine Feature",
+              "type": "issuu",
+              "src": "https://issuu.com/episcopalhighschool/docs/ehs_the_magazine_of_episcopal_high_school_fall_20/42",
+              "thumbnail": "images/cv/ehs-magazine-ai-feature.jpg",
+              "title": "EHS Magazine Feature",
+              "context": "Fall 2025 issue of The Magazine of Episcopal High School, featuring the school's AI adaptation initiatives."
             }
           ]
         },
@@ -320,9 +322,9 @@
           "type": "Paper",
           "hasPreview": true,
           "previewType": "pdf",
-          "previewSrc": "files/cv/steppe-and-sea.pdf",
+          "previewSrc": "documents/chekhov-project.pdf",
           "previewTitle": "The Steppe and the Sea: Nature in Chekhov",
-          "previewContext": "Capstone paper, 2021."
+          "previewContext": "Chekhov's natural landscapes use recurring webs of motifs to raise existential questions about whether the universe is sympathetic and communicative or indifferent and empty. Capstone paper, 2021."
         },
         {
           "title": "Stranger to the House",
@@ -331,7 +333,7 @@
           "type": "Creative Project",
           "hasPreview": true,
           "previewType": "pdf",
-          "previewSrc": "files/cv/stranger-to-the-house.pdf",
+          "previewSrc": "documents/stranger-to-the-house.pdf",
           "previewTitle": "Stranger to the House",
           "previewContext": "Creative capstone project, 2022."
         }
@@ -350,9 +352,9 @@
         "year": "2013",
         "hasPreview": true,
         "previewType": "pdf",
-        "previewSrc": "files/cv/very-remarkable-men.pdf",
+        "previewSrc": "documents/honors-thesis.pdf",
         "previewTitle": "Very Remarkable Men: Villains and Victorian Doubt in Robert Louis Stevenson",
-        "previewContext": "Honors thesis, 2013."
+        "previewContext": "Stevenson's most enduring villains—Long John Silver and Mr. Hyde—function as embodiments of Victorian doubt and the terrifying specter of an empty, materialist universe. UNC Chapel Hill Honors Thesis, 2013."
       },
       "activities": [
         "Carolina Outdoor Education Center, Lead Instructor",
