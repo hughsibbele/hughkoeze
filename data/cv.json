@@ -113,18 +113,32 @@
           "description": "Lead Episcopal's adaptation to the rise of Artificial Intelligence. Facilitate faculty workshops on AI integration, developing training resources and implementation frameworks. Shape institutional policy emphasizing ethical, honorable and effective integration of AI in collaboration with the Leadership Team.",
           "previews": [
             {
-              "label": "Chapel Talk",
-              "type": "video",
-              "src": "images/cv/leadership/ai-chapel-talk.mp4",
-              "title": "AI Chapel Talk",
-              "context": "Chapel address on AI and education."
+              "label": "AI Chapel Talk",
+              "type": "substack-video",
+              "thumbnail": "https://substack-post-media.s3.amazonaws.com/public/images/4485aa35-4a06-44f4-b162-4d1131f0101e_2678x1618.png",
+              "src": "https://hughkoeze.substack.com/p/a-school-is-not-a-factory-for-essays",
+              "title": "Learning has always been a choice",
+              "context": "A chapel talk I gave in October 2025 about being a terrible high school cellist, and why the rise of AI makes the choice to learn even more important."
             },
             {
               "label": "Workshop Materials",
-              "type": "pdf",
-              "src": "images/cv/leadership/workshop-materials.pdf",
+              "type": "slides-tabs",
               "title": "Faculty Workshop Materials",
-              "context": "Training resources for AI integration."
+              "context": "Training resources for AI integration.",
+              "slides": [
+                {
+                  "title": "Adapting to AI Kickoff",
+                  "id": "1lBu2FBez592nsxJgatctPiicle2xyax3fF-W01Tfefg"
+                },
+                {
+                  "title": "Gemini & Canvas Integration",
+                  "id": "11mq6LXBYkbA9cfhtujGiCYfyUbTFuFLa5LXYHniGdcw"
+                },
+                {
+                  "title": "Essays in the Age of AI",
+                  "id": "1yQWP2xUWgwdCJ4bIlBONq0gm_ZnXOJjlb1cJO0UG5zY"
+                }
+              ]
             }
           ]
         },
@@ -148,10 +162,11 @@
           "previews": [
             {
               "label": "Expedition Photos",
-              "type": "collage",
-              "src": "images/cv/coaching/expedition-photos.jpg",
-              "title": "Expedition Photos",
-              "context": "Photos from backpacking, kayaking, and climbing expeditions."
+              "type": "photo-gallery",
+              "title": "Outdoor Leadership Expeditions",
+              "context": "Photos from backpacking, kayaking, and climbing expeditions at Episcopal High School.",
+              "galleryPath": "images/cv/expeditions/episcopal/",
+              "galleryManifest": "data/expeditions-episcopal.json"
             }
           ]
         }
@@ -208,10 +223,11 @@
         "location": "Virginia Beach, VA",
         "description": "Founded and led the Outdoor Leadership Series, an experiential outdoor leadership development program. Led international student programs to Panama, Guatemala, and Norway.",
         "hasPreview": true,
-        "previewType": "collage",
-        "previewSrc": "images/cv/cape-henry/expedition-gallery.jpg",
-        "previewTitle": "Expedition Gallery",
-        "previewContext": "Photos from outdoor leadership expeditions.",
+        "previewType": "photo-gallery",
+        "previewTitle": "Outdoor Leadership Expeditions",
+        "previewContext": "Photos from expeditions to Panama, Guatemala, Norway, and local wilderness areas.",
+        "galleryPath": "images/cv/expeditions/cape-henry/",
+        "galleryManifest": "data/expeditions-cape-henry.json",
         "courses": [
           {
             "id": "chc-english-9",

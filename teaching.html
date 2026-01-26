@@ -758,6 +758,212 @@
       font-style: italic;
     }
 
+    /* Substack Video Preview */
+    .substack-video-preview {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .substack-video-link {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .substack-video-link img {
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--mortar);
+      display: block;
+    }
+
+    .substack-video-link .play-button-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: 72px;
+      background: rgba(54, 51, 47, 0.85);
+      border-radius: 50%;
+      border: 2px solid var(--warm-white);
+      transition: all 0.2s ease;
+    }
+
+    .substack-video-link .play-button-overlay::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-40%, -50%);
+      border-left: 22px solid var(--warm-white);
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+    }
+
+    .substack-video-link:hover .play-button-overlay {
+      background: rgba(61, 122, 122, 0.9);
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    /* Slides Tabs Container */
+    .slides-tabs-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slides-tabs-nav {
+      display: flex;
+      gap: 2px;
+      background: var(--mortar);
+      padding: 2px;
+      flex-shrink: 0;
+    }
+
+    .slides-tab {
+      flex: 1;
+      padding: 10px 12px;
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--cream);
+      border: none;
+      color: var(--charcoal-light);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .slides-tab:hover {
+      background: var(--warm-white);
+      color: var(--charcoal);
+    }
+
+    .slides-tab.active {
+      background: var(--warm-white);
+      color: var(--verdigris);
+      font-weight: 600;
+    }
+
+    .slides-tabs-content {
+      flex: 1;
+      position: relative;
+      min-height: 0;
+    }
+
+    .slides-tab-pane {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .slides-tab-pane.active {
+      display: block;
+    }
+
+    .slides-tab-pane iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Mini Photo Gallery */
+    .mini-gallery {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .mini-gallery-grid {
+      position: relative;
+      padding: 8px;
+      min-height: 200px;
+    }
+
+    .mini-gallery-item {
+      position: absolute;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .mini-gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+
+    .mini-gallery-item:hover img {
+      transform: scale(1.02);
+    }
+
+    .mini-gallery-loading {
+      text-align: center;
+      padding: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--stone-gray);
+    }
+
+    /* Mini Lightbox */
+    .mini-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(54, 51, 47, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .mini-lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mini-lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      cursor: default;
+    }
+
+    .mini-lightbox-close {
+      position: absolute;
+      top: var(--space-3);
+      right: var(--space-3);
+      color: var(--warm-white);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+
+    .mini-lightbox-close:hover {
+      opacity: 1;
+    }
+
     /* =========================================
        RESPONSIVE
        ========================================= */
@@ -885,6 +1091,16 @@
       .cv-role-clickable,
       .cv-leadership-item {
         padding: var(--space-2);
+      }
+
+      /* Slides tabs mobile */
+      .slides-tabs-nav {
+        flex-direction: column;
+      }
+
+      .slides-tab {
+        padding: 12px;
+        min-height: 44px;
       }
     }
 
@@ -1123,14 +1339,24 @@
           if (item.previews && item.previews.length > 0) {
             html += '<div class="cv-item-links">';
             item.previews.forEach(preview => {
+              const isSubstackVideo = preview.type === 'substack-video';
+              const isSlidesTabs = preview.type === 'slides-tabs';
+              const isPhotoGallery = preview.type === 'photo-gallery';
+              const typeLabel = isSubstackVideo ? 'VIDEO' : isSlidesTabs ? 'SLIDES' : isPhotoGallery ? 'PHOTOS' : preview.type.toUpperCase();
+              const isPlaceholder = !isSubstackVideo && !isSlidesTabs && !isPhotoGallery && !preview.src;
+              const slidesData = isSlidesTabs ? JSON.stringify(preview.slides) : '';
               html += `
-                <a class="cv-item-link placeholder"
+                <a class="cv-item-link ${isPlaceholder ? 'placeholder' : ''}"
                    data-preview="${preview.type}"
-                   data-src="${preview.src}"
+                   data-src="${preview.src || ''}"
+                   data-thumbnail="${preview.thumbnail || ''}"
                    data-title="${preview.title}"
                    data-context="${preview.context}"
-                   data-type="${preview.type.toUpperCase()}"
-                   data-placeholder="true">
+                   data-type="${typeLabel}"
+                   data-slides='${slidesData}'
+                   data-gallery-path="${preview.galleryPath || ''}"
+                   data-gallery-manifest="${preview.galleryManifest || ''}"
+                   data-placeholder="${isPlaceholder}">
                   ${preview.label}
                 </a>
               `;
@@ -1420,15 +1646,18 @@
 
       // Add preview button if item has one
       if (item.hasPreview) {
+        const isPhotoGallery = item.previewType === 'photo-gallery';
         html += `
           <div class="cv-item-links">
-            <a class="cv-item-link placeholder"
+            <a class="cv-item-link ${isPhotoGallery ? '' : 'placeholder'}"
                data-preview="${item.previewType}"
-               data-src="${item.previewSrc}"
+               data-src="${item.previewSrc || ''}"
                data-title="${item.previewTitle}"
                data-context="${item.previewContext}"
                data-type="Photos"
-               data-placeholder="true">
+               data-gallery-path="${item.galleryPath || ''}"
+               data-gallery-manifest="${item.galleryManifest || ''}"
+               data-placeholder="${!isPhotoGallery}">
               Expedition Gallery
             </a>
           </div>
@@ -1485,6 +1714,7 @@
     function showPreview(link) {
       const type = link.dataset.preview;
       const src = link.dataset.src;
+      const thumbnail = link.dataset.thumbnail;
       const title = link.dataset.title;
       const context = link.dataset.context;
       const typeLabel = link.dataset.type;
@@ -1521,7 +1751,164 @@
       // Clear and populate body
       previewBody.innerHTML = '';
 
-      if (isPlaceholder || !src) {
+      if (type === 'photo-gallery') {
+        // Mini masonry photo gallery
+        const galleryPath = link.dataset.galleryPath;
+        const galleryManifest = link.dataset.galleryManifest;
+
+        previewBody.innerHTML = `
+          <div class="mini-gallery" id="mini-gallery">
+            <div class="mini-gallery-grid" id="mini-gallery-grid"></div>
+            <div class="mini-gallery-loading">Loading photos...</div>
+          </div>
+          <div class="mini-lightbox" id="mini-lightbox">
+            <button class="mini-lightbox-close" aria-label="Close">ESC</button>
+            <img src="" alt="Enlarged photograph" id="mini-lightbox-img">
+          </div>
+        `;
+
+        // Fetch and display photos
+        fetch(galleryManifest)
+          .then(res => res.json())
+          .then(photos => {
+            const grid = document.getElementById('mini-gallery-grid');
+            const loading = previewBody.querySelector('.mini-gallery-loading');
+
+            if (photos.length === 0) {
+              loading.textContent = 'No photos yet';
+              return;
+            }
+
+            let loadedCount = 0;
+            const columnHeights = [0, 0, 0];
+            const GAP = 8;
+
+            function positionPhoto(item, img) {
+              const gridWidth = grid.clientWidth;
+              const colWidth = (gridWidth - GAP * 2) / 3;
+              const minCol = columnHeights.indexOf(Math.min(...columnHeights));
+              const aspectRatio = img.naturalHeight / img.naturalWidth;
+              const itemHeight = colWidth * aspectRatio;
+
+              item.style.left = (minCol * (colWidth + GAP)) + 'px';
+              item.style.top = columnHeights[minCol] + 'px';
+              item.style.width = colWidth + 'px';
+              item.style.opacity = '1';
+
+              columnHeights[minCol] += itemHeight + GAP;
+              grid.style.height = Math.max(...columnHeights) + 'px';
+            }
+
+            photos.forEach((photo, i) => {
+              const item = document.createElement('div');
+              item.className = 'mini-gallery-item';
+              item.style.opacity = '0';
+
+              const img = document.createElement('img');
+              img.src = galleryPath + photo.file;
+              img.alt = 'Expedition photo';
+
+              img.onload = () => {
+                positionPhoto(item, img);
+                loadedCount++;
+                if (loadedCount === photos.length) {
+                  loading.style.display = 'none';
+                }
+              };
+
+              img.onerror = () => {
+                item.remove();
+                loadedCount++;
+                if (loadedCount === photos.length) {
+                  loading.style.display = 'none';
+                }
+              };
+
+              item.appendChild(img);
+              grid.appendChild(item);
+            });
+
+            // Lightbox functionality
+            const lightbox = document.getElementById('mini-lightbox');
+            const lightboxImg = document.getElementById('mini-lightbox-img');
+
+            grid.addEventListener('click', (e) => {
+              if (e.target.tagName === 'IMG') {
+                lightboxImg.src = e.target.src;
+                lightbox.classList.add('active');
+              }
+            });
+
+            lightbox.addEventListener('click', (e) => {
+              if (e.target === lightbox || e.target.classList.contains('mini-lightbox-close')) {
+                lightbox.classList.remove('active');
+              }
+            });
+          })
+          .catch(err => {
+            previewBody.querySelector('.mini-gallery-loading').textContent = 'Could not load photos';
+            console.error('Failed to load gallery:', err);
+          });
+
+        openLink.style.display = 'none';
+      } else if (type === 'slides-tabs') {
+        // Multiple Google Slides in a tabbed interface
+        const slides = JSON.parse(link.dataset.slides || '[]');
+        let tabsHtml = '<div class="slides-tabs-container">';
+        tabsHtml += '<div class="slides-tabs-nav">';
+        slides.forEach((slide, i) => {
+          tabsHtml += `<button class="slides-tab ${i === 0 ? 'active' : ''}" data-index="${i}">${slide.title}</button>`;
+        });
+        tabsHtml += '</div>';
+        tabsHtml += '<div class="slides-tabs-content">';
+        slides.forEach((slide, i) => {
+          const embedUrl = `https://docs.google.com/presentation/d/${slide.id}/embed?start=false&loop=false&delayms=3000`;
+          // Only load first iframe immediately, others lazy-load on tab click
+          const srcAttr = i === 0 ? `src="${embedUrl}"` : '';
+          tabsHtml += `<div class="slides-tab-pane ${i === 0 ? 'active' : ''}" data-index="${i}">
+            <iframe ${srcAttr} data-src="${embedUrl}" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          </div>`;
+        });
+        tabsHtml += '</div></div>';
+        previewBody.innerHTML = tabsHtml;
+
+        // Attach tab click handlers
+        previewBody.querySelectorAll('.slides-tab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            const index = tab.dataset.index;
+            // Update active tab
+            previewBody.querySelectorAll('.slides-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            // Update active pane and lazy-load iframe
+            previewBody.querySelectorAll('.slides-tab-pane').forEach(pane => {
+              pane.classList.remove('active');
+              if (pane.dataset.index === index) {
+                pane.classList.add('active');
+                const iframe = pane.querySelector('iframe');
+                // Load iframe if not yet loaded (no src attribute)
+                if (iframe && !iframe.hasAttribute('src')) {
+                  iframe.src = iframe.dataset.src;
+                }
+              }
+            });
+          });
+        });
+
+        openLink.style.display = 'none';
+      } else if (type === 'substack-video') {
+        // Substack video - show thumbnail with play button overlay
+        previewBody.innerHTML = `
+          <div class="substack-video-preview">
+            <a href="${src}" target="_blank" rel="noopener" class="substack-video-link">
+              <img src="${thumbnail}" alt="${title}">
+              <div class="play-button-overlay"></div>
+            </a>
+          </div>
+        `;
+        openLink.href = src;
+        openLink.textContent = 'Read on Substack';
+        openLink.style.display = 'inline-flex';
+      } else if (isPlaceholder || !src) {
         // Show placeholder for missing content
         previewBody.innerHTML = `
           <div class="placeholder-content">
@@ -1533,6 +1920,7 @@
       } else if (type === 'pdf') {
         previewBody.innerHTML = `<iframe src="${src}"></iframe>`;
         openLink.href = src;
+        openLink.textContent = 'Open full';
         openLink.style.display = 'inline-flex';
       } else if (type === 'image' || type === 'photo' || type === 'slides' || type === 'collage') {
         const img = document.createElement('img');
@@ -1540,6 +1928,7 @@
         img.alt = title;
         previewBody.appendChild(img);
         openLink.href = src;
+        openLink.textContent = 'Open full';
         openLink.style.display = 'inline-flex';
       } else if (type === 'video') {
         previewBody.innerHTML = `
@@ -1548,6 +1937,7 @@
           </div>
         `;
         openLink.href = src;
+        openLink.textContent = 'Open full';
         openLink.style.display = 'inline-flex';
       } else {
         previewBody.innerHTML = `
@@ -1646,8 +2036,11 @@
         });
       });
 
-      // Show default preview on page load
-      showDefaultPreview();
+      // Show default preview on page load (only on wider screens)
+      // On mobile (≤768px), the preview is a full-screen overlay, so keep CV visible
+      if (window.innerWidth > 768) {
+        showDefaultPreview();
+      }
     }
 
     // Event: Toggle button
@@ -1668,9 +2061,18 @@
 
     // Event: Keyboard (Escape to close)
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && panelOpen) {
-        togglePanel(false);
-        closePreview();
+      if (e.key === 'Escape') {
+        // First check for mini lightbox
+        const miniLightbox = document.getElementById('mini-lightbox');
+        if (miniLightbox && miniLightbox.classList.contains('active')) {
+          miniLightbox.classList.remove('active');
+          return;
+        }
+        // Then close preview panel
+        if (panelOpen) {
+          togglePanel(false);
+          closePreview();
+        }
       }
     });
 
