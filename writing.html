@@ -521,89 +521,6 @@
       color: var(--stone-gray);
     }
 
-    /* =========================================
-       OTHER PIECES SECTION
-       ========================================= */
-
-    .other-pieces-section {
-      padding: var(--space-4) 0 var(--space-5);
-      background: var(--cream);
-    }
-
-    .other-pieces-section h2 {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--brick);
-      margin-bottom: var(--space-3);
-    }
-
-    .other-pieces-list {
-      list-style: none;
-      border-top: 1px solid var(--mortar);
-    }
-
-    .other-pieces-item {
-      display: flex;
-      align-items: baseline;
-      padding: var(--space-2) 0;
-      border-bottom: 1px solid var(--mortar);
-      gap: var(--space-2);
-    }
-
-    .other-pieces-item:hover {
-      background: var(--warm-white);
-      margin: 0 calc(-1 * var(--space-2));
-      padding-left: var(--space-2);
-      padding-right: var(--space-2);
-    }
-
-    .other-pieces-title {
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--charcoal);
-      text-decoration: none;
-      transition: color 0.2s ease;
-      flex-shrink: 0;
-    }
-
-    .other-pieces-title:hover {
-      color: var(--verdigris);
-    }
-
-    .other-pieces-dots {
-      flex: 1;
-      border-bottom: 1px dotted var(--mortar);
-      min-width: 20px;
-      margin-bottom: 4px;
-    }
-
-    .other-pieces-explore {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-      color: var(--verdigris);
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: color 0.2s ease;
-    }
-
-    .other-pieces-explore::after {
-      content: '→';
-      transition: transform 0.2s ease;
-    }
-
-    .other-pieces-explore:hover {
-      color: var(--verdigris-dark);
-    }
-
-    .other-pieces-explore:hover::after {
-      transform: translateX(3px);
-    }
 
     /* =========================================
        RESPONSIVE
@@ -677,26 +594,6 @@
         align-items: flex-start;
       }
 
-      /* Other pieces adjustments */
-      .other-pieces-dots {
-        display: none;
-      }
-
-      .other-pieces-item {
-        flex-wrap: wrap;
-        gap: var(--space-1);
-      }
-
-      .other-pieces-title {
-        flex-basis: 100%;
-      }
-
-      .other-pieces-explore {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-      }
-
       /* Preview panel mobile adjustments */
       .writing-preview-header {
         padding: var(--space-2) var(--space-3);
@@ -758,13 +655,11 @@
         font-size: 0.75rem;
       }
 
-      .substack-section h2,
-      .other-pieces-section h2 {
+      .substack-section h2 {
         font-size: 0.75rem;
       }
 
-      .substack-feed-link,
-      .other-pieces-title {
+      .substack-feed-link {
         font-size: 0.85rem;
       }
 
@@ -942,34 +837,6 @@
       </div>
     </section>
 
-    <!-- Other Pieces Section -->
-    <section class="other-pieces-section">
-      <div class="container">
-        <h2>Other Pieces</h2>
-        <ul class="other-pieces-list">
-          <li class="other-pieces-item">
-            <a href="https://hughkoeze.substack.com/p/placeholder" class="other-pieces-title" target="_blank" rel="noopener">Title of an older essay or piece</a>
-            <span class="other-pieces-dots"></span>
-            <a href="https://hughkoeze.substack.com/p/placeholder" class="other-pieces-explore" target="_blank" rel="noopener">Explore</a>
-          </li>
-          <li class="other-pieces-item">
-            <a href="https://hughkoeze.substack.com/p/placeholder" class="other-pieces-title" target="_blank" rel="noopener">Another piece worth reading</a>
-            <span class="other-pieces-dots"></span>
-            <a href="https://hughkoeze.substack.com/p/placeholder" class="other-pieces-explore" target="_blank" rel="noopener">Explore</a>
-          </li>
-          <li class="other-pieces-item">
-            <a href="https://hughkoeze.substack.com/p/placeholder" class="other-pieces-title" target="_blank" rel="noopener">Something from a while back</a>
-            <span class="other-pieces-dots"></span>
-            <a href="https://hughkoeze.substack.com/p/placeholder" class="other-pieces-explore" target="_blank" rel="noopener">Explore</a>
-          </li>
-          <li class="other-pieces-item">
-            <a href="documents/some-paper.pdf" class="other-pieces-title" target="_blank">A shorter paper or article</a>
-            <span class="other-pieces-dots"></span>
-            <a href="documents/some-paper.pdf" class="other-pieces-explore" target="_blank">Explore</a>
-          </li>
-        </ul>
-      </div>
-    </section>
   </main>
 
   <!-- Preview Panel (for papers) -->
@@ -1004,7 +871,7 @@
 
   <footer>
     <div class="container text-center">
-      <p class="footer-subtle"><a href="https://hughkoeze.substack.com/p/placeholder">Wonder how an English teacher made this website?</a></p>
+      <p class="footer-subtle"><a href="https://hughkoeze.substack.com/p/placeholder">Wondering how an English teacher made this website?</a></p>
     </div>
   </footer>
 
