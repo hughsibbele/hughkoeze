@@ -367,7 +367,16 @@
       "degree": "Gap Year Program",
       "dates": "2008–2009",
       "location": "Johannesburg, South Africa",
-      "description": "Member of the inaugural class at a pan-African secondary school developing the next generation of African leaders."
+      "description": "Member of the inaugural class at a pan-African secondary school developing the next generation of African leaders.",
+      "previews": [
+        {
+          "label": "Grand Opening Address",
+          "type": "youtube",
+          "src": "https://www.youtube.com/embed/lz4KGJ6kOSg",
+          "title": "Grand Opening Address",
+          "context": "African Leadership Academy Grand Opening, 2008."
+        }
+      ]
     },
     {
       "id": "stpauls",

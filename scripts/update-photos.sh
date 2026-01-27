@@ -62,3 +62,33 @@ echo "" >> photos.json
 echo "]" >> photos.json
 
 echo "Updated photos.json with $count photos"
+
+# Generate thumbnails (800px max dimension, 75% JPEG quality)
+echo "Generating thumbnails..."
+THUMB_DIR="images/photography/thumbnails"
+mkdir -p "$THUMB_DIR"
+
+thumb_count=0
+while IFS= read -r file; do
+  if [ -n "$file" ]; then
+    filename=$(basename "$file")
+    out="$THUMB_DIR/$filename"
+    if [ ! -f "$out" ] || [ "$file" -nt "$out" ]; then
+      sips -Z 800 "$file" --out "$out" > /dev/null 2>&1
+      sips -s formatOptions 75 "$out" --out "$out" > /dev/null 2>&1
+      thumb_count=$((thumb_count + 1))
+    fi
+  fi
+done <<< "$files"
+
+# Remove thumbnails for deleted photos
+for thumb in "$THUMB_DIR"/*; do
+  [ -f "$thumb" ] || continue
+  original="images/photography/$(basename "$thumb")"
+  if [ ! -f "$original" ]; then
+    rm "$thumb"
+    echo "  Removed orphaned thumbnail: $(basename "$thumb")"
+  fi
+done
+
+echo "Generated $thumb_count new thumbnails ($(ls "$THUMB_DIR" | wc -l | tr -d ' ') total)"
