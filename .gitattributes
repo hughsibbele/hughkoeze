@@ -7,7 +7,3 @@ images/photography/*.HEIC filter=lfs diff=lfs merge=lfs -text
 images/photography/*.heic filter=lfs diff=lfs merge=lfs -text
 images/photography/*.JPG filter=lfs diff=lfs merge=lfs -text
 images/photography/*.JPEG filter=lfs diff=lfs merge=lfs -text
-images/photography/thumbnails/*.jpg filter=lfs diff=lfs merge=lfs -text
-images/photography/thumbnails/*.jpeg filter=lfs diff=lfs merge=lfs -text
-images/photography/thumbnails/*.png filter=lfs diff=lfs merge=lfs -text
-images/photography/thumbnails/*.webp filter=lfs diff=lfs merge=lfs -text
