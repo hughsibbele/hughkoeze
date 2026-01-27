@@ -103,20 +103,20 @@
     .eval-nav-btn {
       font-family: var(--font-display);
       font-size: 0.75rem;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       text-decoration: none;
       padding: 8px 16px;
-      background: var(--warm-white);
-      border: 1px solid var(--mortar);
+      background: transparent;
+      border: 1px solid var(--charcoal);
       color: var(--charcoal);
+      cursor: pointer;
       transition: all 0.2s ease;
     }
 
     .eval-nav-btn:hover {
       background: var(--charcoal);
       color: var(--warm-white);
-      border-color: var(--charcoal);
     }
 
     /* Sections */
@@ -126,22 +126,27 @@
     }
 
     .eval-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
       margin-bottom: var(--space-2);
       padding-bottom: var(--space-1);
       border-bottom: 1px solid var(--mortar);
     }
 
     .eval-section-header h2 {
-      font-size: 1.1rem;
-      color: var(--oak);
-      margin-bottom: 4px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--brick);
+      margin: 0;
     }
 
     .section-note {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
       color: var(--stone-gray);
-      letter-spacing: 0.05em;
+      font-style: italic;
     }
 
     /* Rating Badge */
@@ -347,12 +352,13 @@
       }
 
       .eval-nav {
+        position: static;
         gap: 6px;
       }
 
       .eval-nav-btn {
-        padding: 6px 12px;
-        font-size: 0.7rem;
+        padding: 6px 10px;
+        font-size: 0.65rem;
       }
 
       .area-grid {
@@ -372,7 +378,7 @@
       <nav>
         <a href="index.html" class="site-title">Hugh Koeze</a>
         <ul>
-          <li><a href="teaching.html">Teaching</a></li>
+          <li><a href="teaching.html" class="nav-active">Teaching</a></li>
           <li><a href="writing.html">Writing</a></li>
           <li><a href="photography.html">Photography</a></li>
           <li><a href="about.html">About</a></li>
