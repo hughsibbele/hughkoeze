@@ -1,0 +1,832 @@
+/* =========================================
+   STRANGER TO THE HOUSE
+   A Photo Essay on Photography and Proust
+   ========================================= */
+
+/* -----------------------------------------
+   COLOR PALETTE (from lichen reference)
+   ----------------------------------------- */
+:root {
+  /* Page & Section Backgrounds */
+  --color-page-bg: rgb(58, 62, 65);
+  --color-content-light: rgb(223, 221, 211);
+  --color-content-dark: rgb(38, 40, 42);
+  --color-gallery-bg: rgb(78, 82, 85);
+
+  /* Accent Colors */
+  --color-accent: rgb(218, 165, 32);
+  --color-accent-bright: rgb(242, 183, 55);
+
+  /* Text Colors */
+  --color-text-primary: rgb(0, 0, 0);
+  --color-text-light: rgb(255, 255, 255);
+  --color-text-muted: rgb(120, 120, 115);
+
+  /* Typography */
+  --font-primary: 'Poppins', sans-serif;
+
+  /* Spacing */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+  --space-8: 128px;
+
+  /* Layout */
+  --max-width: 1400px;
+  --inset-padding: 48px;
+  --gallery-gap: 16px;
+}
+
+/* -----------------------------------------
+   RESET & BASE
+   ----------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.87;
+  color: var(--color-text-primary);
+  background-color: var(--color-page-bg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* -----------------------------------------
+   TYPOGRAPHY
+   ----------------------------------------- */
+h1 {
+  font-size: 84px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-accent);
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: var(--space-2);
+}
+
+.section-subtitle {
+  font-size: 17px;
+  font-weight: 300;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-5);
+}
+
+.divider {
+  text-align: center;
+  font-size: 17px;
+  letter-spacing: 0.3em;
+  color: var(--color-text-muted);
+  margin: var(--space-5) 0;
+}
+
+/* -----------------------------------------
+   LAYOUT UTILITIES
+   ----------------------------------------- */
+.inset {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--inset-padding);
+  padding-right: var(--inset-padding);
+}
+
+.full-bleed {
+  width: 100%;
+}
+
+/* -----------------------------------------
+   SITE HEADER
+   ----------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-accent);
+  transition: background-color 0.3s ease;
+}
+
+.site-header.scrolled {
+  background: var(--color-accent);
+}
+
+.site-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.site-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgb(61, 122, 122); /* verdigris from main site */
+  text-decoration: none;
+}
+
+.site-title:hover {
+  color: rgb(45, 95, 95); /* verdigris-dark */
+}
+
+.site-subtitle {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--color-text-primary);
+  opacity: 0.7;
+}
+
+.site-nav {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.site-nav a {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.site-nav a:hover {
+  opacity: 1;
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* -----------------------------------------
+   NAVBAR (Section Navigation)
+   ----------------------------------------- */
+.navbar {
+  background: var(--color-content-dark);
+  padding: var(--space-3) 0;
+}
+
+.navbar-inner {
+  text-align: center;
+}
+
+.navbar a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  font-size: 17px;
+  font-weight: 300;
+  transition: color 0.2s ease;
+}
+
+.navbar a:hover {
+  color: var(--color-accent-bright);
+}
+
+.navbar-separator {
+  color: var(--color-text-light);
+  margin: 0 var(--space-2);
+  opacity: 0.5;
+}
+
+/* -----------------------------------------
+   HERO CARD
+   ----------------------------------------- */
+.hero-card {
+  background: var(--color-accent);
+  padding: 127px var(--inset-padding) 42px;
+}
+
+.hero-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 45% 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.hero-image {
+  aspect-ratio: 4/3;
+  background: var(--color-gallery-bg);
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-image.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.hero-content h1 {
+  margin-bottom: var(--space-3);
+}
+
+.hero-content .subtitle {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.hero-content .subtitle em {
+  font-style: italic;
+}
+
+/* -----------------------------------------
+   SECTION INTRO (Full-bleed with bg image)
+   ----------------------------------------- */
+.section-intro {
+  position: relative;
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-7) var(--space-4);
+}
+
+.section-intro-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.section-intro-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-content-dark);
+  opacity: 0.6;
+}
+
+.section-intro-bg.placeholder {
+  background: var(--color-content-dark);
+}
+
+.section-intro-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.section-intro h3 {
+  margin-bottom: var(--space-3);
+}
+
+.section-intro p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--color-text-light);
+  opacity: 0.9;
+}
+
+/* -----------------------------------------
+   ESSAY TEXT SECTIONS
+   ----------------------------------------- */
+.essay-text {
+  background: var(--color-content-light);
+  padding: var(--space-6) 0;
+}
+
+.essay-text-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.essay-text p {
+  margin-bottom: var(--space-3);
+}
+
+.essay-text p:last-child {
+  margin-bottom: 0;
+}
+
+.essay-text a {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+}
+
+.essay-text a:hover {
+  color: var(--color-accent);
+}
+
+/* Inline images within essay text */
+.inline-image {
+  margin: var(--space-5) 0;
+}
+
+.inline-image img {
+  width: 100%;
+}
+
+.inline-image.placeholder {
+  aspect-ratio: 16/9;
+  background: var(--color-gallery-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
+  font-size: 14px;
+}
+
+.inline-image figcaption {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: var(--space-2);
+  font-style: italic;
+}
+
+/* Three-column image comparison */
+.image-comparison {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  margin: var(--space-5) 0;
+}
+
+.image-comparison figure {
+  text-align: center;
+}
+
+.image-comparison img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: var(--color-gallery-bg);
+}
+
+.image-comparison figcaption {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* -----------------------------------------
+   PHOTO GALLERY (Masonry style from main site)
+   ----------------------------------------- */
+.photo-gallery {
+  padding: var(--space-5) var(--space-3);
+  background: var(--color-accent);
+}
+
+.photo-gallery.bg-gray {
+  background: var(--color-gallery-bg);
+}
+
+.gallery-label {
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo-gallery.bg-gray .gallery-label {
+  color: var(--color-text-light);
+  opacity: 0.7;
+}
+
+.photo-grid {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.photo-item {
+  position: absolute;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+.photo-item img {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+.photo-item.placeholder {
+  background: var(--color-content-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+/* -----------------------------------------
+   LIGHTBOX (matching main site style)
+   ----------------------------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(38, 40, 42, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox img {
+  max-width: 85vw;
+  max-height: 85vh;
+  object-fit: contain;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  cursor: default;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  color: var(--color-text-light);
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-size: 3rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  padding: var(--space-3);
+  line-height: 1;
+  user-select: none;
+}
+
+.lightbox-nav:hover {
+  opacity: 1;
+}
+
+.lightbox-prev {
+  left: var(--space-2);
+}
+
+.lightbox-next {
+  right: var(--space-2);
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: var(--space-3);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  text-align: center;
+  max-width: 600px;
+}
+
+.lightbox-caption:empty {
+  display: none;
+}
+
+/* -----------------------------------------
+   NOTES & WORKS CITED PAGES
+   ----------------------------------------- */
+.page-content {
+  background: var(--color-content-light);
+  min-height: 100vh;
+  padding: 120px 0 var(--space-7);
+}
+
+.page-content-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.page-content h1 {
+  font-size: 48px;
+  margin-bottom: var(--space-5);
+  color: var(--color-text-primary);
+}
+
+.page-content p {
+  margin-bottom: var(--space-3);
+}
+
+.page-content blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-3);
+  margin: var(--space-4) 0;
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.page-content a {
+  color: var(--color-text-primary);
+}
+
+.page-content a:hover {
+  color: var(--color-accent);
+}
+
+/* Works Cited specific */
+.works-cited-list {
+  list-style: none;
+}
+
+.works-cited-list li {
+  margin-bottom: var(--space-3);
+  padding-left: 2em;
+  text-indent: -2em;
+}
+
+/* Back link */
+.back-link {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  font-size: 15px;
+  color: var(--color-accent);
+}
+
+.back-link:hover {
+  color: var(--color-accent-bright);
+}
+
+/* -----------------------------------------
+   ENDNOTES
+   ----------------------------------------- */
+.endnote-ref {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--color-accent);
+  text-decoration: none;
+  margin-left: 1px;
+}
+
+.endnote-ref:hover {
+  color: var(--color-accent-bright);
+  text-decoration: underline;
+}
+
+.endnotes {
+  list-style-position: outside;
+  padding-left: 2em;
+}
+
+.endnotes li {
+  margin-bottom: var(--space-3);
+  padding-left: 0.5em;
+}
+
+.endnotes li:target {
+  background: rgba(218, 165, 32, 0.15);
+  padding: var(--space-2);
+  margin-left: -var(--space-2);
+  border-radius: 4px;
+}
+
+.back-to-text {
+  font-size: 0.85em;
+  color: var(--color-accent);
+  text-decoration: none;
+  margin-left: 0.5em;
+}
+
+.back-to-text:hover {
+  text-decoration: underline;
+}
+
+/* -----------------------------------------
+   FOOTER
+   ----------------------------------------- */
+.site-footer {
+  background: var(--color-content-dark);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.site-footer p {
+  color: var(--color-text-light);
+  opacity: 0.6;
+  font-size: 14px;
+}
+
+.site-footer a {
+  color: var(--color-accent);
+}
+
+/* -----------------------------------------
+   RESPONSIVE
+   ----------------------------------------- */
+@media (max-width: 1200px) {
+  /* Masonry handled by JS */
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --inset-padding: 32px;
+  }
+
+  h1 {
+    font-size: 64px;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .hero-image {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --inset-padding: 24px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  h3 {
+    font-size: 28px;
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .site-nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-accent);
+    padding: var(--space-3);
+  }
+
+  .site-subtitle {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .hero-card {
+    padding: 100px var(--inset-padding) 32px;
+  }
+
+  .image-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar a {
+    font-size: 15px;
+  }
+
+  .navbar-separator {
+    margin: 0 var(--space-1);
+  }
+
+  .section-intro {
+    min-height: 50vh;
+  }
+
+  .lightbox-nav {
+    font-size: 2rem;
+    padding: var(--space-2);
+  }
+
+  .photo-gallery {
+    padding: var(--space-4) var(--space-2);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  .site-title {
+    font-size: 14px;
+  }
+
+  .navbar-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .navbar-separator {
+    display: none;
+  }
+
+  .navbar a {
+    display: block;
+    padding: var(--space-1) 0;
+  }
+
+  .lightbox-nav {
+    font-size: 1.5rem;
+  }
+}

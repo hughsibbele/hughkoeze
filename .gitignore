@@ -3,3 +3,6 @@
 
 # macOS
 .DS_Store
+
+# Source content (original high-res images and markdown, 1GB+)
+stranger-source-content/

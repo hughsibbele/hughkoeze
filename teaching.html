@@ -772,6 +772,88 @@
       transform: translate(-50%, -50%) scale(1.05);
     }
 
+    /* Internal Link Preview (e.g., photo essays) */
+    .internal-link-preview {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .internal-link-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .internal-link-header {
+      background: rgb(218, 165, 32);
+      padding: var(--space-3) var(--space-4);
+      text-align: center;
+    }
+
+    .internal-link-title {
+      font-family: 'Poppins', var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .internal-link-subtitle {
+      font-family: 'Poppins', var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #000;
+      font-style: italic;
+    }
+
+    .internal-link-image {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      min-height: 200px;
+    }
+
+    .internal-link-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .internal-link-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(54, 51, 47, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .internal-link-overlay span {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      color: var(--warm-white);
+      background: rgba(54, 51, 47, 0.85);
+      padding: 12px 20px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .internal-link-card:hover .internal-link-overlay {
+      background: rgba(54, 51, 47, 0.4);
+    }
+
+    .internal-link-card:hover .internal-link-overlay span {
+      opacity: 1;
+    }
+
     /* Issuu Magazine Preview */
     .issuu-preview {
       width: 100%;
@@ -1747,6 +1829,8 @@
             <a class="cv-item-link two-line ${capHasSrc ? '' : 'placeholder'}"
                data-preview="${cap.previewType || 'pdf'}"
                data-src="${cap.previewSrc || ''}"
+               data-preview-image="${cap.previewImage || ''}"
+               data-preview-subtitle="${cap.previewSubtitle || ''}"
                data-title="${cap.previewTitle || cap.title}"
                data-context="${cap.previewContext || 'Capstone project.'}"
                data-type="${cap.type}"
@@ -2314,6 +2398,31 @@
         }
         openLink.href = src;
         openLink.textContent = 'View full analysis';
+        openLink.style.display = 'inline-flex';
+      } else if (type === 'internal-link' && src) {
+        // Internal link to another page on the site (e.g., photo essay)
+        // Hide the standard header - we're showing a custom card
+        previewType.parentElement.parentElement.style.display = 'none';
+        const previewImage = link.dataset.previewImage || '';
+        const previewSubtitle = link.dataset.previewSubtitle || context;
+        previewBody.innerHTML = `
+          <div class="internal-link-preview">
+            <a href="${src}" class="internal-link-card">
+              <div class="internal-link-header">
+                <div class="internal-link-title">${title}</div>
+                <div class="internal-link-subtitle">${previewSubtitle}</div>
+              </div>
+              <div class="internal-link-image">
+                ${previewImage ? `<img src="${previewImage}" alt="${title}">` : ''}
+                <div class="internal-link-overlay">
+                  <span>Explore the full essay →</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        `;
+        openLink.href = src;
+        openLink.textContent = 'Explore essay';
         openLink.style.display = 'inline-flex';
       } else if (type === 'pdf' && src) {
         previewType.parentElement.parentElement.style.display = '';

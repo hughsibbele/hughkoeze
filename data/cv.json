@@ -328,14 +328,16 @@
         },
         {
           "title": "Stranger to the House",
-          "subtitle": "Photography in <em>In Search of Lost Time</em>",
-          "year": "2022",
-          "type": "Creative Project",
+          "subtitle": "An essay on photography and <em>In Search of Lost Time</em>",
+          "year": "2021",
+          "type": "Photo Essay",
           "hasPreview": true,
-          "previewType": "pdf",
-          "previewSrc": "documents/stranger-to-the-house.pdf",
+          "previewType": "internal-link",
+          "previewSrc": "stranger-to-the-house/",
+          "previewImage": "stranger-to-the-house/images/hero/P6301031.jpg",
           "previewTitle": "Stranger to the House",
-          "previewContext": "Creative capstone project, 2022."
+          "previewSubtitle": "An essay on photography and In Search of Lost Time",
+          "previewContext": "Advanced Writing Tutorial capstone, Summer 2021"
         }
       ]
     },
