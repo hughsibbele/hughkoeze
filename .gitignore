@@ -6,3 +6,10 @@
 
 # Source content (original high-res images and markdown, 1GB+)
 stranger-source-content/
+
+# Draft content and development files (not for production)
+_drafts/
+_dev/
+
+# Original high-resolution image backups
+**/originals_backup/
