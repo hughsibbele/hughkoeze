@@ -13,3 +13,7 @@ _dev/
 
 # Original high-resolution image backups
 **/originals_backup/
+
+# Large source files
+my-year-at-ala/*.doc
+my-year-at-ala/content.json

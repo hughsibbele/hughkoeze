@@ -372,6 +372,15 @@
       "description": "Member of the inaugural class at a pan-African secondary school developing the next generation of African leaders.",
       "previews": [
         {
+          "label": "My Year at ALA",
+          "type": "internal-link",
+          "src": "my-year-at-ala/",
+          "title": "My Year at ALA",
+          "context": "Emails home from Johannesburg, 2008-2009",
+          "previewImage": "my-year-at-ala/images/img_004.jpg",
+          "previewSubtitle": "A collection of emails home"
+        },
+        {
           "label": "Grand Opening Address",
           "type": "youtube",
           "src": "https://www.youtube.com/embed/lz4KGJ6kOSg",
