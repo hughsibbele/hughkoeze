@@ -574,6 +574,9 @@ footer a { color: var(--verdigris); }
   object-fit: cover;
   border: 1px solid var(--mortar);
   display: block;
+  position: relative;
+  top: -16px;
+  left: -12px;
 }
 
 /* =========================================
