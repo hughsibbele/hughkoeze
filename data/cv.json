@@ -11,20 +11,6 @@
         "type": "teaching-photo",
         "image": "images/cv/teaching/2023_09_25_EHS307-775.jpg"
       },
-      "evaluations": {
-        "student": {
-          "type": "eval-summary",
-          "src": "student-evaluations.html",
-          "title": "Student Course Evaluations",
-          "context": "Fall 2020 – Fall 2025 · 355 responses across 18 course sections"
-        },
-        "faculty": {
-          "type": "eval-summary",
-          "src": "faculty-evaluations.html",
-          "title": "Faculty Evaluations",
-          "context": "Supervisor assessments & classroom observations · 2021–2025"
-        }
-      },
       "otherRoles": [
         {
           "id": "advisor",

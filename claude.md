@@ -45,6 +45,11 @@ Key mobile considerations:
 - Ensure buttons and interactive elements have touch-friendly sizing
 - Test that preview/modal panels work as full-screen overlays on phones
 
+## Unlinked Pages (keep, do not delete)
+The following pages exist in the repo but are intentionally not linked from anywhere on the site. They remain reachable only by direct URL. **Do not delete these files**, and do not re-link them without Hugh's explicit request:
+- `student-evaluations.html`
+- `faculty-evaluations.html`
+
 ## File Structure
 ```
 /index.html
