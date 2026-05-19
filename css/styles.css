@@ -559,6 +559,7 @@ footer a { color: var(--verdigris); }
   text-transform: uppercase;
   color: var(--brick);
   margin-bottom: var(--space-1);
+  text-align: center;
 }
 
 .hero-tagline-secondary {
