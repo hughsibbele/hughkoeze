@@ -554,8 +554,8 @@ footer a { color: var(--verdigris); }
 
 .hero-tagline {
   font-family: var(--font-display);
-  font-size: 1.25rem;
-  letter-spacing: 0.12em;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--brick);
   margin-bottom: var(--space-1);
