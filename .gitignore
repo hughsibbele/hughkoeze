@@ -4,6 +4,9 @@
 # macOS
 .DS_Store
 
+# Claude Code local config
+.claude/
+
 # Source content (original high-res images and markdown, 1GB+)
 stranger-source-content/
 
