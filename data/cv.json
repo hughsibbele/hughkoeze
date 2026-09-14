@@ -28,45 +28,25 @@
           "id": "fundamentals",
           "name": "Fundamentals in Literature and Composition",
           "shortName": "9th Grade English",
-          "description": "A skills-based course redesigned collaboratively with the 9th grade English team. The curriculum centers on competency development in close reading, writing in many forms, metacognition and character growth, grounded in place-based learning that uses Washington, DC as a living text.",
-          "hasPreview": true,
-          "previewType": "collage",
-          "previewSrc": "images/cv/courses/flc-collage.jpg",
-          "previewTitle": "FLC Course Materials",
-          "previewContext": "Sample assignments, student work, and course artifacts."
+          "description": "A skills-based course redesigned collaboratively with the 9th grade English team. The curriculum centers on competency development in close reading, writing in many forms, metacognition and character growth, grounded in place-based learning that uses Washington, DC as a living text."
         },
         {
           "id": "chekhov",
           "name": "Chekhov",
           "grades": "Elective",
-          "description": "A single-author course tracing Chekhov's development from early work to the extraordinary pieces of his final years. His short stories and plays become a lens for exploring realist aesthetics, while his humble, humanist worldview offers a model for living.",
-          "hasPreview": true,
-          "previewType": "collage",
-          "previewSrc": "images/cv/courses/chekhov-collage.jpg",
-          "previewTitle": "Chekhov Course Materials",
-          "previewContext": "Sample assignments, student work, and course artifacts."
+          "description": "A single-author course tracing Chekhov's development from early work to the extraordinary pieces of his final years. His short stories and plays become a lens for exploring realist aesthetics, while his humble, humanist worldview offers a model for living."
         },
         {
           "id": "gothic-lit",
           "name": "Gothic Literature Across Two Centuries",
           "grades": "Elective",
-          "description": "Gothic literature reinterpreted across cultures and centuries. Each society's use of gothic tropes reveals what it finds unspeakably terrifying, making the genre a window into collective fears—from Victorian anxieties to contemporary Latin American gothic.",
-          "hasPreview": true,
-          "previewType": "collage",
-          "previewSrc": "images/cv/courses/gothic-collage.jpg",
-          "previewTitle": "Gothic Literature Course Materials",
-          "previewContext": "Sample assignments, student work, and course artifacts."
+          "description": "Gothic literature reinterpreted across cultures and centuries. Each society's use of gothic tropes reveals what it finds unspeakably terrifying, making the genre a window into collective fears—from Victorian anxieties to contemporary Latin American gothic."
         },
         {
           "id": "middle-eastern-lit",
           "name": "Middle Eastern Voices",
           "grades": "Elective",
-          "description": "Contemporary literature from across the Middle East, chosen to complicate and contest stereotypical understandings of the region. The emphasis on diversity of perspective, genre, and content teaches broader lessons about humility and curiosity when encountering unfamiliar cultures.",
-          "hasPreview": true,
-          "previewType": "collage",
-          "previewSrc": "images/cv/courses/mev-collage.jpg",
-          "previewTitle": "Middle Eastern Voices Course Materials",
-          "previewContext": "Sample assignments, student work, and course artifacts."
+          "description": "Contemporary literature from across the Middle East, chosen to complicate and contest stereotypical understandings of the region. The emphasis on diversity of perspective, genre, and content teaches broader lessons about humility and curiosity when encountering unfamiliar cultures."
         },
         {
           "id": "russian-lit",
@@ -134,7 +114,7 @@
           "id": "interim-chair",
           "title": "Interim English Department Chair",
           "dates": "2024–2025",
-          "description": "Mentored department colleagues through formal observation cycles and collaborative curriculum development. Led departmental response to emerging instructional technologies and maintained instional standards through a significant staffing crisis."
+          "description": "Mentored department colleagues through formal observation cycles and collaborative curriculum development. Led departmental response to emerging instructional technologies and maintained institutional standards through a significant staffing crisis."
         },
         {
           "id": "dean",
@@ -291,7 +271,6 @@
       }
     ]
   },
-
   "education": [
     {
       "id": "breadloaf-ma",
@@ -384,7 +363,6 @@
       "honors": "Magna cum laude"
     }
   ],
-
   "certifications": [
     {
       "id": "cpr",

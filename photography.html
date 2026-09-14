@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Photography — Hugh Koeze</title>
+  <meta name="description" content="A gallery of photographs by Hugh Koeze.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Photography — Hugh Koeze">
+  <meta property="og:description" content="A gallery of photographs by Hugh Koeze.">
+  <meta property="og:url" content="https://hughkoeze.netlify.app/photography">
+  <meta property="og:image" content="https://hughkoeze.netlify.app/images/hugh-portrait.jpg">
+  <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Josefin+Sans:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -102,8 +109,9 @@
       right: var(--space-3);
       color: var(--warm-white);
       font-family: var(--font-display);
-      font-size: 1rem;
-      letter-spacing: 0.1em;
+      font-size: 2rem;
+      line-height: 1;
+      padding: 0 var(--space-1);
       background: none;
       border: none;
       cursor: pointer;
@@ -222,7 +230,7 @@
   <main>
     <section class="photo-header">
       <h1>Photography</h1>
-      <p>Stay calm - I promise this page will look normal once it's done loading. <a href="about.html">Let me know if you'd like a print!</a></p>
+      <p>A random selection every visit. Refresh for a new mix, and <a href="about.html">let me know if you'd like a print!</a></p>
     </section>
 
     <div class="photo-grid" id="photoGrid">
@@ -234,7 +242,7 @@
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
-      <button class="lightbox-close" aria-label="Close">ESC</button>
+      <button class="lightbox-close" aria-label="Close">&times;</button>
       <button class="lightbox-nav lightbox-prev" aria-label="Previous photo">‹</button>
       <img src="" alt="Enlarged photograph" id="lightboxImg">
       <button class="lightbox-nav lightbox-next" aria-label="Next photo">›</button>
@@ -385,7 +393,7 @@
 
           const img = document.createElement('img');
           img.src = THUMB_PATH + photo.file;
-          img.alt = 'Photograph';
+          img.alt = photo.year ? 'Photograph, ' + photo.year : 'Photograph';
           img.dataset.full = IMAGE_PATH + photo.file;
           if (photo.year) {
             img.dataset.year = photo.year;

@@ -475,9 +475,8 @@ footer p {
 footer a { color: var(--verdigris); }
 
 .footer-subtle {
-  font-size: 0.65rem;
-  color: var(--brick);
-  opacity: 0.5;
+  font-size: 0.7rem;
+  color: var(--umber);
   letter-spacing: 0.02em;
   text-align: center;
 }
@@ -488,8 +487,7 @@ footer a { color: var(--verdigris); }
 }
 
 .footer-subtle a:hover {
-  color: var(--verdigris-light);
-  opacity: 1;
+  color: var(--verdigris-dark);
 }
 
 /* =========================================

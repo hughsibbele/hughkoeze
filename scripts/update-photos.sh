@@ -14,13 +14,45 @@ else
   HAS_EXIFTOOL=true
 fi
 
-# Find all image files
+# Convert WebP and HEIC originals to JPEG.
+# macOS 'sips' (used for thumbnails below) cannot read WebP, and browsers
+# cannot display HEIC, so both formats would silently vanish from the gallery.
+# ImageMagick ('brew install imagemagick') handles WebP; sips handles HEIC.
+converted=0
+while IFS= read -r file; do
+  [ -n "$file" ] || continue
+  base="${file%.*}"
+  out="$base.jpg"
+  if [ -e "$out" ]; then
+    echo "  $(basename "$file") was already converted to $(basename "$out"); delete the original."
+    continue
+  fi
+  case "$file" in
+    *.webp|*.WEBP)
+      if command -v magick &> /dev/null; then
+        magick "$file" -quality 92 "$out" && converted=$((converted + 1)) \
+          && echo "  Converted $(basename "$file") -> $(basename "$out")"
+      else
+        echo "  WARNING: $(basename "$file") is WebP and ImageMagick is not installed; skipping. Run: brew install imagemagick"
+      fi
+      ;;
+    *.heic|*.HEIC)
+      sips -s format jpeg "$file" --out "$out" > /dev/null 2>&1 && converted=$((converted + 1)) \
+        && echo "  Converted $(basename "$file") -> $(basename "$out")"
+      ;;
+  esac
+done <<< "$(find images/photography -maxdepth 1 -type f \( -iname "*.webp" -o -iname "*.heic" \) | sort)"
+if [ "$converted" -gt 0 ]; then
+  echo "Converted $converted file(s) to JPEG. The originals are still in the folder;"
+  echo "delete them (or move them out) so they are not re-converted next time."
+fi
+
+# Find all image files the gallery can display and thumbnail
 files=$(find images/photography -maxdepth 1 -type f \( \
   -iname "*.jpg" -o \
   -iname "*.jpeg" -o \
   -iname "*.png" -o \
-  -iname "*.gif" -o \
-  -iname "*.webp" \
+  -iname "*.gif" \
 \) | sort)
 
 # Build JSON array
@@ -69,14 +101,19 @@ THUMB_DIR="images/photography/thumbnails"
 mkdir -p "$THUMB_DIR"
 
 thumb_count=0
+failed_thumbs=0
 while IFS= read -r file; do
   if [ -n "$file" ]; then
     filename=$(basename "$file")
     out="$THUMB_DIR/$filename"
     if [ ! -f "$out" ] || [ "$file" -nt "$out" ]; then
-      sips -Z 800 "$file" --out "$out" > /dev/null 2>&1
-      sips -s formatOptions 75 "$out" --out "$out" > /dev/null 2>&1
-      thumb_count=$((thumb_count + 1))
+      if sips -Z 800 "$file" --out "$out" > /dev/null 2>&1; then
+        sips -s formatOptions 75 "$out" --out "$out" > /dev/null 2>&1
+        thumb_count=$((thumb_count + 1))
+      else
+        echo "  ERROR: could not create thumbnail for $filename (the gallery will not show it)"
+        failed_thumbs=$((failed_thumbs + 1))
+      fi
     fi
   fi
 done <<< "$files"
@@ -92,3 +129,7 @@ for thumb in "$THUMB_DIR"/*; do
 done
 
 echo "Generated $thumb_count new thumbnails ($(ls "$THUMB_DIR" | wc -l | tr -d ' ') total)"
+if [ "$failed_thumbs" -gt 0 ]; then
+  echo "WARNING: $failed_thumbs photo(s) have no thumbnail and will not appear in the gallery."
+  exit 1
+fi
