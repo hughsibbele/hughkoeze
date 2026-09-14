@@ -469,6 +469,33 @@
       margin-bottom: var(--space-1);
     }
 
+    /* Bulleted descriptions */
+    ul.cv-bullets {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 2px;
+    }
+
+    ul.cv-bullets li {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 3px;
+    }
+
+    ul.cv-bullets li:last-child {
+      margin-bottom: 0;
+    }
+
+    ul.cv-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 5px;
+      height: 5px;
+      background: var(--sage);
+    }
+
     /* Expandable sections */
     .cv-expandable {
       margin-top: var(--space-1);
@@ -1580,6 +1607,13 @@
       attachLinkListeners();
     }
 
+    // Render a description as a bullet list (accepts a string or an array of strings)
+    function renderDesc(desc, cls) {
+      if (!desc) return '';
+      const items = Array.isArray(desc) ? desc : [desc];
+      return `<ul class="cv-bullets ${cls}">${items.map(d => `<li>${d}</li>`).join('')}</ul>`;
+    }
+
     // Render current position with courses, leadership, awards, coaching
     function renderCurrentPosition() {
       const pos = cvData.teaching.current;
@@ -1594,7 +1628,7 @@
             </div>
             <div class="cv-role-clickable" data-default-preview="true">
               <div class="cv-item-title">${pos.title}</div>
-              <p class="cv-item-desc">${pos.description}</p>
+              ${renderDesc(pos.description, 'cv-item-desc')}
             </div>
 
             <div class="cv-expandables cv-indented">
@@ -1677,7 +1711,7 @@
                 <span class="cv-leadership-title">${item.title}</span>
                 <span class="cv-leadership-date">${item.dates}</span>
               </div>
-              ${item.description ? `<p class="cv-leadership-desc">${item.description}</p>` : ''}
+              ${renderDesc(item.description, 'cv-leadership-desc')}
           `;
 
           // Add preview buttons if available
@@ -1827,7 +1861,7 @@
       }
 
       if (item.description) {
-        html += `<p class="cv-item-desc">${item.description}</p>`;
+        html += renderDesc(item.description, 'cv-item-desc');
       }
 
       // Thesis
@@ -1906,7 +1940,7 @@
             <span class="cv-item-date">${item.dates}</span>
           </div>
           <div class="cv-item-title">${item.title}</div>
-          ${item.description ? `<p class="cv-item-desc">${item.description}</p>` : ''}
+          ${renderDesc(item.description, 'cv-item-desc')}
       `;
 
       // Add expandables container if we have courses, coaching, or other roles

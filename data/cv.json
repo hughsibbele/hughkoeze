@@ -6,7 +6,13 @@
       "title": "English Teacher",
       "dates": "August 2018–Present",
       "location": "Alexandria, VA",
-      "description": "Teach literary analysis and writing through close reading, supportive, discussion-centered classrooms, and an emphasis on authentic student voice. Led a collaborative redesign of the 9th grade English curriculum. Developed elective courses drawing on my graduate work in Russian and world literature. Currently leading the school's adaptation to Artificial Intelligence. Beyond the classroom, serve as advisor, coach, and dorm parent, and founded an outdoor leadership program.",
+      "description": [
+        "Teach literary analysis and writing through close reading, supportive discussion-centered classrooms, and an emphasis on authentic student voice.",
+        "Led a collaborative redesign of the 9th grade English curriculum around a competency-based skills framework and place-based learning in Washington, DC.",
+        "Developed elective courses drawing on my graduate work in Russian and world literature.",
+        "Lead the school's adaptation to Artificial Intelligence through the Teaching, Learning and Emerging Technologies Task Force.",
+        "Beyond the classroom, serve as advisor, coach, and dorm parent, and founded an outdoor leadership program."
+      ],
       "defaultPreview": {
         "type": "teaching-photo",
         "image": "images/cv/teaching/2023_09_25_EHS307-775.jpg"
@@ -68,9 +74,13 @@
       "leadership": [
         {
           "id": "ai-taskforce",
-          "title": "AI Task Force Lead",
+          "title": "Teaching, Learning and Emerging Technologies Task Force Lead",
           "dates": "2025–Present",
-          "description": "Lead Episcopal's adaptation to the rise of Artificial Intelligence. Facilitate faculty workshops on AI integration, developing training resources and implementation frameworks. Shape institutional policy emphasizing ethical, honorable and effective integration of AI in collaboration with the Leadership Team.",
+          "description": [
+            "Lead Episcopal's adaptation to the rise of Artificial Intelligence.",
+            "Facilitate faculty workshops on AI integration, developing training resources and implementation frameworks.",
+            "Shape institutional policy emphasizing ethical, honorable and effective integration of AI in collaboration with the Leadership Team."
+          ],
           "previews": [
             {
               "label": "AI Chapel Talk",
@@ -114,19 +124,29 @@
           "id": "interim-chair",
           "title": "Interim English Department Chair",
           "dates": "2024–2025",
-          "description": "Mentored department colleagues through formal observation cycles and collaborative curriculum development. Led departmental response to emerging instructional technologies and maintained institutional standards through a significant staffing crisis."
+          "description": [
+            "Mentored department colleagues through formal observation cycles and collaborative curriculum development.",
+            "Led departmental response to emerging instructional technologies.",
+            "Maintained class coverage and instructional standards through a significant staffing crisis."
+          ]
         },
         {
           "id": "dean",
           "title": "9th Grade Dean & Dorm Head",
           "dates": "2021–2023",
-          "description": "Supervised residential life for 9th grade boys, coordinating grade-level programming, parent communication, and dorm policies. Partnered with Academic Support Center to support struggling students through individualized intervention plans."
+          "description": [
+            "Supervised residential life for 9th grade boys, coordinating grade-level programming, parent communication, and dorm policies.",
+            "Partnered with the Academic Support Center to support struggling students through individualized intervention plans."
+          ]
         },
         {
           "id": "outdoor-leadership",
           "title": "Outdoor Leadership Program",
           "dates": "2020–2022",
-          "description": "Designed four-tier experiential leadership curriculum progressing from foundational skills to expedition leadership. Led backpacking, kayaking, and climbing trips facilitating personal development and wilderness competency.",
+          "description": [
+            "Designed a four-tier experiential leadership curriculum progressing from foundational skills to expedition leadership.",
+            "Led backpacking, kayaking, and climbing trips facilitating personal development and wilderness competency."
+          ],
           "previews": [
             {
               "label": "Expedition Photos",
@@ -140,6 +160,11 @@
         }
       ],
       "awards": [
+        {
+          "id": "ravenel-mastership-2026",
+          "title": "William Bee Ravenel Mastership for Excellence in Teaching English",
+          "dates": "2026–2027"
+        },
         {
           "id": "phillips-mastership",
           "title": "Allen C. Phillips Mastership for an Outstanding Teacher",
@@ -189,7 +214,11 @@
         "title": "English Teacher",
         "dates": "August 2014–August 2018",
         "location": "Virginia Beach, VA",
-        "description": "Founded and led the Outdoor Leadership Series, an experiential outdoor leadership development program. Led international student programs to Panama, Guatemala, and Norway.",
+        "description": [
+          "Taught 9th, 9th Honors, and 11th grade English, creating supportive learning environments tailored to individual students' growth.",
+          "Founded and led the Outdoor Leadership Series, an experiential outdoor leadership development program.",
+          "Led international student programs to Panama, Guatemala, and Norway."
+        ],
         "hasPreview": true,
         "previewType": "photo-gallery",
         "previewTitle": "Outdoor Leadership Expeditions",
@@ -227,7 +256,10 @@
         "title": "Fulbright English Teaching Assistant",
         "dates": "August 2013–May 2014",
         "location": "Bergen, Norway",
-        "description": "Taught and assisted in 11th grade English at Bergen Cathedral School, planning and leading classroom activities, assignments, and evaluations. Held one-on-one writing conferences and led weekly academic writing seminars at the University of Bergen, expanding the program into 200-level courses."
+        "description": [
+          "Taught and assisted in 11th grade English at Bergen Cathedral School, planning and leading classroom activities, assignments, and evaluations.",
+          "Held one-on-one writing conferences and led weekly academic writing seminars at the University of Bergen, expanding the program into 200-level courses."
+        ]
       },
       {
         "id": "writing-center",
@@ -235,7 +267,10 @@
         "title": "Writing Tutor",
         "dates": "September 2011–May 2013",
         "location": "Chapel Hill, NC",
-        "description": "Taught effective writing strategies to members of the University community. Co-founded and facilitated an honors thesis writing support group."
+        "description": [
+          "Taught effective writing strategies to members of the University community.",
+          "Co-founded and facilitated an honors thesis writing support group."
+        ]
       },
       {
         "id": "coec",
@@ -243,7 +278,10 @@
         "title": "Lead Instructor",
         "dates": "March 2011–May 2013",
         "location": "Chapel Hill, NC",
-        "description": "Planned and led kayaking, rock climbing, and backpacking trips, utilizing experiential pedagogy to facilitate personal development and teach wilderness skills. Mentored less experienced co-instructors."
+        "description": [
+          "Planned and led kayaking, rock climbing, and backpacking trips, using experiential pedagogy to facilitate personal development and teach wilderness skills.",
+          "Mentored less experienced co-instructors."
+        ]
       },
       {
         "id": "sep",
@@ -267,7 +305,10 @@
         "title": "Sailing Instructor & Race Coach",
         "dates": "Summers 2005–2010",
         "location": "York Harbor, ME",
-        "description": "Taught sailing fundamentals and racing techniques to youth sailors. Coached junior racing team and coordinated regatta participation."
+        "description": [
+          "Taught sailing fundamentals and racing techniques to youth sailors.",
+          "Coached the junior racing team and coordinated regatta participation."
+        ]
       }
     ]
   },
